@@ -2,20 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "KOTRA_BOLD";
+  src: url("../../public/fonts/KOTRA_BOLD.ttf") format("truetype");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: "GmarketSansBold";
+  src: url("../../public/fonts/GmarketSansTTFBold.ttf") format("truetype");
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("../../public/fonts/GmarketSansTTFMedium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "GmarketSansLight";
+  src: url("../../public/fonts/GmarketSansTTFLight.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "HSSaemaul-Regular";
+  src: url("../../public/fonts/HSSaemaul-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SEBANG Gothic";
+  src: url("../../public/fonts/SEBANG Gothic.ttf") format("truetype");
+}
+
+/* @font-face {
+  font-family: "ExcelsiorSans";
+  src: url("/fonts/ExcelsiorSans.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "BebasKai";
+  src: url("./assets/fonts/BebasKai.ttf") format("truetype");
+} */
+
+@font-face {
+  font-family: "SCDream5";
+  src: url("../../public/fonts/SCDream5.otf");
+}
+
+.range-slider {
+  @apply w-full m-0 mx-auto;
+}
+
+#mySlider {
+  @apply !h-1 bg-gray-800;
+}
+
+#mySlider .range-slider__thumb {
+  @apply w-3 h-3 bg-white rounded-full shadow;
+  @apply appearance-none cursor-pointer;
+  @apply outline-none border-none;
+}
+
+#mySlider .range-slider__range {
+  @apply h-1 bg-primary-300;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
 }
