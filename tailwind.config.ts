@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-import withMT from "@material-tailwind/react/utils/withMT";
+const withMT = require("@material-tailwind/react/utils/withMT");
 import colors from "tailwindcss/colors";
 
 module.exports = withMT({

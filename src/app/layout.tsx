@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Header from "@/app/compoenets/Header";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,11 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={` bg-primary-450`}>
-        <div className="w-full max-w-7xl py-4 mx-auto px-4 md:px-16 font-content">
-          {children}
-        </div>
+        <Header />
+        <div className='w-full max-w-7xl py-4 mx-auto px-4 md:px-16 font-content'>{children}</div>
       </body>
     </html>
   );
