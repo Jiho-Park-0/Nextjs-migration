@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+
 import {
   Button,
   Dialog,
@@ -9,14 +12,13 @@ import {
 } from "@material-tailwind/react";
 
 const PrivacyPolicy = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(!open);
 
   return (
     <>
       <Typography
-        as="li"
         variant="small"
         className="p-1 font-light text-xs md:text-sm text-primary-100 cursor-pointer"
         onClick={handleOpen}
@@ -54,43 +56,41 @@ const PrivacyPolicy = () => {
               We may collect personal information that you voluntarily provide
               to us when you register on the Site, subscribe to our newsletter,
               or contact us for support. This information may include:
-              <ul className="list-disc ml-5">
-                <li>Name</li>
-                <li>Email address</li>
-                <li>Usernames</li>
-                <li>Any other information you choose to provide</li>
-              </ul>
             </p>
+            <ul className="list-disc ml-5">
+              <li>Name</li>
+              <li>Email address</li>
+              <li>Usernames</li>
+              <li>Any other information you choose to provide</li>
+            </ul>
             <br />
             <p className="font-bold">1.2. Non-Personal Information:</p>
             <p>
               We automatically collect non-personal information about your
               interactions with the Site. This information may include:
-              <ul className="list-disc ml-5">
-                <li>IP address</li>
-                <li>Browser type and version</li>
-                <li>Operating system</li>
-                <li>Referring website</li>
-                <li>Pages viewed and the time spent on each page</li>
-                <li>Clickstream data</li>
-              </ul>
             </p>
+            <ul className="list-disc ml-5">
+              <li>IP address</li>
+              <li>Browser type and version</li>
+              <li>Operating system</li>
+              <li>Referring website</li>
+              <li>Pages viewed and the time spent on each page</li>
+              <li>Clickstream data</li>
+            </ul>
             <br />
             <p className="text-lg font-bold">2. How We Use Your Information</p>
             <br />
             <p className="font-bold">
               2.1. To Provide and Improve Our Services:
             </p>
-            <p>
-              We use the information we collect to:
-              <ul className="list-disc ml-5">
-                <li>Operate and maintain the Site</li>
-                <li>Personalize your experience</li>
-                <li>Improve the Site and our services</li>
-                <li>Respond to your comments and questions</li>
-                <li>Send you administrative and promotional communications</li>
-              </ul>
-            </p>
+            <p>We use the information we collect to:</p>
+            <ul className="list-disc ml-5">
+              <li>Operate and maintain the Site</li>
+              <li>Personalize your experience</li>
+              <li>Improve the Site and our services</li>
+              <li>Respond to your comments and questions</li>
+              <li>Send you administrative and promotional communications</li>
+            </ul>
             <br />
             <p className="font-bold">
               2.2. Marketing and Promotional Communications:
