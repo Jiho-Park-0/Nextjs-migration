@@ -43,8 +43,8 @@ const PrivacyPolicy = () => {
             <p className="text-lg font-bold">Effective Date: July 17, 2024</p>
             <br />
             <p>
-              Welcome to baslimbus.info (the "Site"). This Privacy Policy
-              describes how we collect, use, and protect your personal
+              Welcome to baslimbus.info (the &quot;Site&quot;). This Privacy
+              Policy describes how we collect, use, and protect your personal
               information when you visit our Site and use our services. By using
               the Site, you agree to the terms outlined in this Privacy Policy.
             </p>
@@ -166,7 +166,7 @@ const PrivacyPolicy = () => {
               protection rights. Please contact us to exercise these rights.
             </p>
             <br />
-            <p className="text-lg font-bold">6. Children's Privacy</p>
+            <p className="text-lg font-bold">6. Children&apos;s Privacy</p>
             <br />
             <p>
               The Site is not intended for individuals under the age of 13. We
