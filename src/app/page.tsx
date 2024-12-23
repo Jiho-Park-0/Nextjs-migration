@@ -1,9 +1,9 @@
 import React from "react";
-import MainCarousel from "./compoenets/MainCarousel";
-import NewsCard from "./compoenets/NewsCard";
-import YoutubePlay from "./compoenets/YoutubePlay";
-import MenuCard from "./compoenets/MenuCard";
-import SiteButton from "./compoenets/SiteButton";
+import MainCarousel from "./components/MainCarousel";
+import NewsCard from "./components/NewsCard";
+import YoutubePlay from "./components/YoutubePlay";
+import MenuCard from "./components/MenuCard";
+import SiteButton from "./components/SiteButton";
 import { FaSquareXTwitter, FaSquareYoutube } from "react-icons/fa6";
 import Image from "next/image";
 
