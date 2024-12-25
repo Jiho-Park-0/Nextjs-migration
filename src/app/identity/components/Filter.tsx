@@ -3,7 +3,7 @@
 import FilterButtonGroup from "./FilterButtonGroup";
 import FilterSelectGroup from "./FilterSelectGroup";
 import FilterSliderGroup from "./FilterSliderGroup";
-// import FilterEtcButtonGroup from "./FilterEtcButtonGroup";
+import FilterEtcButtonGroup from "./FilterEtcButtonGroup";
 
 import sinners from "@/app/constants/sinners.json";
 import resource from "@/app/constants/resource.json";
@@ -117,7 +117,11 @@ const Filter = () => {
         src="/assets/common/"
         propertyToSaveTo="grade"
       />
-      {/* <FilterEtcButtonGroup title="기타" content={etcKeyword} /> */}
+      <FilterEtcButtonGroup
+        title="기타"
+        content={etcKeyword}
+        propertyToSaveTo="etcKeyword"
+      />
     </div>
   );
 };

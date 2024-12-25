@@ -1,8 +1,7 @@
-import useToggleButtons from "@hooks/useToggleButtons";
+import React, { useEffect } from "react";
+import useToggleButtons from "@/app/hooks/useToggleButtons";
+import useStore from "@/zustand/store";
 import FilterEtcButton from "./FilterEtcButton";
-import { egoOptionsState, optionsState } from "@recoils/atoms";
-import { useSetRecoilState } from "recoil";
-import { useEffect } from "react";
 
 interface Content {
   name: string;
@@ -11,34 +10,36 @@ interface Content {
 interface FilterEtcButtonGroupProps {
   title: string;
   content: Content[];
+  propertyToSaveTo: string;
   isIdentityPage?: boolean;
-  propertyToSaveTo?: string;
 }
 
 const FilterEtcButtonGroup = ({
   title,
   content,
   isIdentityPage = true,
-  propertyToSaveTo = "etcKeyword",
+  propertyToSaveTo,
 }: FilterEtcButtonGroupProps) => {
   const [buttons, toggleButton] = useToggleButtons(
     content.map((item) => item.name)
   );
 
-  const setOptions = useSetRecoilState(optionsState);
-  const setEgoOptions = useSetRecoilState(egoOptionsState);
+  const setOptions = useStore((state) => state.setOptionsState);
+  const setEgoOptions = useStore((state) => state.setEgoOptionsState);
+  const options = useStore((state) => state.optionsState);
+  const egoOptions = useStore((state) => state.egoOptionsState);
 
   const savePropertyToOptions = (selectedButtons: string[]) => {
     if (isIdentityPage) {
-      setOptions((prevOptions) => ({
-        ...prevOptions,
+      setOptions({
+        ...options,
         [propertyToSaveTo]: selectedButtons,
-      }));
+      });
     } else {
-      setEgoOptions((prevOptions) => ({
-        ...prevOptions,
+      setEgoOptions({
+        ...egoOptions,
         [propertyToSaveTo]: selectedButtons,
-      }));
+      });
     }
   };
 
