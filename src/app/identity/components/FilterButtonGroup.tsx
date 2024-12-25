@@ -2,9 +2,9 @@
 
 import useToggleButtons from "@/app/hooks/useToggleButtons";
 import FilterButton from "./FilterButton";
-
 import { useEffect } from "react";
 import { Tooltip } from "@material-tailwind/react";
+import useStore from "@/zustand/store";
 
 interface Content {
   name: string;
@@ -30,6 +30,51 @@ const FilterButtonGroup = ({
   const [buttons, toggleButton] = useToggleButtons(
     content.map((item) => item.name)
   );
+
+  const options = useStore((state) => state.optionsState);
+  const setOptions = useStore((state) => state.setOptionsState);
+  const egoOptions = useStore((state) => state.egoOptionsState);
+  const setEgoOptions = useStore((state) => state.setEgoOptionsState);
+
+  const savePropertyToOptions = (selectedButtons: string[]) => {
+    if (isIdentityPage) {
+      setOptions({
+        ...options,
+        [propertyToSaveTo as keyof typeof options]: selectedButtons,
+      });
+    } else {
+      setEgoOptions({
+        ...egoOptions,
+        [propertyToSaveTo as keyof typeof egoOptions]: selectedButtons,
+      });
+    }
+  };
+
+  useEffect(() => {
+    const initialSelectedButtons: string[] | number | undefined = isIdentityPage
+      ? options[propertyToSaveTo as keyof typeof options]
+      : egoOptions[propertyToSaveTo as keyof typeof egoOptions];
+
+    if (initialSelectedButtons && Array.isArray(initialSelectedButtons)) {
+      initialSelectedButtons.forEach((buttonName) => {
+        const button = buttons.find((button) => button.name === buttonName);
+        if (button) {
+          toggleButton(buttonName);
+        }
+      });
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    savePropertyToOptions(
+      buttons.filter((button) => button.isSelected).map((button) => button.name)
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [buttons]);
+
+  console.log(options);
 
   return (
     <div>
@@ -61,6 +106,7 @@ const FilterButtonGroup = ({
           </Tooltip>
         )}
       </span>
+
       <div className="grid grid-cols-6 gap-1.5">
         {content.map((item, index) => (
           <FilterButton

@@ -2,11 +2,21 @@
 
 import React from "react";
 import { Button } from "@material-tailwind/react";
-import { useResetRecoilState } from "recoil";
-import { optionsState } from "@/recoils/atoms";
+import { create } from "zustand";
+
+// 상태 정의
+interface StoreState {
+  optionsState: Record<string, unknown>;
+  resetOptions: () => void;
+}
+
+const useStore = create<StoreState>((set) => ({
+  optionsState: {},
+  resetOptions: () => set({ optionsState: {} }),
+}));
 
 const FilterHeader = () => {
-  const resetOptions = useResetRecoilState(optionsState);
+  const resetOptions = useStore((state) => state.resetOptions);
 
   const handleResetOptions = () => {
     resetOptions();
