@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/app/layout_components/Header";
 import Footer from "@/app/layout_components/Footer";
-import RecoilRootWrapper from "@/app/layout_components/RecoilWrapper";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={` bg-primary-450`}>
         <Header />
         <div className="w-full max-w-7xl py-4 mx-auto px-4 md:px-16 font-content">
-          <RecoilRootWrapper>{children}</RecoilRootWrapper>
+          {children}
         </div>
         <Footer />
       </body>

@@ -2,8 +2,7 @@
 
 import useToggleButtons from "@/app/hooks/useToggleButtons";
 import FilterButton from "./FilterButton";
-import { egoOptionsState, optionsState } from "@/recoils/atoms";
-import { useRecoilState } from "recoil";
+
 import { useEffect } from "react";
 import { Tooltip } from "@material-tailwind/react";
 
@@ -31,8 +30,6 @@ const FilterButtonGroup = ({
   const [buttons, toggleButton] = useToggleButtons(
     content.map((item) => item.name)
   );
-
-  const [options, setOptions] = useRecoilState(optionsState);
 
   return (
     <div>
