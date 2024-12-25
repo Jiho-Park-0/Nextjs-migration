@@ -1,5 +1,3 @@
-"use client";
-
 import useToggleButtons from "@/app/hooks/useToggleButtons";
 import FilterButton from "./FilterButton";
 import { useEffect } from "react";

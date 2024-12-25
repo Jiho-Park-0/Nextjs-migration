@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { Button, Tooltip } from "@material-tailwind/react";
 import Image from "next/image";

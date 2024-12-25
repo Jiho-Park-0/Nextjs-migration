@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 interface IdentityOptions {
+  [key: string]: string[] | number;
   sinner: string[];
   season: string[];
   grade: string[];
@@ -16,6 +17,7 @@ interface IdentityOptions {
 }
 
 interface EgoOptions {
+  [key: string]: string[] | number;
   sinner: string[];
   season: string[];
   grade: string[];
