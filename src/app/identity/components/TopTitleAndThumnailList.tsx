@@ -1,9 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button, Input, Tooltip } from "@material-tailwind/react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { LuSearch } from "react-icons/lu";
+import axios from "axios";
+import { getIdentity } from "@/app/api/ditionaryApi";
+import useStore from "@/zustand/store"; // zustand 스토어 import
+import IdentityThumbnailCard from "./IdentityThumbnailCard";
+import { Spinner } from "@material-tailwind/react";
+import ErrorMessage from "@/app/ui/ErrorMessage";
+import nicknamesData from "@/app/constants/nicknames.json";
 import Filter from "./Filter";
 
 interface FilterModalProps {
@@ -52,13 +59,64 @@ const FilterModal: React.FC<FilterModalProps> = ({
   );
 };
 
-const TopTitleAndButton = () => {
+const TopTitleAndThumnailList = () => {
   const [isSync, setIsSync] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [openFilter, setOpenFilter] = useState(false);
+  const options = useStore((state) => state.optionsState); // options 상태 가져오기
+
+  const [nicknames, setNicknames] = useState<{ [key: string]: string[] }>({});
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const dataRef = useRef(null);
+
+  const { isLoading, isError, error } = useStore(
+    (state) => state.identityState
+  );
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getIdentity(options); // options를 getIdentity에 넘기기
+        setData(response);
+        dataRef.current = response; // 데이터를 캐시에 저장
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, [options]); // options가 변경될 때마다 호출
+
+  // 별명 데이터를 상태로 저장
+  useEffect(() => {
+    // JSON 파일의 데이터를 상태로 설정
+    const nicknamesMap: { [key: string]: string[] } = {};
+    nicknamesData.forEach((item: { id: string; nicknames: string[] }) => {
+      nicknamesMap[item.id] = item.nicknames;
+    });
+    setNicknames(nicknamesMap);
+  }, []);
+
+  // 이름 및 별명 검색 필터링
+  useEffect(() => {
+    if (searchTerm) {
+      const filteredIds = Object.keys(nicknames).filter((id) =>
+        nicknames[id].some((nickname) =>
+          nickname.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+      const filteredResults = data.filter((item) =>
+        filteredIds.includes(item.id.toString())
+      );
+      setFilteredData(filteredResults.reverse());
+    } else {
+      setFilteredData(data.reverse());
+    }
+  }, [searchTerm, nicknames, data]);
 
   return (
-    <div className="flex-auto md:pl-10">
+    <>
       {/* 상단 제목, 버튼 */}
       <div className="flex justify-between items-center">
         <span className="text-3xl lg:text-4xl whitespace-nowrap hidden lg:block pr-2">
@@ -116,8 +174,59 @@ const TopTitleAndButton = () => {
         </div>
       </div>
       <FilterModal openFilter={openFilter} setOpenFilter={setOpenFilter} />
-    </div>
+      {/* 썸네일 리스트 */}
+      {isLoading ? (
+        <div className="flex justify-center items-center h-screen">
+          <Spinner className="w-8 h-8 text-primary-200" />
+        </div>
+      ) : isError ? (
+        axios.isAxiosError(error) && error.response?.status === 404 ? (
+          <div className="text-primary-200 text-center w-full my-8 h-screen">
+            해당하는 인격이 없습니다.
+          </div>
+        ) : (
+          <div className="text-primary-200 text-center w-full my-8">
+            <ErrorMessage />
+          </div>
+        )
+      ) : (
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 my-8">
+          {filteredData.length > 0 ? (
+            filteredData.map(
+              (
+                item: {
+                  id: number;
+                  name: string;
+                  grade: number;
+                  character: string;
+                  beforeImage: string | null;
+                  afterImage: string | null;
+                },
+                index: number
+              ) => (
+                <IdentityThumbnailCard
+                  key={index}
+                  id={item.id}
+                  grade={item.grade}
+                  name={item.name}
+                  character={item.character}
+                  imageBefore={
+                    item.beforeImage ? item.beforeImage.trimEnd() : ""
+                  }
+                  imageAfter={item.afterImage ? item.afterImage.trimEnd() : ""}
+                  isSync={isSync}
+                />
+              )
+            )
+          ) : (
+            <div className="text-primary-200 text-center w-full">
+              검색 결과가 없습니다.
+            </div>
+          )}
+        </div>
+      )}
+    </>
   );
 };
 
-export default TopTitleAndButton;
+export default TopTitleAndThumnailList;

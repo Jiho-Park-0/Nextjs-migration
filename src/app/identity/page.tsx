@@ -2,7 +2,7 @@ import React from "react";
 import FilterHeader from "./components/FilterHeader";
 import Filter from "./components/Filter";
 import FilterModal from "./components/FilterModal";
-import TopTitleAndButton from "./components/TopTitleAndButton";
+import TopTitleAndThumnailList from "./components/TopTitleAndThumnailList";
 
 export default function IdentityPage() {
   return (
@@ -12,7 +12,9 @@ export default function IdentityPage() {
         <Filter />
       </div>
       <FilterModal />
-      <TopTitleAndButton />
+      <div className="flex-auto md:pl-10">
+        <TopTitleAndThumnailList />
+      </div>
     </div>
   );
 }

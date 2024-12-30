@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.10",
+    "axios": "^1.7.9",
     "next": "^15.1.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -17,6 +18,7 @@
     "react-range-slider-input": "^3.0.7",
     "react-select": "^5.9.0",
     "react-youtube": "^10.1.0",
+    "swr": "^2.3.0",
     "zustand": "^5.0.2"
   },
   "devDependencies": {
