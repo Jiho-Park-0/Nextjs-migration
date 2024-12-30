@@ -72,8 +72,6 @@ const FilterButtonGroup = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [buttons]);
 
-  console.log(options);
-
   return (
     <div>
       <span className="text-xs flex items-center">

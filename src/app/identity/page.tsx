@@ -2,6 +2,7 @@ import React from "react";
 import FilterHeader from "./components/FilterHeader";
 import Filter from "./components/Filter";
 import FilterModal from "./components/FilterModal";
+import TopTitleAndButton from "./components/TopTitleAndButton";
 
 export default function IdentityPage() {
   return (
@@ -11,6 +12,7 @@ export default function IdentityPage() {
         <Filter />
       </div>
       <FilterModal />
+      <TopTitleAndButton />
     </div>
   );
 }

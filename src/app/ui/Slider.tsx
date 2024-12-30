@@ -11,7 +11,10 @@ interface Props {
 }
 
 const Slider = ({ name, minValue, maxValue, isIdentityPage = true }: Props) => {
-  const [value, setValue] = React.useState([minValue, maxValue]);
+  const [value, setValue] = React.useState<[number, number]>([
+    minValue,
+    maxValue,
+  ]);
 
   const handleChange = (newValue: [number, number]) => {
     setValue(newValue);
@@ -24,10 +27,10 @@ const Slider = ({ name, minValue, maxValue, isIdentityPage = true }: Props) => {
 
   useEffect(() => {
     if (isIdentityPage) {
-      if (
-        options[`min${name}`] !== value[0] ||
-        options[`max${name}`] !== value[1]
-      ) {
+      const currentMin = options[`min${name}`];
+      const currentMax = options[`max${name}`];
+
+      if (currentMin !== value[0] || currentMax !== value[1]) {
         setOptions({
           ...options,
           [`min${name}`]: value[0],
@@ -35,10 +38,10 @@ const Slider = ({ name, minValue, maxValue, isIdentityPage = true }: Props) => {
         });
       }
     } else {
-      if (
-        egoOptions[`min${name}`] !== value[0] ||
-        egoOptions[`max${name}`] !== value[1]
-      ) {
+      const currentMin = egoOptions[`min${name}`];
+      const currentMax = egoOptions[`max${name}`];
+
+      if (currentMin !== value[0] || currentMax !== value[1]) {
         setEgoOptions({
           ...egoOptions,
           [`min${name}`]: value[0],
@@ -46,15 +49,8 @@ const Slider = ({ name, minValue, maxValue, isIdentityPage = true }: Props) => {
         });
       }
     }
-  }, [
-    value,
-    isIdentityPage,
-    name,
-    setOptions,
-    setEgoOptions,
-    options,
-    egoOptions,
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, isIdentityPage, name, setOptions, setEgoOptions]);
 
   return (
     <div className="md:flex md:gap-2">
