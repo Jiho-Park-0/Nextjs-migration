@@ -106,7 +106,7 @@ const TopTitleAndThumnailList = () => {
           nickname.toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
-      const filteredResults = data.filter((item) =>
+      const filteredResults = data.filter((item: { id: string }) =>
         filteredIds.includes(item.id.toString())
       );
       setFilteredData(filteredResults.reverse());
