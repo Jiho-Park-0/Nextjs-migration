@@ -4,7 +4,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import { Typography } from "@material-tailwind/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import nav from "@/app/constants/nav.json";
+import nav from "@/constants/nav.json";
 
 interface NavListProps {
   setIsNavOpen: Dispatch<SetStateAction<boolean>>;

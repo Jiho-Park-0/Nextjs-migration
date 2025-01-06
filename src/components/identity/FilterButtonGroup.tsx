@@ -1,4 +1,4 @@
-import useToggleButtons from "@/app/hooks/useToggleButtons";
+import useToggleButtons from "@/hooks/useToggleButtons";
 import FilterButton from "./FilterButton";
 import { useEffect } from "react";
 import { Tooltip } from "@material-tailwind/react";

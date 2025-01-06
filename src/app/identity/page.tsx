@@ -1,8 +1,8 @@
 import React from "react";
-import FilterHeader from "./components/FilterHeader";
-import Filter from "./components/Filter";
-import FilterModal from "./components/FilterModal";
-import TopTitleAndThumnailList from "./components/TopTitleAndThumnailList";
+import FilterHeader from "@/components/identity/FilterHeader";
+import Filter from "@/components/identity/Filter";
+import FilterModal from "@/components/identity/FilterModal";
+import TopTitleAndThumnailList from "@/components/identity/TopTitleAndThumnailList";
 
 export default function IdentityPage() {
   return (

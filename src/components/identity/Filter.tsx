@@ -5,14 +5,13 @@ import FilterSelectGroup from "./FilterSelectGroup";
 import FilterSliderGroup from "./FilterSliderGroup";
 import FilterEtcButtonGroup from "./FilterEtcButtonGroup";
 
-import sinners from "@/app/constants/sinners.json";
-import resource from "@/app/constants/resource.json";
-import attackType from "@/app/constants/attackType.json";
-import keyword from "@/app/constants/keyword.json";
-import affiliation from "@/app/constants/affiliation.json";
-import etcKeyword from "@/app/constants/etcKeyword.json";
-
-import useSelectOptions from "@/app/hooks/useSelectOptions";
+import sinners from "@/constants/sinners.json";
+import resource from "@/constants/resource.json";
+import attackType from "@/constants/attackType.json";
+import keyword from "@/constants/keyword.json";
+import affiliation from "@/constants/affiliation.json";
+import etcKeyword from "@/constants/etcKeyword.json";
+import useSelectOptions from "@/hooks/useSelectOptions";
 import useStore from "@/zustand/store";
 
 interface Option {

@@ -1,4 +1,4 @@
-import Slider from "@/app/ui/Slider";
+import Slider from "@/ui/Slider";
 
 interface FilterSliderGroupProps {
   title: string;

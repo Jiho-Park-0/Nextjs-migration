@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { fetchYoutube } from "@/app/api/mainApi"; // YouTube API 호출 함수
+import { fetchYoutube } from "@/api/mainApi"; // YouTube API 호출 함수
 import YouTube from "react-youtube";
 
 const YoutubePlay = () => {

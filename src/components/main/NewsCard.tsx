@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { fetchNews } from "@/app/api/mainApi";
+import { fetchNews } from "@/api/mainApi";
 import Skeleton from "./Skeleton";
 import Error from "./ErrorCompoenet";
 

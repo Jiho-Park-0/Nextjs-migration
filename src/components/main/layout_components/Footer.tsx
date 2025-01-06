@@ -3,8 +3,8 @@
 import React from "react";
 import { Typography } from "@material-tailwind/react";
 import Link from "next/link";
-import nav from "@/app/constants/nav.json";
-import PrivacyPolicy from "@/app/layout_components/PrivacyPolicy";
+import nav from "@/constants/nav.json";
+import PrivacyPolicy from "@/components/main/layout_components/PrivacyPolicy";
 import Image from "next/image";
 
 const Footer = () => {

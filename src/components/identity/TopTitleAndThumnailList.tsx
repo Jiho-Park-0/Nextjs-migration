@@ -5,12 +5,12 @@ import { Button, Input, Tooltip } from "@material-tailwind/react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { LuSearch } from "react-icons/lu";
 import axios from "axios";
-import { getIdentity } from "@/app/api/ditionaryApi";
+import { getIdentity } from "@/api/ditionaryApi";
 import useStore from "@/zustand/store"; // zustand 스토어 import
 import IdentityThumbnailCard from "./IdentityThumbnailCard";
 import { Spinner } from "@material-tailwind/react";
-import ErrorMessage from "@/app/ui/ErrorMessage";
-import nicknamesData from "@/app/constants/nicknames.json";
+import ErrorMessage from "@/ui/ErrorMessage";
+import nicknamesData from "@/constants/nicknames.json";
 import Filter from "./Filter";
 
 interface FilterModalProps {

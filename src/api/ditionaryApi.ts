@@ -39,7 +39,7 @@ export const getIdentity = async (options: IdentityOptions) => {
     ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity?${query}`
     : "";
 
-  const response = await fetch(uri);
+  const response = await fetch(uri, { cache: "force-cache" });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
