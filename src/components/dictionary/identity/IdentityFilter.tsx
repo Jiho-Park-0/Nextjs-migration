@@ -1,9 +1,9 @@
 "use client";
 
-import FilterButtonGroup from "./FilterButtonGroup";
-import FilterSelectGroup from "./FilterSelectGroup";
-import FilterSliderGroup from "./FilterSliderGroup";
-import FilterEtcButtonGroup from "./FilterEtcButtonGroup";
+import FilterButtonGroup from "../FilterButtonGroup";
+import FilterSelectGroup from "../FilterSelectGroup";
+import FilterSliderGroup from "../FilterSliderGroup";
+import FilterEtcButtonGroup from "../FilterEtcButtonGroup";
 
 import sinners from "@/constants/sinners.json";
 import resource from "@/constants/resource.json";

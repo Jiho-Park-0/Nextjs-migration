@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Filter from "./Filter";
+import Filter from "./identity/IdentityFilter";
 
 const FilterModal: React.FC = () => {
   const [openFilter, setOpenFilter] = useState(false);

@@ -1,18 +1,18 @@
 import React from "react";
 import FilterHeader from "@/components/dictionary/FilterHeader";
-import IdentityFilter from "@/components/dictionary/identity/IdentityFilter";
+import EgoFilter from "@/components/dictionary/ego/EgoFilter";
 import FilterModal from "@/components/dictionary/FilterModal";
-import TopTitleAndThumnailList from "@/components/dictionary/identity/TopTitleAndThumnailList";
+import TopTitleAndThumnailList from "@/components/dictionary/ego/TopTitleAndThumnailList";
 
-export default function IdentityPage() {
+export default function EgoPage() {
   return (
     <div className="flex font-sans text-primary-100 font-bold mt-4">
       <div className="w-[300px] min-w-[300px] hidden lg:block mt-2">
         <FilterHeader />
-        <IdentityFilter />
+        <EgoFilter />
       </div>
       <FilterModal />
-      <div className="flex-auto md:pl-10">
+      <div>
         <TopTitleAndThumnailList />
       </div>
     </div>
