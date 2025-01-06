@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Input, Tooltip } from "@material-tailwind/react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { LuSearch } from "react-icons/lu";
@@ -12,6 +12,8 @@ import { Spinner } from "@material-tailwind/react";
 import ErrorMessage from "@/ui/ErrorMessage";
 import nicknamesData from "@/constants/nicknames.json";
 import Filter from "./Filter";
+import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "@/api/queryClient";
 
 interface FilterModalProps {
   openFilter: boolean;
@@ -66,27 +68,39 @@ const TopTitleAndThumnailList = () => {
   const options = useStore((state) => state.optionsState); // options 상태 가져오기
 
   const [nicknames, setNicknames] = useState<{ [key: string]: string[] }>({});
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const dataRef = useRef(null);
 
-  const { isLoading, isError, error } = useStore(
-    (state) => state.identityState
-  );
+  // const { isLoading, isError, error } = useStore(
+  //   (state) => state.identityState
+  // );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getIdentity(options); // options를 getIdentity에 넘기기
-        setData(response);
-        dataRef.current = response; // 데이터를 캐시에 저장
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await getIdentity(options); // options를 getIdentity에 넘기기
+  //       setData(response);
+  //       dataRef.current = response; // 데이터를 캐시에 저장
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    fetchData();
-  }, [options]); // options가 변경될 때마다 호출
+  //   fetchData();
+  // }, [options]); // options가 변경될 때마다 호출
+
+  // 데이터 가져오기
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["identity", options],
+    queryFn: () => getIdentity(options),
+    retry: 1,
+    placeholderData: () => {
+      const cachedData = queryClient.getQueryData(["identity", options]);
+      return cachedData || [];
+    },
+    staleTime: 1000 * 60 * 60 * 24, // 하루
+    refetchOnWindowFocus: false, // 포커스 할 때마다 다시 불러오는 기능 끔
+  });
 
   // 별명 데이터를 상태로 저장
   useEffect(() => {
