@@ -89,9 +89,10 @@ const TopTitleAndThumnailList = () => {
       threshold: 1.0,
     };
     const observer = new IntersectionObserver(handleObserver, option);
-    if (observerElem.current) observer.observe(observerElem.current);
+    const currentElem = observerElem.current;
+    if (currentElem) observer.observe(currentElem);
     return () => {
-      if (observerElem.current) observer.unobserve(observerElem.current);
+      if (currentElem) observer.unobserve(currentElem);
     };
   }, [handleObserver]);
 
