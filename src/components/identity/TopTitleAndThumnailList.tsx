@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Button, Input, Tooltip } from "@material-tailwind/react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { LuSearch } from "react-icons/lu";
@@ -13,7 +13,6 @@ import ErrorMessage from "@/ui/ErrorMessage";
 import nicknamesData from "@/constants/nicknames.json";
 import Filter from "./Filter";
 import { useQuery } from "@tanstack/react-query";
-import { queryClient } from "@/api/queryClient";
 
 interface FilterModalProps {
   openFilter: boolean;
@@ -24,7 +23,6 @@ const FilterModal: React.FC<FilterModalProps> = ({
   openFilter,
   setOpenFilter,
 }) => {
-  // 모달 배경 클릭 시 닫기
   const handleBackgroundClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -34,30 +32,28 @@ const FilterModal: React.FC<FilterModalProps> = ({
   };
 
   return (
-    <>
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 ${
+        openFilter ? "opacity-100" : "opacity-0 pointer-events-none"
+      }`}
+      onClick={handleBackgroundClick}
+    >
       <div
-        className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-300 ${
-          openFilter ? "opacity-100" : "opacity-0 pointer-events-none"
+        className={`bg-primary-500 p-0 h-5/6 rounded-lg w-11/12 max-w-sm transition-transform duration-300 max-h-screen overflow-y-auto ${
+          openFilter ? "translate-y-0" : "translate-y-full"
         }`}
-        onClick={handleBackgroundClick}
       >
-        <div
-          className={`bg-primary-500 p-0 h-5/6 rounded-lg w-11/12 max-w-sm transition-transform duration-300 max-h-screen overflow-y-auto ${
-            openFilter ? "translate-y-0" : "translate-y-full"
-          }`}
-        >
-          <div className="flex justify-end items-center m-0 p-2 pb-0 ">
-            <button
-              onClick={() => setOpenFilter(false)}
-              className="text-primary-100 hover:text-primary-200 text-2xl"
-            >
-              &times;
-            </button>
-          </div>
-          <Filter />
+        <div className="flex justify-end items-center m-0 p-2 pb-0 ">
+          <button
+            onClick={() => setOpenFilter(false)}
+            className="text-primary-100 hover:text-primary-200 text-2xl"
+          >
+            &times;
+          </button>
         </div>
+        <Filter />
       </div>
-    </>
+    </div>
   );
 };
 
@@ -68,43 +64,38 @@ const TopTitleAndThumnailList = () => {
   const options = useStore((state) => state.optionsState); // options 상태 가져오기
 
   const [nicknames, setNicknames] = useState<{ [key: string]: string[] }>({});
-  // const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [page, setPage] = useState(1);
+  const observerElem = useRef<HTMLDivElement | null>(null);
 
-  // const { isLoading, isError, error } = useStore(
-  //   (state) => state.identityState
-  // );
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await getIdentity(options); // options를 getIdentity에 넘기기
-  //       setData(response);
-  //       dataRef.current = response; // 데이터를 캐시에 저장
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [options]); // options가 변경될 때마다 호출
-
-  // 데이터 가져오기
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["identity", options],
     queryFn: () => getIdentity(options),
-    retry: 1,
-    placeholderData: () => {
-      const cachedData = queryClient.getQueryData(["identity", options]);
-      return cachedData || [];
-    },
     staleTime: 1000 * 60 * 60 * 24, // 하루
     refetchOnWindowFocus: false, // 포커스 할 때마다 다시 불러오는 기능 끔
   });
 
-  // 별명 데이터를 상태로 저장
+  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
+    const target = entries[0];
+    if (target.isIntersecting) {
+      setPage((prev) => prev + 1);
+    }
+  }, []);
+
   useEffect(() => {
-    // JSON 파일의 데이터를 상태로 설정
+    const option = {
+      root: null,
+      rootMargin: "20px",
+      threshold: 1.0,
+    };
+    const observer = new IntersectionObserver(handleObserver, option);
+    if (observerElem.current) observer.observe(observerElem.current);
+    return () => {
+      if (observerElem.current) observer.unobserve(observerElem.current);
+    };
+  }, [handleObserver]);
+
+  useEffect(() => {
     const nicknamesMap: { [key: string]: string[] } = {};
     nicknamesData.forEach((item: { id: string; nicknames: string[] }) => {
       nicknamesMap[item.id] = item.nicknames;
@@ -112,7 +103,6 @@ const TopTitleAndThumnailList = () => {
     setNicknames(nicknamesMap);
   }, []);
 
-  // 이름 및 별명 검색 필터링
   useEffect(() => {
     if (searchTerm) {
       const filteredIds = Object.keys(nicknames).filter((id) =>
@@ -120,18 +110,19 @@ const TopTitleAndThumnailList = () => {
           nickname.toLowerCase().includes(searchTerm.toLowerCase())
         )
       );
-      const filteredResults = data.filter((item: { id: string }) =>
+      const filteredResults = data?.filter((item: { id: string }) =>
         filteredIds.includes(item.id.toString())
       );
-      setFilteredData(filteredResults.reverse());
+      setFilteredData(filteredResults?.reverse() || []);
     } else {
-      setFilteredData(data.reverse());
+      setFilteredData(data?.reverse() || []);
     }
   }, [searchTerm, nicknames, data]);
 
+  const paginatedData = filteredData.slice(0, page * 15);
+
   return (
     <>
-      {/* 상단 제목, 버튼 */}
       <div className="flex justify-between items-center">
         <span className="text-3xl lg:text-4xl whitespace-nowrap hidden lg:block pr-2">
           인격
@@ -188,7 +179,6 @@ const TopTitleAndThumnailList = () => {
         </div>
       </div>
       <FilterModal openFilter={openFilter} setOpenFilter={setOpenFilter} />
-      {/* 썸네일 리스트 */}
       {isLoading ? (
         <div className="flex justify-center items-center h-screen">
           <Spinner className="w-8 h-8 text-primary-200" />
@@ -205,8 +195,8 @@ const TopTitleAndThumnailList = () => {
         )
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 my-8">
-          {filteredData.length > 0 ? (
-            filteredData.map(
+          {paginatedData.length > 0 ? (
+            paginatedData.map(
               (
                 item: {
                   id: number;
@@ -239,6 +229,7 @@ const TopTitleAndThumnailList = () => {
           )}
         </div>
       )}
+      <div ref={observerElem} className="h-10"></div>
     </>
   );
 };
