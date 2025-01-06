@@ -1,34 +1,27 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { fetchYoutube } from "@/api/mainApi"; // YouTube API 호출 함수
+import React from "react";
+import { getYoutube } from "@/api/mainApi"; // YouTube API 호출 함수
 import YouTube from "react-youtube";
+import { useQuery } from "@tanstack/react-query";
+import { Main_Keys } from "@/constants/queryKeys";
 
 const YoutubePlay = () => {
-  const [videoId, setVideoId] = useState<string | null>(null);
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const data = await fetchYoutube(); // fetchYoutube는 { videoId: string } 형식의 데이터를 반환한다고 가정
-        if (data?.videoId) {
-          setVideoId(data.videoId); // API에서 받은 동영상 ID를 설정
-        } else {
-          throw new Error("Invalid video ID");
-        }
-      } catch (err) {
-        console.error("Error fetching YouTube data:", err);
-      }
-    };
-
-    getData();
-  }, []);
+  const { data } = useQuery({
+    queryKey: Main_Keys.youtube,
+    queryFn: getYoutube,
+    staleTime: 1000 * 60 * 30,
+    refetchOnWindowFocus: false,
+    placeholderData: {
+      videoId: "HTRQgFYCXHY", // 기본값 설정
+    },
+  });
 
   return (
     <div className="w-full mx-auto">
       <div className="aspect-video">
         <YouTube
-          videoId={videoId || "HTRQgFYCXHY"} // data가 없는 경우 프로젝트문 대표 영상 출력 "HTRQgFYCXHY"
+          videoId={data?.videoId || "HTRQgFYCXHY"} // data가 없는 경우 프로젝트문 대표 영상 출력 "HTRQgFYCXHY"
           className="aspect-video"
           opts={{
             width: "100%",

@@ -1,4 +1,4 @@
-export const fetchNews = async () => {
+export const getNews = async () => {
   const newsURL = `${process.env.NEXT_PUBLIC_API_URL}/main/news`;
 
   const response = await fetch(newsURL);
@@ -9,7 +9,7 @@ export const fetchNews = async () => {
   return result;
 };
 
-export const fetchYoutube = async () => {
+export const getYoutube = async () => {
   const youtubeURL = `${process.env.NEXT_PUBLIC_API_URL}/main/youtube`;
 
   const response = await fetch(youtubeURL);
