@@ -1,6 +1,14 @@
 import { IdentityOptions } from "@/interfaces/identity";
 import { EgoOptions } from "@/interfaces/ego";
 
+function getLength(value: string | number | string[]): number {
+  if (typeof value === "string" || Array.isArray(value)) {
+    return value.length;
+  } else {
+    return 0; // number 타입일 경우 length가 없으므로 0을 반환
+  }
+}
+
 export const getIdentity = async (options: IdentityOptions) => {
   const query = Object.entries(options)
     .filter(
@@ -8,7 +16,8 @@ export const getIdentity = async (options: IdentityOptions) => {
         value !== undefined &&
         value !== null &&
         value !== "" &&
-        value.length !== 0
+        getLength(value) &&
+        _
     )
     .map(([key, value]) => {
       if (Array.isArray(value)) {
@@ -47,7 +56,8 @@ export const getEgo = async (options: EgoOptions) => {
         value !== undefined &&
         value !== null &&
         value !== "" &&
-        value.length !== 0
+        value.length !== 0 &&
+        _
     )
     .map(([key, value]) => {
       // 배열인 경우

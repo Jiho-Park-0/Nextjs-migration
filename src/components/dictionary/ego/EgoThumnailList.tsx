@@ -1,17 +1,17 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Button, Input, Tooltip } from "@material-tailwind/react";
-import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
+import { Button, Input } from "@material-tailwind/react";
+
 import { LuSearch } from "react-icons/lu";
 import axios from "axios";
-import { getIdentity } from "@/api/ditionaryApi";
+import { getEgo } from "@/api/ditionaryApi";
 import useStore from "@/zustand/store"; // zustand 스토어 import
-import IdentityThumbnailCard from "./IdentityThumbnailCard";
+import EgoThumbnailCard from "./EgoThumbnailCard";
 import { Spinner } from "@material-tailwind/react";
 import ErrorMessage from "@/ui/ErrorMessage";
-import nicknamesData from "@/constants/nicknames.json";
-import Filter from "./IdentityFilter";
+
+import Filter from "./EgoFilter";
 import { useQuery } from "@tanstack/react-query";
 
 interface FilterModalProps {
@@ -58,19 +58,17 @@ const FilterModal: React.FC<FilterModalProps> = ({
 };
 
 const TopTitleAndThumnailList = () => {
-  const [isSync, setIsSync] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [openFilter, setOpenFilter] = useState(false);
   const options = useStore((state) => state.optionsState); // options 상태 가져오기
-
-  const [nicknames, setNicknames] = useState<{ [key: string]: string[] }>({});
   const [filteredData, setFilteredData] = useState([]);
+  const [paginatedData, setPaginatedData] = useState([]);
   const [page, setPage] = useState(1);
   const observerElem = useRef<HTMLDivElement | null>(null);
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["identity", options],
-    queryFn: () => getIdentity(options),
+    queryKey: ["ego", options],
+    queryFn: () => getEgo(options),
     staleTime: 1000 * 60 * 60 * 24, // 하루
     refetchOnWindowFocus: false, // 포커스 할 때마다 다시 불러오는 기능 끔
   });
@@ -97,36 +95,23 @@ const TopTitleAndThumnailList = () => {
   }, [handleObserver]);
 
   useEffect(() => {
-    const nicknamesMap: { [key: string]: string[] } = {};
-    nicknamesData.forEach((item: { id: string; nicknames: string[] }) => {
-      nicknamesMap[item.id] = item.nicknames;
-    });
-    setNicknames(nicknamesMap);
-  }, []);
-
-  useEffect(() => {
-    if (searchTerm) {
-      const filteredIds = Object.keys(nicknames).filter((id) =>
-        nicknames[id].some((nickname) =>
-          nickname.toLowerCase().includes(searchTerm.toLowerCase())
+    if (data) {
+      const filtered = data
+        .filter((item: { name: string }) =>
+          item.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
-      );
-      const filteredResults = data?.filter((item: { id: string }) =>
-        filteredIds.includes(item.id.toString())
-      );
-      setFilteredData(filteredResults?.reverse() || []);
-    } else {
-      setFilteredData(data?.reverse() || []);
+        .reverse();
+      setFilteredData(filtered);
+      setPaginatedData(filtered.slice(0, page * 15));
     }
-  }, [searchTerm, nicknames, data]);
-
-  const paginatedData = filteredData.slice(0, page * 15);
+  }, [data, searchTerm, page]);
 
   return (
-    <>
+    <div className="">
+      {/* 상단 제목, 버튼 */}
       <div className="flex justify-between items-center">
         <span className="text-3xl lg:text-4xl whitespace-nowrap hidden lg:block pr-2">
-          인격
+          에고
         </span>
         <div className="my-2 grid grid-cols-1 sm:flex sm:justify-between w-full lg:w-fit gap-2 h-fit md:h-10">
           <Button
@@ -137,25 +122,6 @@ const TopTitleAndThumnailList = () => {
             <span className="whitespace-nowrap">필터</span>
           </Button>
           <div className="flex gap-2">
-            <Tooltip
-              className="bg-primary-500 text-primary-100 text-xs"
-              content={
-                <span>체크 시 3 동기화 후 이미지를 확인할 수 있습니다.</span>
-              }
-            >
-              <Button
-                className="min-w-[80px] flex gap-2 items-center bg-primary-400 px-2 md:px-4 py-0 md:py-1 font-sansLight text-sm md:text-base text-white hover:bg-primary-300 rounded"
-                placeholder={undefined}
-                onClick={() => setIsSync((prev) => !prev)}
-              >
-                <span className="pt-1 whitespace-nowrap">동기화</span>
-                {isSync ? (
-                  <FaCheckCircle className="text-primary-200" />
-                ) : (
-                  <FaRegCircle className="text-primary-200" />
-                )}
-              </Button>
-            </Tooltip>
             <div className="relative flex w-full gap-2 md:w-max">
               <Input
                 type="search"
@@ -179,7 +145,10 @@ const TopTitleAndThumnailList = () => {
           </div>
         </div>
       </div>
+
       <FilterModal openFilter={openFilter} setOpenFilter={setOpenFilter} />
+
+      {/* 썸네일 리스트 */}
       {isLoading ? (
         <div className="flex justify-center items-center h-screen">
           <Spinner className="w-8 h-8 text-primary-200" />
@@ -187,7 +156,7 @@ const TopTitleAndThumnailList = () => {
       ) : isError ? (
         axios.isAxiosError(error) && error.response?.status === 404 ? (
           <div className="text-primary-200 text-center w-full my-8 h-screen">
-            해당하는 인격이 없습니다.
+            해당하는 에고가 없습니다.
           </div>
         ) : (
           <div className="text-primary-200 text-center w-full my-8">
@@ -204,22 +173,19 @@ const TopTitleAndThumnailList = () => {
                   name: string;
                   grade: number;
                   character: string;
-                  beforeImage: string | null;
-                  afterImage: string | null;
+                  zoomImage: string;
+                  image: string;
                 },
                 index: number
               ) => (
-                <IdentityThumbnailCard
+                <EgoThumbnailCard
                   key={index}
                   id={item.id}
                   grade={item.grade}
                   name={item.name}
                   character={item.character}
-                  imageBefore={
-                    item.beforeImage ? item.beforeImage.trimEnd() : ""
-                  }
-                  imageAfter={item.afterImage ? item.afterImage.trimEnd() : ""}
-                  isSync={isSync}
+                  imageZoomIn={item.zoomImage}
+                  imageZoomOut={item.image}
                 />
               )
             )
@@ -231,7 +197,7 @@ const TopTitleAndThumnailList = () => {
         </div>
       )}
       <div ref={observerElem} className="h-10"></div>
-    </>
+    </div>
   );
 };
 

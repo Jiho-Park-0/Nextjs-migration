@@ -2,7 +2,7 @@ import React from "react";
 import FilterHeader from "@/components/dictionary/FilterHeader";
 import EgoFilter from "@/components/dictionary/ego/EgoFilter";
 import FilterModal from "@/components/dictionary/FilterModal";
-import TopTitleAndThumnailList from "@/components/dictionary/ego/TopTitleAndThumnailList";
+import EgoThumnailList from "@/components/dictionary/ego/EgoThumnailList";
 
 export default function EgoPage() {
   return (
@@ -12,8 +12,8 @@ export default function EgoPage() {
         <EgoFilter />
       </div>
       <FilterModal />
-      <div>
-        <TopTitleAndThumnailList />
+      <div className="flex-auto md:pl-10">
+        <EgoThumnailList />
       </div>
     </div>
   );

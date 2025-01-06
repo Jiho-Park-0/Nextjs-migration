@@ -2,7 +2,7 @@ import React from "react";
 import FilterHeader from "@/components/dictionary/FilterHeader";
 import IdentityFilter from "@/components/dictionary/identity/IdentityFilter";
 import FilterModal from "@/components/dictionary/FilterModal";
-import TopTitleAndThumnailList from "@/components/dictionary/identity/TopTitleAndThumnailList";
+import IdentityThumnailList from "@/components/dictionary/identity/IdentityThumnailList";
 
 export default function IdentityPage() {
   return (
@@ -13,7 +13,7 @@ export default function IdentityPage() {
       </div>
       <FilterModal />
       <div className="flex-auto md:pl-10">
-        <TopTitleAndThumnailList />
+        <IdentityThumnailList />
       </div>
     </div>
   );
