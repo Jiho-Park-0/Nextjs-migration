@@ -1,5 +1,5 @@
 export interface IdentityOptions {
-  [key: string]: any;
+  [key: string]: string | number | string[];
   sinner: string[];
   season: string[];
   grade: string[];

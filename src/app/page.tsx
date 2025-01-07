@@ -1,11 +1,14 @@
 import React from "react";
-import MainCarousel from "./components/MainCarousel";
-import NewsCard from "./components/NewsCard";
-import YoutubePlay from "./components/YoutubePlay";
-import MenuCard from "./components/MenuCard";
-import SiteButton from "./components/SiteButton";
+import MainCarousel from "@/components/main/MainCarousel";
+import MenuCard from "@/components/main/MenuCard";
+import SiteButton from "@/components/main/SiteButton";
 import { FaSquareXTwitter, FaSquareYoutube } from "react-icons/fa6";
 import Image from "next/image";
+import Skeleton from "@/components/main/Skeleton";
+import { Suspense, lazy } from "react";
+
+const YoutubePlay = lazy(() => import("@/components/main/YoutubePlay"));
+const NewsCard = lazy(() => import("@/components/main/NewsCard"));
 
 export default function Home() {
   return (
@@ -19,8 +22,11 @@ export default function Home() {
           <YoutubePlay />
         </div>
         {/* NewsCard가 나머지 40%를 차지하게 설정 */}
+
         <div className="w-full md:w-2/5">
-          <NewsCard />
+          <Suspense fallback={<Skeleton />}>
+            <NewsCard />
+          </Suspense>
         </div>
       </div>
       <div className="flex justify-between w-full h-20 md:h-28 lg:h-40 gap-2 md:gap-4">
