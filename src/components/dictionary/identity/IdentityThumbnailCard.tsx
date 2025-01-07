@@ -31,7 +31,7 @@ const IdentityThumbnailCard = ({
   };
 
   return (
-    <Link href={`${id}`}>
+    <Link href={`/identity/${id}`}>
       <div className=" bg-primary-500 rounded-lg p-[10px] hover:scale-105">
         <div className="flex justify-between items-center">
           <div className="w-10 mx-auto">

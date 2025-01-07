@@ -25,7 +25,7 @@ const EgoThumbnailCard = ({
   };
 
   return (
-    <Link href={`${id}`}>
+    <Link href={`ego/${id}`}>
       <div className=" bg-primary-500 rounded-lg p-[10px] hover:scale-105 relative h-fit">
         <div className="flex justify-between items-center">
           <div className="w-14 md:w-20 lg:w-16 xl:w-20 mx-auto">
