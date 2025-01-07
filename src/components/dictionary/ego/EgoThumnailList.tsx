@@ -5,7 +5,7 @@ import { Button, Input } from "@material-tailwind/react";
 
 import { LuSearch } from "react-icons/lu";
 import axios from "axios";
-import { getEgo } from "@/api/ditionaryApi";
+import { getEgo } from "@/api/dictionaryApi";
 import useStore from "@/zustand/store"; // zustand 스토어 import
 import EgoThumbnailCard from "./EgoThumbnailCard";
 import { Spinner } from "@material-tailwind/react";
