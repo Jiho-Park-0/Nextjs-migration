@@ -1,5 +1,4 @@
 import IdentitySkillCard from "./IdentitySkillCard";
-
 import useStore from "@/zustand/store";
 
 interface Props {

@@ -21,7 +21,6 @@ const Keyword = ({ keywords }: KeywordProps) => {
                 src={`/assets/keyword/${keyword}.webp`}
                 alt="resourceImg"
                 className="inline-block mr-1 mb-[2px]"
-                layout="intrinsic"
                 width={18}
                 height={18}
               />
