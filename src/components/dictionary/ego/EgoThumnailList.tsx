@@ -60,7 +60,7 @@ const FilterModal: React.FC<FilterModalProps> = ({
 const TopTitleAndThumnailList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [openFilter, setOpenFilter] = useState(false);
-  const options = useStore((state) => state.optionsState); // options 상태 가져오기
+  const options = useStore((state) => state.egoOptionsState); // options 상태 가져오기
   const [filteredData, setFilteredData] = useState([]);
   const [paginatedData, setPaginatedData] = useState([]);
   const [page, setPage] = useState(1);

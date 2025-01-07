@@ -135,8 +135,6 @@ const TopTitleAndThumnailList = () => {
     }
   }, [data, searchTerm, page]);
 
-  const LastestIdentity = filteredData[0].name;
-
   return (
     <>
       <div className="flex justify-between items-center">
@@ -144,8 +142,6 @@ const TopTitleAndThumnailList = () => {
           인격
         </span>
         <div className="my-2 grid grid-cols-1 sm:flex sm:justify-between w-full lg:w-fit gap-2 h-fit md:h-10">
-          <span>{LastestIdentity}</span>
-
           <Button
             className="h-8 lg:hidden bg-primary-400 lg:h-8 py-0.5 px-4 text-lg lg:text-sm text-primary-100 hover:bg-primary-300 rounded"
             onClick={() => setOpenFilter(true)}

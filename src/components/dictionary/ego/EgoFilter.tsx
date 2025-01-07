@@ -26,8 +26,8 @@ const keywordOptionList: Option[] = keyword.map((item) => ({
 }));
 
 const Filter = () => {
-  const setOptions = useStore((state) => state.setOptionsState);
-  const options = useStore((state) => state.optionsState);
+  const setOptions = useStore((state) => state.setEgoOptionsState);
+  const options = useStore((state) => state.egoOptionsState);
 
   const {
     selectedOptions: keywordOptions,
@@ -46,7 +46,7 @@ const Filter = () => {
       [key]: newSelectedOptions,
     });
   };
-  // console.log("options", options);
+  console.log("options", options);
   return (
     <div className="bg-primary-500 w-full rounded p-4 flex flex-col gap-2">
       <FilterButtonGroup
@@ -95,7 +95,8 @@ const Filter = () => {
         title="가중치"
         name="Weight"
         minValue={1}
-        maxValue={9}
+        maxValue={7}
+        isIdentityPage={false}
       />
       <FilterButtonGroup
         title="시즌"
@@ -109,6 +110,7 @@ const Filter = () => {
         src=""
         buttonType="text"
         propertyToSaveTo="season"
+        isIdentityPage={false}
       />
       <FilterEtcButtonGroup
         title="등급"
