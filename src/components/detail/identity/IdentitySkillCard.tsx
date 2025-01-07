@@ -72,16 +72,27 @@ const IdentitySkillCard = ({
           <div className="flex items-center pb-2 gap-1 md:gap-3">
             <span className="flex items-center justify-center">
               {/* 코인 이미지 */}
-              {[...Array(currentSkill.coinNum)].map((_, index) => (
-                <Image
-                  key={index}
-                  src={`/assets/coin/normal_coin.webp`}
-                  alt="coinImg"
-                  className="w-auto h-[1em] mr-[2px]"
-                  width={1024}
-                  height={1024}
-                />
-              ))}
+              {[...Array(currentSkill.coinNum)].map((_, index) => {
+                const effectKey = `coin${index + 1}Effect`;
+                const effect = currentSkill[effectKey as keyof Skill] as string;
+                const effectParts = effect.split("\n");
+
+                // 첫 문장이 '파괴 불가 코인'인 경우
+                const isUnbreakableCoin = effectParts[0] === "파괴 불가 코인";
+
+                return (
+                  <Image
+                    key={index}
+                    src={`/assets/coin/${
+                      isUnbreakableCoin ? "unbreakable_coin" : "normal_coin"
+                    }.webp`}
+                    alt="coinImg"
+                    className="w-auto h-[1em] mr-[2px]"
+                    width={1024}
+                    height={1024}
+                  />
+                );
+              })}
             </span>
             <span className="flex items-center">
               <span className="w-[3em]">가중치 </span>

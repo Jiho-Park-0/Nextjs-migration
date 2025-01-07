@@ -5,7 +5,7 @@ import { Button, Input } from "@material-tailwind/react";
 
 import { LuSearch } from "react-icons/lu";
 import axios from "axios";
-import { getEgo } from "@/api/ditionaryApi";
+import { getEgo } from "@/api/dictionaryApi";
 import useStore from "@/zustand/store"; // zustand 스토어 import
 import EgoThumbnailCard from "./EgoThumbnailCard";
 import { Spinner } from "@material-tailwind/react";
@@ -67,7 +67,7 @@ const TopTitleAndThumnailList = () => {
   const observerElem = useRef<HTMLDivElement | null>(null);
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["ego", options],
+    queryKey: ["identity", options],
     queryFn: () => getEgo(options),
     staleTime: 1000 * 60 * 60 * 24, // 하루
     refetchOnWindowFocus: false, // 포커스 할 때마다 다시 불러오는 기능 끔
@@ -103,6 +103,25 @@ const TopTitleAndThumnailList = () => {
         .reverse();
       setFilteredData(filtered);
       setPaginatedData(filtered.slice(0, page * 15));
+    }
+  }, [data, searchTerm, page]);
+
+  useEffect(() => {
+    if (data) {
+      const filtered = data
+        .filter((item: { name: string }) =>
+          item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .reverse();
+      setFilteredData(filtered);
+      setPaginatedData(filtered.slice(0, page * 15));
+
+      // 1부터 93까지의 id 중 비어있는 id를 찾기
+      const requiredIds = Array.from({ length: 93 }, (_, i) => i + 1);
+      const existingIds = filtered.map((item: { id: number }) => item.id);
+      const missingIds = requiredIds.filter((id) => !existingIds.includes(id));
+
+      console.log("Missing IDs:", missingIds);
     }
   }, [data, searchTerm, page]);
 
