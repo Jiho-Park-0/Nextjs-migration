@@ -60,33 +60,29 @@ export const getEgo = async (options: EgoOptions) => {
         _
     )
     .map(([key, value]) => {
-      // 배열인 경우
       if (Array.isArray(value)) {
-        // etcKeyword 처리
         if (key === "etcKeyword") {
           const encodedValues = value
             .map((val) => encodeURIComponent(val))
             .join(",");
           return `keyword=${encodedValues}`;
         } else {
-          // 다른 배열 처리
           const encodedValues = value
             .map((val) => encodeURIComponent(val))
             .join(",");
           return `${key}=${encodedValues}`;
         }
       }
-
-      // 배열이 아닌 경우: 속도랑 가중치 현재 API 에러로 제외하고 호출
       return `${key}=${encodeURIComponent(value)}`;
     })
     .join("&");
 
+  // 배열이 아닌 경우: 속도랑 가중치 현재 API 에러로 제외하고 호출
   const uri = query
     ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego?${query}`
-    : "";
+    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego`;
 
-  const response = await fetch(uri);
+  const response = await fetch(uri, { cache: "force-cache" });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }

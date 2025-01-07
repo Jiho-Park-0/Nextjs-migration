@@ -74,7 +74,7 @@ const useStore = create<StoreState>((set) => ({
     resources: [],
     types: [],
     minWeight: 1,
-    maxWeight: 6,
+    maxWeight: 7,
   },
   synchronizationState: {
     synchronization: 0,
