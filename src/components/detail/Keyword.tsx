@@ -3,11 +3,11 @@ import Image from "next/image";
 import keyword_data from "@/constants/keyword.json";
 import KeywordHighlighted from "@/components/detail/KeywordHighlighted";
 
-interface IdentityKeywordProps {
+interface KeywordProps {
   keywords: string[];
 }
 
-const IdentityKeyword = ({ keywords }: IdentityKeywordProps) => {
+const Keyword = ({ keywords }: KeywordProps) => {
   return (
     <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
       {keywords.map((keyword, index) => {
@@ -20,9 +20,10 @@ const IdentityKeyword = ({ keywords }: IdentityKeywordProps) => {
               <Image
                 src={`/assets/keyword/${keyword}.webp`}
                 alt="resourceImg"
-                className="inline-block h-[1.1em] mr-1 mb-[2px]"
-                width={1024}
-                height={1024}
+                className="inline-block mr-1 mb-[2px]"
+                layout="intrinsic"
+                width={18}
+                height={18}
               />
               <span>{keyword}</span>
               <br />
@@ -36,4 +37,4 @@ const IdentityKeyword = ({ keywords }: IdentityKeywordProps) => {
   );
 };
 
-export default IdentityKeyword;
+export default Keyword;

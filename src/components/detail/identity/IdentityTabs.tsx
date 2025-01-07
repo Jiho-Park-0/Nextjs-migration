@@ -17,9 +17,14 @@ import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { getIdentityDetail } from "@/api/detailAPI";
 import IdentityInfoBox from "@/components/detail/identity/IdentityInfoBox";
 import IdentitySkills from "@/components/detail/identity/IdentitySkills";
+import IdentityPassive from "@/components/detail/identity/IdentityPassive";
+import Keyword from "@/components/detail/Keyword";
+import DetailImage from "@/components/detail/DetailImage";
 import ErrorMessage from "@/ui/ErrorMessage";
 
 import useStore from "@/zustand/store";
+
+import keyword_data from "@/constants/keyword.json";
 
 const IdentityTabs = () => {
   const id = useParams().id;
@@ -59,6 +64,10 @@ const IdentityTabs = () => {
       </div>
     );
   }
+
+  const keywordInfo = data?.keyword.some((kw: string) =>
+    keyword_data.some((item) => item.name === kw && item.content)
+  );
 
   const identitySkills = [
     data.identitySkill1s,
@@ -143,6 +152,24 @@ const IdentityTabs = () => {
               <div className="py-1">
                 {value === "스킬" && (
                   <IdentitySkills identitySkills={identitySkills} />
+                )}
+                {value === "패시브" && (
+                  <IdentityPassive identityPassives={data.identityPassives} />
+                )}
+                {value === "키워드" &&
+                  (keywordInfo ? (
+                    <Keyword keywords={data.keyword} />
+                  ) : (
+                    <div className="text-primary-200 text-center w-full my-8">
+                      키워드가 없습니다.
+                    </div>
+                  ))}
+                {value === "이미지" && (
+                  <DetailImage
+                    type="identity"
+                    beforeImage={data.beforeImage}
+                    afterImage={data.afterImage}
+                  />
                 )}
               </div>
             </TabPanel>
