@@ -13,6 +13,7 @@ import ErrorMessage from "@/ui/ErrorMessage";
 import nicknamesData from "@/constants/nicknames.json";
 import Filter from "./IdentityFilter";
 import { useQuery } from "@tanstack/react-query";
+import WeeklyData from "@/components/dictionary/WeeklyData";
 
 interface FilterModalProps {
   openFilter: boolean;
@@ -64,7 +65,9 @@ const TopTitleAndThumnailList = () => {
   const options = useStore((state) => state.optionsState); // options 상태 가져오기
 
   const [nicknames, setNicknames] = useState<{ [key: string]: string[] }>({});
-  const [filteredData, setFilteredData] = useState([]);
+  const [filteredData, setFilteredData] = useState([
+    { id: 0, name: "", character: "" },
+  ]);
   const [paginatedData, setPaginatedData] = useState([]);
   const [page, setPage] = useState(1);
   const observerElem = useRef<HTMLDivElement | null>(null);
@@ -141,6 +144,15 @@ const TopTitleAndThumnailList = () => {
         <span className="text-3xl lg:text-4xl whitespace-nowrap hidden lg:block pr-2">
           인격
         </span>
+        {filteredData
+          .filter((item) => item.id === 128)
+          .map((item) => (
+            <WeeklyData
+              key={item.id}
+              name={item.name}
+              character={item.character}
+            />
+          ))}
         <div className="my-2 grid grid-cols-1 sm:flex sm:justify-between w-full lg:w-fit gap-2 h-fit md:h-10">
           <Button
             className="h-8 lg:hidden bg-primary-400 lg:h-8 py-0.5 px-4 text-lg lg:text-sm text-primary-100 hover:bg-primary-300 rounded"

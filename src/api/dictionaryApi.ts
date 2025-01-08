@@ -92,7 +92,7 @@ export const getEgo = async (options: EgoOptions) => {
 export const getAllIdentity = async () => {
   const uri = `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity?minSpeed=1&maxSpeed=9&minWeight=1&maxWeight=9`;
 
-  const response = await fetch(uri);
+  const response = await fetch(uri, { cache: "force-cache" });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
