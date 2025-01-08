@@ -34,13 +34,14 @@ const IdentityThumbnailCard = ({
     <Link href={`/identity/${id}`}>
       <div className=" bg-primary-500 rounded-lg p-[10px] hover:scale-105">
         <div className="flex justify-between items-center">
-          <div className="w-10 h-7">
+          <div>
             <Image
               key={grade}
               src={`/assets/common/${grade}.webp`}
               alt={`grade-${grade}`}
               width={40} // Tailwind에서 크기 조정을 하므로 설정하지 않음
-              height={40}
+              height={28}
+              style={{ width: 40, height: 28 }}
               className="object-contain h-full w-full"
             />
           </div>
