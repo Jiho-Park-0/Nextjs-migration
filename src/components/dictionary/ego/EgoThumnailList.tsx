@@ -13,7 +13,6 @@ import ErrorMessage from "@/ui/ErrorMessage";
 
 import Filter from "./EgoFilter";
 import { useQuery } from "@tanstack/react-query";
-import WeeklyData from "@/components/dictionary/WeeklyData";
 
 interface FilterModalProps {
   openFilter: boolean;
@@ -121,6 +120,14 @@ const TopTitleAndThumnailList = () => {
     }
   }, [data, searchTerm, page]);
 
+  useEffect(() => {
+    filteredData
+      .filter((item) => item.id === 79)
+      .map((item) =>
+        console.log("이번주 최다 검색 : ", item.name, item.character)
+      );
+  }, [filteredData]);
+
   return (
     <div className="">
       {/* 상단 제목, 버튼 */}
@@ -128,15 +135,7 @@ const TopTitleAndThumnailList = () => {
         <span className="text-3xl lg:text-4xl whitespace-nowrap hidden lg:block pr-2">
           에고
         </span>
-        {filteredData
-          .filter((item) => item.id === 79)
-          .map((item) => (
-            <WeeklyData
-              key={item.id}
-              name={item.name}
-              character={item.character}
-            />
-          ))}
+
         <div className="my-2 grid grid-cols-1 sm:flex sm:justify-between w-full lg:w-fit gap-2 h-fit md:h-10">
           <Button
             className="h-8 lg:hidden bg-primary-400 lg:h-8 py-0.5 px-4 text-lg lg:text-sm text-primary-100 hover:bg-primary-300 rounded"
