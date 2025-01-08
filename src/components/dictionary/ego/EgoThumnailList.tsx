@@ -61,7 +61,9 @@ const TopTitleAndThumnailList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [openFilter, setOpenFilter] = useState(false);
   const options = useStore((state) => state.egoOptionsState); // options 상태 가져오기
-  const [filteredData, setFilteredData] = useState([]);
+  const [filteredData, setFilteredData] = useState([
+    { id: 0, name: "", character: "" },
+  ]);
   const [paginatedData, setPaginatedData] = useState([]);
   const [page, setPage] = useState(1);
   const observerElem = useRef<HTMLDivElement | null>(null);
@@ -115,15 +117,16 @@ const TopTitleAndThumnailList = () => {
         .reverse();
       setFilteredData(filtered);
       setPaginatedData(filtered.slice(0, page * 15));
-
-      // 1부터 93까지의 id 중 비어있는 id를 찾기
-      const requiredIds = Array.from({ length: 93 }, (_, i) => i + 1);
-      const existingIds = filtered.map((item: { id: number }) => item.id);
-      const missingIds = requiredIds.filter((id) => !existingIds.includes(id));
-
-      console.log("Missing IDs:", missingIds);
     }
   }, [data, searchTerm, page]);
+
+  useEffect(() => {
+    filteredData
+      .filter((item) => item.id === 79)
+      .map((item) =>
+        console.log("이번주 최다 검색 : ", item.name, item.character)
+      );
+  }, [filteredData]);
 
   return (
     <div className="">
@@ -132,6 +135,7 @@ const TopTitleAndThumnailList = () => {
         <span className="text-3xl lg:text-4xl whitespace-nowrap hidden lg:block pr-2">
           에고
         </span>
+
         <div className="my-2 grid grid-cols-1 sm:flex sm:justify-between w-full lg:w-fit gap-2 h-fit md:h-10">
           <Button
             className="h-8 lg:hidden bg-primary-400 lg:h-8 py-0.5 px-4 text-lg lg:text-sm text-primary-100 hover:bg-primary-300 rounded"
