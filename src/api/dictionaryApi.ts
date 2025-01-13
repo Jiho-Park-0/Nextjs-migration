@@ -56,7 +56,7 @@ export const getEgo = async (options: EgoOptions) => {
         value !== undefined &&
         value !== null &&
         value !== "" &&
-        value.length !== 0 &&
+        getLength(value) !== 0 &&
         _
     )
     .map(([key, value]) => {

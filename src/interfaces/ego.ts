@@ -1,5 +1,5 @@
 export interface EgoOptions {
-  [key: string]: any;
+  [key: string]: string | string[] | number;
   sinner: string[];
   season: string[];
   grade: string[];
