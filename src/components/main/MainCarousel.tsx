@@ -24,23 +24,30 @@ const MainCarousel = () => {
     >
       {/* 업데이트 */}
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%EB%8F%88%ED%82%A4%ED%98%B8%ED%85%8C/Identity/%EB%9D%BC%EB%A7%8C%EC%B0%A8%EB%9E%9C%EB%93%9C%20%EC%8B%A4%EC%9E%A5/10310_gaksung.webp"
-        spanText="12월 12일 업데이트"
-        headingText="라만차랜드 실장 돈키호테 추가"
-        linkPath="/identity/130"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%ED%99%8D%EB%A3%A8/Identity/%EB%A7%88%EC%B9%A8%ED%91%9C%20%EC%82%AC%EB%AC%B4%EC%86%8C%20%ED%95%B4%EA%B2%B0%EC%82%AC/10611_gacksung.webp"
+        spanText="발푸르기스의 밤"
+        headingText="발푸르기스의 밤 인격 포함 티어 업데이트"
+        linkPath="/tier"
+        linkText="리세 티어 바로가기"
+      />
+      <Banner
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%ED%99%8D%EB%A3%A8/Identity/%EB%A7%88%EC%B9%A8%ED%91%9C%20%EC%82%AC%EB%AC%B4%EC%86%8C%20%ED%95%B4%EA%B2%B0%EC%82%AC/10611_normal.webp"
+        spanText="발푸르기스의 밤"
+        headingText="마침표 사무소 해결사 홍루 추가"
+        linkPath="/identity/132"
         linkText="인격 정보 바로가기"
       />
-      {/* <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%EC%8B%B1%ED%81%B4%EB%A0%88%EC%96%B4/Identity/%EC%84%9C%EB%B6%80%20%EC%B8%A0%EB%B0%94%EC%9D%B4%20%ED%98%91%ED%9A%8C%203%EA%B3%BC/11010_gacksung.webp"
-        spanText="10월 10일 업데이트"
-        headingText="서부 츠바이 협회 3과 싱클레어 추가"
-        linkPath="/identity/124"
+      <Banner
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%ED%9E%88%EC%8A%A4%ED%81%B4%EB%A6%AC%ED%94%84/Identity/%EB%A7%88%EC%B9%A8%ED%91%9C%20%EC%82%AC%EB%AC%B4%EC%86%8C%20%ED%95%B4%EA%B2%B0%EC%82%AC/10711_gacksung.webp"
+        spanText="발푸르기스의 밤"
+        headingText="마침표 사무소 해결사 히스클리프 추가"
+        linkPath="/identity/131"
         linkText="인격 정보 바로가기"
-      /> */}
+      />
 
       {/* 신규 기능 */}
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%EB%8F%88%ED%82%A4%ED%98%B8%ED%85%8C/Identity/%EB%9D%BC%EB%A7%8C%EC%B0%A8%EB%9E%9C%EB%93%9C%20%EC%8B%A4%EC%9E%A5/10310_normal.webp"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%ED%9E%88%EC%8A%A4%ED%81%B4%EB%A6%AC%ED%94%84/Identity/%EB%A7%88%EC%B9%A8%ED%91%9C%20%EC%82%AC%EB%AC%B4%EC%86%8C%20%ED%95%B4%EA%B2%B0%EC%82%AC/10711_normal.webp"
         spanText="내가 가진 인격 키워드를 모르겠다고?"
         headingText="내 인격 분류 기능 추가"
         linkPath="/deck"
