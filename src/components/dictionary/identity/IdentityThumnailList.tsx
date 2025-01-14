@@ -119,23 +119,16 @@ const TopTitleAndThumnailList = () => {
             nicknames[item.id]?.some((nickname) =>
               nickname.toLowerCase().includes(searchTerm.toLowerCase())
             ) || false;
+
           return nameMatch || nicknameMatch;
         })
         .reverse();
-    setFilteredData(filtered || []);
-  }, [data, searchTerm, nicknames]);
 
-  useEffect(() => {
-    if (data) {
-      const filtered = data
-        .filter((item: { name: string }) =>
-          item.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .reverse();
-      setFilteredData(filtered);
-      setPaginatedData(filtered.slice(0, page * 15));
-    }
-  }, [data, searchTerm, page]);
+    setFilteredData(filtered || []);
+    setPaginatedData((filtered || []).slice(0, page * 15));
+  }, [data, searchTerm, nicknames, page]);
+
+  // console.log(nicknames["1"]);
 
   useEffect(() => {
     filteredData
