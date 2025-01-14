@@ -83,20 +83,20 @@ const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
                     effectKey as keyof Skill
                   ] as string;
                   const effectParts = effect.split("\n");
-
+                  let coinString = "normal_coin";
                   // 첫 문장이 '파괴 불가 코인'인 경우
                   const isUnbreakableCoin = effectParts[0] === "파괴 불가 코인";
-
+                  if (isUnbreakableCoin) {
+                    coinString = "unbreakable_coin";
+                  }
                   return (
                     <Image
                       key={index}
-                      src={`/assets/coin/${
-                        isUnbreakableCoin ? "unbreakable_coin" : "normal_coin"
-                      }.webp`}
+                      src={`/assets/coin/${coinString}.webp`}
                       alt="coinImg"
                       className="w-auto h-[1em] mr-[2px]"
-                      width={1024}
-                      height={1024}
+                      width={16}
+                      height={16}
                     />
                   );
                 })}
