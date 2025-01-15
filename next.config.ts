@@ -5,8 +5,9 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
-  /* 외부 이미지 도메인 설정 */
+  /* 외부 이미지 도메인 및 최적화 설정 */
   images: {
+    unoptimized: false, // 이미지 최적화를 허용 (기본값)
     remotePatterns: [
       {
         protocol: "https",
