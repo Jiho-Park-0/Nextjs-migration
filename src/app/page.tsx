@@ -14,12 +14,7 @@ export default function Home() {
   return (
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
       <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
-        안녕하세요. 단빵숲 입니다.
-        <br />
-        이번 주 발푸르기스의 밤 업데이트는 관리자 공석으로 일요일에 추가될
-        예정입니다.
-        <br />
-        복귀하는 대로 빠르게 추가하도록 하겠습니다.
+        커밋 테스트
       </div>
       <div className="w-full mx-auto">
         <MainCarousel />
