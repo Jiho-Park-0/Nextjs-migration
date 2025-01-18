@@ -7,3 +7,5 @@ export default function IdentityDetailPage() {
     </div>
   );
 }
+
+export const runtime = "edge";
