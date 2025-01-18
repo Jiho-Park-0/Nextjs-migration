@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   },
   /* 외부 이미지 도메인 및 최적화 설정 */
   images: {
-    unoptimized: false, // 이미지 최적화를 허용 (기본값)
+    // unoptimized: false, // 이미지 최적화를 허용 (기본값)
     remotePatterns: [
       {
         protocol: "https",
