@@ -81,11 +81,11 @@
   },
   {
     "name": "반격",
-    "eng_name": "counter"
+    "eng_name": "Counter"
   },
   {
     "name": "방어",
-    "eng_name": "guard"
+    "eng_name": "Guard"
   },
   {
     "name": "참격",
@@ -97,6 +97,6 @@
   },
   {
     "name": "회피",
-    "eng_name": "evade"
+    "eng_name": "Evade"
   }
 ]
