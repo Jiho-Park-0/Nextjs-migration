@@ -1,0 +1,102 @@
+[
+  {
+    "name": "이상",
+    "eng_name": "Yi_Sang"
+  },
+  {
+    "name": "파우스트",
+    "eng_name": "Faust"
+  },
+  {
+    "name": "돈키호테",
+    "eng_name": "Don_Quixote"
+  },
+  {
+    "name": "료슈",
+    "eng_name": "Ryōshū"
+  },
+  {
+    "name": "뫼르소",
+    "eng_name": "Meursault"
+  },
+  {
+    "name": "홍루",
+    "eng_name": "Hong_Lu"
+  },
+  {
+    "name": "히스클리프",
+    "eng_name": "Heathcliff"
+  },
+  {
+    "name": "이스마엘",
+    "eng_name": "Ishmael"
+  },
+  {
+    "name": "로쟈",
+    "eng_name": "Rodion"
+  },
+  {
+    "name": "싱클레어",
+    "eng_name": "Sinclair"
+  },
+  {
+    "name": "오티스",
+    "eng_name": "Outis"
+  },
+  {
+    "name": "그레고르",
+    "eng_name": "Gregor"
+  },
+  {
+    "name": "나태",
+    "eng_name": "Sloth"
+  },
+  {
+    "name": "분노",
+    "eng_name": "Wrath"
+  },
+  {
+    "name": "색욕",
+    "eng_name": "Lust"
+  },
+  {
+    "name": "오만",
+    "eng_name": "Pride"
+  },
+  {
+    "name": "우울",
+    "eng_name": "Gloom"
+  },
+  {
+    "name": "질투",
+    "eng_name": "Envy"
+  },
+  {
+    "name": "탐식",
+    "eng_name": "Gluttony"
+  },
+  {
+    "name": "관통",
+    "eng_name": "Pierce"
+  },
+  {
+    "name": "반격",
+    "eng_name": "Counter"
+  },
+  {
+    "name": "방어",
+    "eng_name": "Guard"
+  },
+  {
+    "name": "참격",
+    "eng_name": "Slash"
+  },
+  {
+    "name": "타격",
+    "eng_name": "Blunt"
+  },
+  {
+    "name": "회피",
+    "eng_name": "Evade"
+  }
+]

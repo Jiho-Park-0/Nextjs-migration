@@ -3,6 +3,7 @@ import FilterButton from "./FilterButton";
 import { useEffect } from "react";
 import { Tooltip } from "@material-tailwind/react";
 import useStore from "@/zustand/store";
+import useGetEngName from "@/hooks/useGetEngName";
 
 interface Content {
   name: string;
@@ -28,6 +29,8 @@ const FilterButtonGroup = ({
   const [buttons, toggleButton] = useToggleButtons(
     content.map((item) => item.name)
   );
+
+  const getEngName = useGetEngName();
 
   const options = useStore((state) => state.optionsState);
   const setOptions = useStore((state) => state.setOptionsState);
@@ -104,16 +107,19 @@ const FilterButtonGroup = ({
       </span>
 
       <div className="grid grid-cols-6 gap-1.5">
-        {content.map((item, index) => (
-          <FilterButton
-            key={`button:${index}`}
-            name={item.name}
-            imgSrc={src + item.name + ".webp"}
-            type={buttonType}
-            isSelected={buttons[index].isSelected}
-            onClick={() => toggleButton(item.name)}
-          />
-        ))}
+        {content.map((item, index) => {
+          const itemsName = getEngName(item.name);
+          return (
+            <FilterButton
+              key={`button:${index}`}
+              name={item.name}
+              imgSrc={src + itemsName + ".webp"}
+              type={buttonType}
+              isSelected={buttons[index].isSelected}
+              onClick={() => toggleButton(item.name)}
+            />
+          );
+        })}
       </div>
     </div>
   );

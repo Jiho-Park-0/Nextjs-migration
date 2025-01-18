@@ -1,6 +1,7 @@
 import React from "react";
 import KeywordHighlighted from "../KeywordHighlighted";
 import Image from "next/image";
+import useGetEngName from "@/hooks/useGetEngName";
 
 interface SkillCardProps {
   type: string;
@@ -28,11 +29,15 @@ interface Skill {
 }
 
 const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
+  const getEngName = useGetEngName();
   const currentSkill = skill[synchronization];
 
   if (!skill || skill.length === 0) {
     return null;
   }
+
+  const resourceEngName = getEngName(currentSkill.resource);
+  const typeEngName = getEngName(currentSkill.atkType);
 
   return (
     <div
@@ -49,7 +54,7 @@ const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
         >
           {currentSkill.resource !== "없음" && (
             <Image
-              src={`/assets/resource/${currentSkill.resource}.webp`}
+              src={`/assets/resource/${resourceEngName}.webp`}
               alt="resourceImg"
               className="inline-block w-auto h-6 mr-1 mb-1"
               width={1024}
@@ -63,7 +68,7 @@ const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
             {currentSkill.name}
           </span>
           <Image
-            src={`/assets/attackType/${currentSkill.atkType}.webp`}
+            src={`/assets/attackType/${typeEngName}.webp`}
             alt="attackTypeImg"
             className="inline-block w-auto h-8 ml-[1px] mb-1"
             width={1024}
@@ -104,7 +109,7 @@ const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
               <span className="pr-1">정신력 소모량</span>
               <span className="flex items-center gap-1">
                 <Image
-                  src={`/assets/정신 소모량.webp`}
+                  src={`/assets/Sanity.webp`}
                   alt="attackTypeImg"
                   className="inline-block w-auto h-5 ml-[1px] mb-1"
                   width={1024}
@@ -117,7 +122,7 @@ const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
             <span className="">
               공격 레벨{" "}
               <Image
-                src={`/assets/공격 레벨.webp`}
+                src={`/assets/attack_level.webp`}
                 alt="attackTypeImg"
                 className="inline-block w-auto h-5 pr-1 mb-1"
                 width={1024}

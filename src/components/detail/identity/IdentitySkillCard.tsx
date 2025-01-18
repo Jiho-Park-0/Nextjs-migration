@@ -1,6 +1,7 @@
 import React from "react";
 import KeywordHighlighted from "../KeywordHighlighted";
 import Image from "next/image";
+import useGetEngName from "@/hooks/useGetEngName";
 
 interface SkillCardProps {
   type: string;
@@ -34,6 +35,11 @@ const IdentitySkillCard = ({
 }: SkillCardProps) => {
   const currentSkill = skill[synchronization];
 
+  const getEngName = useGetEngName();
+
+  const resourceEngName = getEngName(currentSkill.resource);
+  const typeEngName = getEngName(currentSkill.type);
+
   return (
     <div className="p-3 bg-primary-450 rounded-md mb-2 border border-primary-300">
       <div className="xl:flex xl:gap-3 items-center pb-2 lg:pb-4 ">
@@ -46,7 +52,7 @@ const IdentitySkillCard = ({
           {currentSkill.resource !== "없음" && (
             //  자원 이미지
             <Image
-              src={`/assets/resource/${currentSkill.resource}.webp`}
+              src={`/assets/resource/${resourceEngName}.webp`}
               alt="resourceImg"
               className="inline-block w-auto h-6 mr-1 mb-1"
               width={1024}
@@ -58,7 +64,7 @@ const IdentitySkillCard = ({
           <span>{currentSkill.name}</span>
           {/* 공격 타입 이미지 */}
           <Image
-            src={`/assets/attackType/${currentSkill.type}.webp`}
+            src={`/assets/attackType/${typeEngName}.webp`}
             alt="attackTypeImg"
             className="inline-block w-auto h-8 ml-[1px] mb-1"
             width={1024}
@@ -111,8 +117,8 @@ const IdentitySkillCard = ({
               <Image
                 src={
                   type === "DEFENSE"
-                    ? "/assets/방어코인.webp"
-                    : "/assets/공격 레벨.webp"
+                    ? "/assets/defense_coin.webp"
+                    : "/assets/attack_level.webp"
                 }
                 alt={type === "DEFENSE" ? "defenseTypeImg" : "attackTypeImg"}
                 className="inline-block w-auto h-5 pr-1 mb-1"

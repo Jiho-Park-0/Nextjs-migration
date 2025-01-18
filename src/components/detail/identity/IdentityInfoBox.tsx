@@ -32,9 +32,9 @@ const statusImg = [
   "/assets/status/deffense.webp",
 ];
 const resistanceImg = [
-  "/assets/attackType/slash.webp",
-  "/assets/attackType/pierce.webp",
-  "/assets/attackType/blunt.webp",
+  "/assets/attackType/slash_small.webp",
+  "/assets/attackType/pierce_small.webp",
+  "/assets/attackType/blunt_small.webp",
 ];
 
 const IdentityInfoBox = ({
