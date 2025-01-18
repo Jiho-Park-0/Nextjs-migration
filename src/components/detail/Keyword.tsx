@@ -17,10 +17,11 @@ const Keyword = ({ keywords }: KeywordProps) => {
 
         if (keywordInfo && keywordInfo.content) {
           const content = keywordInfo.content;
+          console.log(keywordName?.eng_name);
           return (
             <div key={index} className="p-4 rounded-md bg-primary-500">
               <Image
-                src={`/assets/keyword/${keywordName?.eng_name || keyword}.webp`}
+                src={`/assets/keyword/${keywordName?.eng_name}.webp`}
                 alt="resourceImg"
                 className="inline-block mr-1 mb-[2px]"
                 width={18}
