@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Identity } from "@/interfaces/identity";
+import keyword_names from "@/constants/keyword_names.json";
 
 interface MyIdentityCardProps {
   identities: Identity[];
@@ -9,13 +10,18 @@ interface MyIdentityCardProps {
 }
 
 const MyIdentityCard = ({ identities, title }: MyIdentityCardProps) => {
+  const getEngName = (name: string) => {
+    const match = keyword_names.find((item) => item.name === name);
+    return match ? match.eng_name : name;
+  };
+
   return (
     <div className="text-primary-100 my-4">
       <div className="flex items-center">
         <h2 className="text-sm md:text-lg">{title}</h2>
         {title !== "기타" && (
           <Image
-            src={`/assets/keyword/${title}.webp`}
+            src={`/assets/keyword/${getEngName(title)}.webp`}
             alt="dd"
             className="w-6 h-6"
             width={24}
