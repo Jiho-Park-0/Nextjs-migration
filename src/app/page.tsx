@@ -16,7 +16,21 @@ export default function Home() {
       <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         커밋 테스트
         <Image
-          src={"/assets/attackType/test.webp"}
+          src={"/assets/attackType/Slash.webp"}
+          alt="test"
+          width={24}
+          height={24}
+          unoptimized
+        />
+        <Image
+          src={"/assets/attackType/Pierce.webp"}
+          alt="test"
+          width={24}
+          height={24}
+          unoptimized
+        />
+        <Image
+          src={"/assets/attackType/Blunt.webp"}
           alt="test"
           width={24}
           height={24}
