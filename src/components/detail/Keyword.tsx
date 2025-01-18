@@ -14,14 +14,15 @@ const Keyword = ({ keywords }: KeywordProps) => {
       {keywords.map((keyword, index) => {
         const keywordInfo = keyword_data.find((item) => item.name === keyword);
         const keywordName = keyword_names.find((item) => item.name === keyword);
-
+        
         if (keywordInfo && keywordInfo.content) {
           const content = keywordInfo.content;
-          console.log(keywordName?.eng_name);
+          const imageKeyword = keywordName?.eng_name.replace(/\s+/g, '-');
+          console.log(imageKeyword);
           return (
             <div key={index} className="p-4 rounded-md bg-primary-500">
               <Image
-                src={`/assets/keyword/${keywordName?.eng_name}.webp`}
+                src={`/assets/keyword/${imageKeyword}.webp`}
                 alt="resourceImg"
                 className="inline-block mr-1 mb-[2px]"
                 width={18}
