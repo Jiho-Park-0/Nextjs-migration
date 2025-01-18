@@ -46,6 +46,7 @@ const FilterButton = ({
             }`}
             width={24}
             height={24}
+            unoptimized
           />
         )}
       </Button>

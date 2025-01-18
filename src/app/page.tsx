@@ -15,6 +15,13 @@ export default function Home() {
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
       <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         커밋 테스트
+        <Image
+          src={"/assets/attackType/test.webp"}
+          alt="test"
+          width={24}
+          height={24}
+          unoptimized
+        />
       </div>
       <div className="w-full mx-auto">
         <MainCarousel />
