@@ -77,26 +77,26 @@
   },
   {
     "name": "관통",
-    "eng_name": "Pierce"
+    "eng_name": "pierce"
   },
   {
     "name": "반격",
-    "eng_name": "Counter"
+    "eng_name": "counter"
   },
   {
     "name": "방어",
-    "eng_name": "Guard"
+    "eng_name": "guard"
   },
   {
     "name": "참격",
-    "eng_name": "Slash"
+    "eng_name": "slash"
   },
   {
     "name": "타격",
-    "eng_name": "Blunt"
+    "eng_name": "blunt"
   },
   {
     "name": "회피",
-    "eng_name": "Evade"
+    "eng_name": "evade"
   }
 ]
