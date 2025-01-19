@@ -13,30 +13,10 @@ const NewsCard = lazy(() => import("@/components/main/NewsCard"));
 export default function Home() {
   return (
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
-      <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
+      {/* <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         커밋 테스트
-        <Image
-          src={"/assets/attackType/Slash.webp"}
-          alt="test"
-          width={24}
-          height={24}
-          unoptimized
-        />
-        <Image
-          src={"/assets/attackType/Pierce.webp"}
-          alt="test"
-          width={24}
-          height={24}
-          unoptimized
-        />
-        <Image
-          src={"/assets/attackType/Blunt.webp"}
-          alt="test"
-          width={24}
-          height={24}
-          unoptimized
-        />
-      </div>
+        
+      </div> */}
       <div className="w-full mx-auto">
         <MainCarousel />
       </div>
