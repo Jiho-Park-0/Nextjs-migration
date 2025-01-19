@@ -3,6 +3,7 @@ import Header from "@/components/main/layout_components/Header";
 import Footer from "@/components/main/layout_components/Footer";
 import QueryProvider from "@/components/main/layout_components/QueryProvider";
 import "./globals.css";
+import { GoogleAdSense } from "./GoogleAdSense";
 
 export const metadata: Metadata = {
   title: "림버스 컴퍼니 정보 사이트 - 단빵숲",
@@ -23,11 +24,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={` bg-primary-450`}>
         <Header />
+
         <div className="w-full max-w-7xl py-4 mx-auto px-4 md:px-16 font-content">
           <QueryProvider>{children}</QueryProvider>
         </div>
         <Footer />
       </body>
+      <GoogleAdSense />
     </html>
   );
 }
