@@ -23,7 +23,7 @@ const Footer = () => {
             <br />
             bas.limbus@gmail.com
             <br />
-            <br />© 2024 baslimbus
+            <br />© 2025 baslimbus
             <br />
             <br />
             2025.01.19 Ver.NextJS

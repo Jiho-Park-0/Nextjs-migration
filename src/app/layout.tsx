@@ -23,6 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="naver-site-verification"
+          content="7b3cd3678a44f4544fe00c8528369f8068301d64"
+        />
+      </head>
       <body className={` bg-primary-450`}>
         <Header />
 
