@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Header from "@/components/main/layout_components/Header";
 import Footer from "@/components/main/layout_components/Footer";
 import QueryProvider from "@/components/main/layout_components/QueryProvider";
@@ -32,8 +32,6 @@ export const metadata: Metadata = {
     follow: true,
   },
   manifest: "/manifest.json",
-  themeColor: "#3A2716",
-  viewport: "width=device-width, initial-scale=1",
   icons: {
     icon: "/favicon.ico",
   },
@@ -43,6 +41,12 @@ export const metadata: Metadata = {
       "naver-site-verification": "dc7096e8902186b63c161c36249b62c3768f75f8",
     },
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#3A2716",
 };
 
 /**
