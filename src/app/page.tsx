@@ -13,10 +13,15 @@ const NewsCard = lazy(() => import("@/components/main/NewsCard"));
 export default function Home() {
   return (
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
-      {/* <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
-        커밋 테스트
-        
-      </div> */}
+      <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
+        안녕하세요 단빵숲 입니다.
+        <br />
+        현재 서버 문제로 인해 사이트가 동작하지 않고 있습니다.
+        <br />
+        빠른 시일 내에 복구하겠습니다.
+        <br />
+        불편을 드려 죄송합니다.
+      </div>
       <div className="w-full mx-auto">
         <MainCarousel />
       </div>
