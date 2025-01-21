@@ -35,6 +35,7 @@ const EgoThumbnailCard = ({
               width={40} // 원본 비율 계산을 위한 값
               height={40}
               alt="ego grade"
+              loading="lazy"
             />
           </div>
           <div
@@ -53,6 +54,7 @@ const EgoThumbnailCard = ({
             className="rounded-full w-1/2 relative -mr-5 z-10"
             width={1024}
             height={1024}
+            loading="lazy"
           />
           <Image
             src={imageZoomIn}
@@ -60,6 +62,7 @@ const EgoThumbnailCard = ({
             className="rounded-full w-1/2 relative z-20"
             width={1024}
             height={1024}
+            loading="lazy"
           />
         </div>
       </div>

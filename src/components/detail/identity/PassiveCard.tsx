@@ -50,6 +50,8 @@ const PassiveCard = ({ type, passive }: PassiveCardProps) => {
                     className="w-auto h-[1.3em] mb-0.5 inline-block"
                     width={1024}
                     height={1024}
+                    quality={10}
+                    loading="lazy"
                   />
                   <span>X</span>
                   <span>{quantities[index] ?? quantities[0]}</span>

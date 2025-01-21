@@ -26,6 +26,8 @@ const Keyword = ({ keywords }: KeywordProps) => {
                 className="inline-block mr-1 mb-[2px]"
                 width={18}
                 height={18}
+                quality={10}
+                loading="lazy"
               />
               <span>{keyword}</span>
               <br />

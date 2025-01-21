@@ -79,6 +79,8 @@ const IdentityInfoBox = ({
                 className="w-[14px] h-[14px] mr-[0.1rem]"
                 width={1024}
                 height={1024}
+                quality={10}
+                loading="lazy"
               />
               {item}
             </span>
@@ -103,6 +105,8 @@ const IdentityInfoBox = ({
                 className="w-[14px] h-[14px] mr-[0.1rem]"
                 width={1024}
                 height={1024}
+                quality={10}
+                loading="lazy"
               />
               {type}{" "}
             </span>
@@ -136,6 +140,8 @@ const IdentityInfoBox = ({
           className="w-2/5 h-auto"
           width={1024}
           height={1024}
+          quality={10}
+          loading="lazy"
         />
         <Image
           src={gradeImg[grade - 1]}
@@ -143,6 +149,8 @@ const IdentityInfoBox = ({
           className="w-auto h-[35px]"
           width={1024}
           height={1024}
+          quality={10}
+          loading="lazy"
         />
 
         <p className="text-xl font-bold font-sans text-primary-100">{name}</p>

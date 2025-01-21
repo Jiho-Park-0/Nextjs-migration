@@ -59,6 +59,8 @@ const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
               className="inline-block w-auto h-6 mr-1 mb-1"
               width={1024}
               height={1024}
+              quality={10}
+              loading="lazy"
             />
           )}
           {/* 각성, 침식 */}
@@ -73,6 +75,8 @@ const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
             className="inline-block w-auto h-8 ml-[1px] mb-1"
             width={1024}
             height={1024}
+            quality={10}
+            loading="lazy"
           />
         </div>
         {/* 스킬 스펙 */}
@@ -102,6 +106,8 @@ const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
                       className="w-auto h-[1em] mr-[2px]"
                       width={16}
                       height={16}
+                      quality={10}
+                      loading="lazy"
                     />
                   );
                 })}
@@ -114,6 +120,8 @@ const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
                   className="inline-block w-auto h-5 ml-[1px] mb-1"
                   width={1024}
                   height={1024}
+                  quality={10}
+                  loading="lazy"
                 />
                 <span className="text-white">{currentSkill.mentalConsume}</span>
               </span>
@@ -127,6 +135,8 @@ const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
                 className="inline-block w-auto h-5 pr-1 mb-1"
                 width={1024}
                 height={1024}
+                quality={10}
+                loading="lazy"
               />
               <span className="text-white">{currentSkill.power}</span>
             </span>
@@ -170,6 +180,8 @@ const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
                     style={{ width: "auto", height: "16px" }}
                     width={1024}
                     height={1024}
+                    quality={10}
+                    loading="lazy"
                   />
                   <div>
                     {effectParts.map((part: string, partIndex: number) => (

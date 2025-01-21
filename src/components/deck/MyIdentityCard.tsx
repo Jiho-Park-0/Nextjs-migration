@@ -26,6 +26,8 @@ const MyIdentityCard = ({ identities, title }: MyIdentityCardProps) => {
             className="w-6 h-6"
             width={24}
             height={24}
+            quality={10}
+            loading="lazy"
           />
         )}
       </div>
@@ -41,6 +43,8 @@ const MyIdentityCard = ({ identities, title }: MyIdentityCardProps) => {
                 className="object-contain w-full h-full scale-150"
                 width={1024}
                 height={1024}
+                quality={10}
+                loading="lazy"
               />
             </div>
             <span className="text-xs md:text-sm tracking-tight break-keep">

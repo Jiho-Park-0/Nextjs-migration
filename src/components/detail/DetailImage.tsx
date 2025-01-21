@@ -29,7 +29,14 @@ const IdentityImage = ({ beforeImage, afterImage, type }: Props) => {
             {/* TODO : 침식 대신 확대로 넣어둠, 침식 이미지 삽입시 수정 */}
             {type === "identity" ? "동기화 후" : "침식"}
           </p>
-          <Image src={afterImage} alt="afterImage" width={1024} height={1024} />
+          <Image
+            src={afterImage}
+            alt="afterImage"
+            width={1024}
+            height={1024}
+            quality={10}
+            loading="lazy"
+          />
         </CardBody>
       )}
     </Card>

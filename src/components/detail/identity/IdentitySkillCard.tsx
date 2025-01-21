@@ -57,6 +57,8 @@ const IdentitySkillCard = ({
               className="inline-block w-auto h-6 mr-1 mb-1"
               width={1024}
               height={1024}
+              quality={10}
+              loading="lazy"
             />
           )}
           <span className="pr-2">{type}</span>{" "}
@@ -69,6 +71,8 @@ const IdentitySkillCard = ({
             className="inline-block w-auto h-8 ml-[1px] mb-1"
             width={1024}
             height={1024}
+            quality={10}
+            loading="lazy"
           />
         </div>
 
@@ -97,6 +101,8 @@ const IdentitySkillCard = ({
                     className="w-auto h-[1em] mr-[2px]"
                     width={16}
                     height={16}
+                    quality={10}
+                    loading="lazy"
                   />
                 );
               })}
@@ -124,6 +130,8 @@ const IdentitySkillCard = ({
                 className="inline-block w-auto h-5 pr-1 mb-1"
                 width={1024}
                 height={1024}
+                quality={10}
+                loading="lazy"
               />
               <span className="text-white">{currentSkill.power}</span>
             </span>
@@ -157,6 +165,8 @@ const IdentitySkillCard = ({
                     className="mr-1 mt-0.5 w-auto h-4"
                     width={1024}
                     height={1024}
+                    quality={10}
+                    loading="lazy"
                   />
                   <div>
                     {effectParts.map((part: string, partIndex: number) => (

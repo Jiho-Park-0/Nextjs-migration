@@ -47,6 +47,8 @@ const FilterButton = ({
             width={24}
             height={24}
             unoptimized
+            quality={10}
+            loading="lazy"
           />
         )}
       </Button>

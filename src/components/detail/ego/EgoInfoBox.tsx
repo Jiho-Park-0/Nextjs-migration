@@ -77,6 +77,8 @@ const EgoInfoBox = ({
                   className="w-[14px] h-[14px] mr-[0.1rem]"
                   width={1024}
                   height={1024}
+                  quality={10}
+                  loading="lazy"
                 />
                 {type}{" "}
               </span>
@@ -98,6 +100,8 @@ const EgoInfoBox = ({
                   className="w-[14px] h-[14px] mr-[0.1rem]"
                   width={1024}
                   height={1024}
+                  quality={10}
+                  loading="lazy"
                 />
                 {type}{" "}
               </span>
@@ -126,6 +130,8 @@ const EgoInfoBox = ({
           className="h-auto w-2/5"
           width={1024}
           height={1024}
+          quality={10}
+          loading="lazy"
         />
 
         <Image
