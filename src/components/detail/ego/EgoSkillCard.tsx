@@ -106,7 +106,6 @@ const EgoSkillCard = ({ type, synchronization, skill }: SkillCardProps) => {
                       className="w-auto h-[1em] mr-[2px]"
                       width={16}
                       height={16}
-                      quality={10}
                       loading="lazy"
                     />
                   );

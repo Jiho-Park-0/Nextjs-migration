@@ -140,7 +140,7 @@ const IdentityInfoBox = ({
           className="w-2/5 h-auto"
           width={1024}
           height={1024}
-          quality={10}
+          quality={50}
           loading="lazy"
         />
         <Image
