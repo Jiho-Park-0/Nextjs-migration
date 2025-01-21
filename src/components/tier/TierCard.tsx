@@ -41,8 +41,11 @@ const TierCard = ({ data, isSync }: { data: TierData; isSync: boolean }) => {
             className="min-h-full min-w-full object-center"
             width={1024}
             height={1024}
-            quality={10}
+            quality={1}
             loading="lazy"
+            placeholder="blur"
+            blurDataURL="/images/placeholder.jpg"
+            sizes="(max-width: 768px) 100vw, 512px"
           />
         </div>
         <div

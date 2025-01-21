@@ -59,6 +59,10 @@ const IdentityThumbnailCard = ({
             width={1024}
             height={1024}
             loading="lazy"
+            quality={10}
+            placeholder="blur"
+            blurDataURL="/images/placeholder.jpg"
+            sizes="(max-width: 768px) 100vw, 512px"
           />
         ) : (
           <Image
@@ -68,6 +72,10 @@ const IdentityThumbnailCard = ({
             width={1024}
             height={1024}
             loading="lazy"
+            quality={10}
+            placeholder="blur"
+            blurDataURL="/images/placeholder.jpg"
+            sizes="(max-width: 768px) 100vw, 512px"
           />
         )}
       </div>

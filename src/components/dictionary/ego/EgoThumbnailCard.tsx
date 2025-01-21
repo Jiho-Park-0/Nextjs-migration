@@ -51,18 +51,26 @@ const EgoThumbnailCard = ({
           <Image
             src={imageZoomOut}
             alt="imageZoomOut"
-            className="rounded-full w-1/2 relative -mr-5 z-10"
             width={1024}
             height={1024}
+            quality={10}
             loading="lazy"
+            placeholder="blur"
+            blurDataURL="/images/placeholder.jpg"
+            sizes="(max-width: 768px) 100vw, 512px"
+            className="rounded-full w-1/2 relative -mr-5 z-10"
           />
           <Image
             src={imageZoomIn}
             alt="imageZoomIn"
-            className="rounded-full w-1/2 relative z-20"
             width={1024}
             height={1024}
+            quality={10}
             loading="lazy"
+            placeholder="blur"
+            blurDataURL="/images/placeholder.jpg"
+            sizes="(max-width: 768px) 100vw, 512px"
+            className="rounded-full w-1/2 relative z-20"
           />
         </div>
       </div>

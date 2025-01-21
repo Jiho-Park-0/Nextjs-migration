@@ -105,8 +105,11 @@ const IdentityInfoBox = ({
                 className="w-[14px] h-[14px] mr-[0.1rem]"
                 width={1024}
                 height={1024}
-                quality={10}
+                quality={1}
                 loading="lazy"
+                placeholder="blur"
+                blurDataURL="/images/placeholder.jpg"
+                sizes="(max-width: 768px) 100vw, 512px"
               />
               {type}{" "}
             </span>
@@ -140,8 +143,11 @@ const IdentityInfoBox = ({
           className="w-2/5 h-auto"
           width={1024}
           height={1024}
-          quality={50}
+          quality={1}
           loading="lazy"
+          placeholder="blur"
+          blurDataURL="/images/placeholder.jpg"
+          sizes="(max-width: 768px) 100vw, 512px"
         />
         <Image
           src={gradeImg[grade - 1]}
