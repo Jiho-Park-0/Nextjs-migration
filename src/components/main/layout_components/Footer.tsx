@@ -55,10 +55,28 @@ const Footer = () => {
           className="w-8 h-8 md:w-10 md:h-10"
           width={1024}
           height={1024}
+          quality={10}
+          loading="lazy"
+          placeholder="blur"
+          blurDataURL="/images/placeholder.jpg"
+          sizes="(max-width: 768px) 100vw, 512px"
         />
 
         <div className="flex items-center">
           <div className="p-1 font-light text-xs md:text-sm text-primary-100">
+            <Typography
+              variant="small"
+              className="p-1 font-light text-xs md:text-sm text-primary-100 cursor-pointer"
+              placeholder=""
+            >
+              <a
+                href="https://new-m.pay.naver.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                후원하기 네이버페이: baslimbus
+              </a>
+            </Typography>
             <Typography
               variant="small"
               className="p-1 font-light text-xs md:text-sm text-primary-100 cursor-pointer"
@@ -70,19 +88,6 @@ const Footer = () => {
                 rel="noopener noreferrer"
               >
                 후원하기(투네이션)
-              </a>
-            </Typography>
-            <Typography
-              variant="small"
-              className="p-1 font-light text-xs md:text-sm text-primary-100 cursor-pointer"
-              placeholder=""
-            >
-              <a
-                href="https://www.patreon.com/BreadAndSoup"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                후원하기(패트리온)
               </a>
             </Typography>
           </div>
