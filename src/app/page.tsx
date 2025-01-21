@@ -16,11 +16,12 @@ export default function Home() {
       <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         안녕하세요 단빵숲 입니다.
         <br />
-        현재 서버 문제로 인해 사이트가 동작하지 않고 있습니다.
+        배포 서버를 다른 방법으로 변경하여 적용중 입니다.
         <br />
-        빠른 시일 내에 복구하겠습니다.
+        오늘 하루동안 발생했던 문제에 대하여 계속해서 수정중에 있습니다.
         <br />
-        불편을 드려 죄송합니다.
+        <br />
+        다시한번 불편을 드려 죄송합니다.
       </div>
       <div className="w-full mx-auto">
         <MainCarousel />
