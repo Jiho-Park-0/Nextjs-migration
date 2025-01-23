@@ -41,7 +41,7 @@ export const getIdentity = async (options: IdentityOptions) => {
     ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity?${query}`
     : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity`;
 
-  const response = await fetch(uri, { cache: "force-cache" });
+  const response = await fetch(uri, { cache: "no-cache" });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -82,7 +82,7 @@ export const getEgo = async (options: EgoOptions) => {
     ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego?${query}`
     : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego`;
 
-  const response = await fetch(uri, { cache: "force-cache" });
+  const response = await fetch(uri, { cache: "no-cache" });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
