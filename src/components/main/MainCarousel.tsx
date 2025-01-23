@@ -23,36 +23,30 @@ const MainCarousel = () => {
       )}
     >
       {/* 업데이트 */}
+
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%ED%99%8D%EB%A3%A8/Identity/%EB%A7%88%EC%B9%A8%ED%91%9C%20%EC%82%AC%EB%AC%B4%EC%86%8C%20%ED%95%B4%EA%B2%B0%EC%82%AC/10611_gacksung.webp"
-        spanText="발푸르기스의 밤"
-        headingText="발푸르기스의 밤 인격 포함 티어 업데이트"
-        linkPath="/tier"
-        linkText="리세 티어 바로가기"
-      />
-      <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%ED%99%8D%EB%A3%A8/Identity/%EB%A7%88%EC%B9%A8%ED%91%9C%20%EC%82%AC%EB%AC%B4%EC%86%8C%20%ED%95%B4%EA%B2%B0%EC%82%AC/10611_normal.webp"
-        spanText="발푸르기스의 밤"
-        headingText="마침표 사무소 해결사 홍루 추가"
-        linkPath="/identity/132"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/파우스트/Identity/LCE E.G.O::홍염살/10211_gaksung.webp"
+        spanText="LCB 정기검진 업데이트"
+        headingText="LCE E.G.O::홍염살 파우스트 추가"
+        linkPath="/identity/134"
         linkText="인격 정보 바로가기"
       />
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%ED%9E%88%EC%8A%A4%ED%81%B4%EB%A6%AC%ED%94%84/Identity/%EB%A7%88%EC%B9%A8%ED%91%9C%20%EC%82%AC%EB%AC%B4%EC%86%8C%20%ED%95%B4%EA%B2%B0%EC%82%AC/10711_gacksung.webp"
-        spanText="발푸르기스의 밤"
-        headingText="마침표 사무소 해결사 히스클리프 추가"
-        linkPath="/identity/131"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/이상/Identity/LCE E.G.O::초롱/LCE_E.G.O_Lantern_Yi_Sang_Uptied_Full.webp"
+        spanText="LCB 정기검진 업데이트"
+        headingText="LCE E.G.O::초롱 이상 추가"
+        linkPath="/identity/133"
         linkText="인격 정보 바로가기"
       />
 
       {/* 신규 기능 */}
-      <Banner
+      {/* <Banner
         imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%ED%9E%88%EC%8A%A4%ED%81%B4%EB%A6%AC%ED%94%84/Identity/%EB%A7%88%EC%B9%A8%ED%91%9C%20%EC%82%AC%EB%AC%B4%EC%86%8C%20%ED%95%B4%EA%B2%B0%EC%82%AC/10711_normal.webp"
         spanText="내가 가진 인격 키워드를 모르겠다고?"
         headingText="내 인격 분류 기능 추가"
         linkPath="/deck"
         linkText="인격 분류 바로가기"
-      />
+      /> */}
 
       {/* 발푸밤 리세 홍보 */}
       {/* <Banner

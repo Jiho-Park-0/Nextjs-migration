@@ -19,7 +19,7 @@ import IdentityInfoBox from "@/components/detail/identity/IdentityInfoBox";
 import IdentitySkills from "@/components/detail/identity/IdentitySkills";
 import IdentityPassive from "@/components/detail/identity/IdentityPassive";
 import Keyword from "@/components/detail/Keyword";
-import DetailImage from "@/components/detail/DetailImage";
+// import DetailImage from "@/components/detail/DetailImage";
 import ErrorMessage from "@/ui/ErrorMessage";
 
 import useStore from "@/zustand/store";
@@ -164,13 +164,13 @@ const IdentityTabs = () => {
                       키워드가 없습니다.
                     </div>
                   ))}
-                {value === "이미지" && (
+                {/* {value === "이미지" && (
                   <DetailImage
                     type="identity"
                     beforeImage={data.beforeImage}
                     afterImage={data.afterImage}
                   />
-                )}
+                )} */}
               </div>
             </TabPanel>
           ))}
@@ -180,6 +180,6 @@ const IdentityTabs = () => {
   );
 };
 
-const menu = ["스킬", "패시브", "키워드", "이미지"];
+const menu = ["스킬", "패시브", "키워드"];
 
 export default IdentityTabs;

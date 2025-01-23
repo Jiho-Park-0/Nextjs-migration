@@ -19,7 +19,7 @@ import EgoInfoBox from "@/components/detail/ego/EgoInfoBox";
 import EgoSkills from "@/components/detail/ego/EgoSkills";
 import EgoPassive from "@/components/detail/ego/EgoPassive";
 import Keyword from "@/components/detail/Keyword";
-import DetailImage from "@/components/detail/DetailImage";
+// import DetailImage from "@/components/detail/DetailImage";
 import ErrorMessage from "@/ui/ErrorMessage";
 
 import useStore from "@/zustand/store";
@@ -165,13 +165,13 @@ const EgoTabs = () => {
                       키워드가 없습니다.
                     </div>
                   ))}
-                {value === "이미지" && data.image && data.zoomImage && (
+                {/* {value === "이미지" && data.image && data.zoomImage && (
                   <DetailImage
                     type="ego"
                     beforeImage={data.image}
                     afterImage={data.corImage}
                   />
-                )}
+                )} */}
               </div>
             </TabPanel>
           ))}
@@ -181,6 +181,6 @@ const EgoTabs = () => {
   );
 };
 
-const menu = ["스킬", "패시브", "키워드", "이미지"];
+const menu = ["스킬", "패시브", "키워드"];
 
 export default EgoTabs;

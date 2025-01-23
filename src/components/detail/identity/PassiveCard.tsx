@@ -1,6 +1,7 @@
 import React from "react";
 import KeywordHighlighted from "../KeywordHighlighted";
 import Image from "next/image";
+import useGetEngName from "@/hooks/useGetEngName";
 
 interface PassiveCardProps {
   type: string; // 패시브, 서포트 패시브
@@ -17,6 +18,7 @@ interface Passive {
 }
 
 const PassiveCard = ({ type, passive }: PassiveCardProps) => {
+  const getEngName = useGetEngName();
   // resource 문자열을 ',' 기준으로 분리
   const resources = passive.resource.split(",").map((res) => res.trim());
 
@@ -43,11 +45,13 @@ const PassiveCard = ({ type, passive }: PassiveCardProps) => {
               {res !== "없음" && (
                 <>
                   <Image
-                    src={`/assets/resource/${res}.webp`}
+                    src={`/assets/resource/${getEngName(res)}.webp`}
                     alt="resourceImg"
                     className="w-auto h-[1.3em] mb-0.5 inline-block"
                     width={1024}
                     height={1024}
+                    quality={10}
+                    loading="lazy"
                   />
                   <span>X</span>
                   <span>{quantities[index] ?? quantities[0]}</span>

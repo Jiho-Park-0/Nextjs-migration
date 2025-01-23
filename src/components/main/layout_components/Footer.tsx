@@ -23,10 +23,13 @@ const Footer = () => {
             <br />
             bas.limbus@gmail.com
             <br />
-            <br />© 2024 baslimbus
+            <br />© 2025 baslimbus
+            <br />
+            <br />
+            2025.01.21 Ver.NextJS 1.0.0
             <br />
             단테의 빵과 수프는 프로젝트문 공식 서비스가 아니며, 모든 게임
-            아트워크, 정보, 애셋의 권리와 저작권은 해당
+            아트워크, 정보, 애셋의 권리와 저작권은 해당 저작권자의 소유입니다.
           </Typography>
         </div>
         <div className="hidden md:flex mb-14">
@@ -52,10 +55,28 @@ const Footer = () => {
           className="w-8 h-8 md:w-10 md:h-10"
           width={1024}
           height={1024}
+          quality={10}
+          loading="lazy"
+          placeholder="blur"
+          blurDataURL="/images/placeholder.jpg"
+          sizes="(max-width: 768px) 100vw, 512px"
         />
 
         <div className="flex items-center">
           <div className="p-1 font-light text-xs md:text-sm text-primary-100">
+            <Typography
+              variant="small"
+              className="p-1 font-light text-xs md:text-sm text-primary-100 cursor-pointer"
+              placeholder=""
+            >
+              <a
+                href="https://new-m.pay.naver.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                후원하기 네이버페이: baslimbus
+              </a>
+            </Typography>
             <Typography
               variant="small"
               className="p-1 font-light text-xs md:text-sm text-primary-100 cursor-pointer"
@@ -67,19 +88,6 @@ const Footer = () => {
                 rel="noopener noreferrer"
               >
                 후원하기(투네이션)
-              </a>
-            </Typography>
-            <Typography
-              variant="small"
-              className="p-1 font-light text-xs md:text-sm text-primary-100 cursor-pointer"
-              placeholder=""
-            >
-              <a
-                href="https://www.patreon.com/BreadAndSoup"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                후원하기(패트리온)
               </a>
             </Typography>
           </div>

@@ -108,35 +108,37 @@ const TopTitleAndThumnailList = () => {
   }, []);
 
   useEffect(() => {
-    const filtered =
-      data &&
-      data
-        .filter((item: { id: string; name: string }) => {
-          const nameMatch = item.name
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase());
-          const nicknameMatch =
-            nicknames[item.id]?.some((nickname) =>
-              nickname.toLowerCase().includes(searchTerm.toLowerCase())
-            ) || false;
+    if (!data || data.length === 0) return;
 
-          return nameMatch || nicknameMatch;
-        })
-        .reverse();
+    const filtered = data
+      .filter((item: { id: string; name: string }) => {
+        const nameMatch = item.name
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+        const nicknameMatch =
+          nicknames[item.id]?.some((nickname) =>
+            nickname.toLowerCase().includes(searchTerm.toLowerCase())
+          ) || false;
 
-    setFilteredData(filtered || []);
-    setPaginatedData((filtered || []).slice(0, page * 15));
+        return nameMatch || nicknameMatch;
+      })
+      .reverse();
+
+    setFilteredData(filtered);
+    setPaginatedData(filtered.slice(0, page * 15));
   }, [data, searchTerm, nicknames, page]);
-
-  // console.log(nicknames["1"]);
 
   useEffect(() => {
     filteredData
-      .filter((item) => item.id === 128)
+      .filter((item) => item.id === 133)
       .map((item) =>
         console.log("이번주 최다 검색 : ", item.name, item.character)
       );
   }, [filteredData]);
+
+  useEffect(() => {
+    console.log("data", data);
+  }, [data]);
 
   return (
     <>
@@ -223,8 +225,8 @@ const TopTitleAndThumnailList = () => {
                   name: string;
                   grade: number;
                   character: string;
-                  beforeImage: string | null;
-                  afterImage: string | null;
+                  beforeImage: string;
+                  afterImage: string;
                 },
                 index: number
               ) => (
@@ -234,10 +236,8 @@ const TopTitleAndThumnailList = () => {
                   grade={item.grade}
                   name={item.name}
                   character={item.character}
-                  imageBefore={
-                    item.beforeImage ? item.beforeImage.trimEnd() : ""
-                  }
-                  imageAfter={item.afterImage ? item.afterImage.trimEnd() : ""}
+                  imageBefore={item.beforeImage}
+                  imageAfter={item.afterImage}
                   isSync={isSync}
                 />
               )

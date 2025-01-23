@@ -7,3 +7,5 @@ export default function EgoDetailPage() {
     </div>
   );
 }
+
+export const runtime = "edge";

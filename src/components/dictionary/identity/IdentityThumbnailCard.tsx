@@ -43,6 +43,7 @@ const IdentityThumbnailCard = ({
               height={28}
               style={{ width: 40, height: 28 }}
               className="object-contain h-full w-full"
+              loading="lazy"
             />
           </div>
           <div className="flex flex-col gap-0 justify-center text-center items-center w-full h-6 sm:h-10 text-[0.5rem] sm:text-[0.8rem] leading-[1.1] sm:leading-[1.2]">
@@ -57,7 +58,8 @@ const IdentityThumbnailCard = ({
             className="rounded-lg w-full"
             width={1024}
             height={1024}
-            priority
+            loading="lazy"
+            quality={10}
           />
         ) : (
           <Image
@@ -66,7 +68,8 @@ const IdentityThumbnailCard = ({
             className="rounded-lg"
             width={1024}
             height={1024}
-            priority
+            loading="lazy"
+            quality={10}
           />
         )}
       </div>

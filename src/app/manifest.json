@@ -1,0 +1,16 @@
+{
+  "name": "단테의 빵과 수프",
+  "short_name": "단빵숲",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#281910",
+  "theme_color": "#3A2716",
+  "description": "Limbus Company 정보 사이트 · 인격 및 에고 도감 보기/필터링",
+  "icons": [
+    {
+      "src": "favion.ico",
+      "sizes": "256x256",
+      "type": "image/x-icon"
+    }
+  ]
+}

@@ -14,7 +14,19 @@ export default function Home() {
   return (
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
       <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
-        커밋 테스트
+        안녕하세요 단빵숲 입니다.
+        <br />
+        이번 LCE 인격들이 인격 풀에서 바로 나오지 않는 문제가 발생하고 있습니다.
+        <br />
+        현재, 필터에서 해당 인격의 수감자버튼을 클릭하거나 홈 화면 배너를
+        클릭하시면 해당 인격의 상세내용을 보실 수 있습니다.
+        <br />
+        해당 문제의 원인을 빠르게 찾아 수정하도록 하겠습니다.
+        <br />
+        <br />
+        추가적으로 상세 페이지의 이미지 탭을 잠시 비활성화 하였습니다.
+        <br />
+        이용시 참고 바랍니다.
       </div>
       <div className="w-full mx-auto">
         <MainCarousel />
