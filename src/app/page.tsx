@@ -16,12 +16,17 @@ export default function Home() {
       <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         안녕하세요 단빵숲 입니다.
         <br />
-        배포 서버를 다른 방법으로 변경하여 적용중 입니다.
+        이번 LCE 인격들이 인격 풀에서 바로 나오지 않는 문제가 발생하고 있습니다.
         <br />
-        오늘 하루동안 발생했던 문제에 대하여 계속해서 수정중에 있습니다.
+        현재, 필터에서 해당 인격의 수감자버튼을 클릭하거나 홈 화면 배너를
+        클릭하시면 해당 인격의 상세내용을 보실 수 있습니다.
+        <br />
+        해당 문제의 원인을 빠르게 찾아 수정하도록 하겠습니다.
         <br />
         <br />
-        다시한번 불편을 드려 죄송합니다.
+        추가적으로 상세 페이지의 이미지 탭을 잠시 비활성화 하였습니다.
+        <br />
+        이용시 참고 바랍니다.
       </div>
       <div className="w-full mx-auto">
         <MainCarousel />

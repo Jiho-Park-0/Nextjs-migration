@@ -25,7 +25,7 @@ const Banner = ({
           alt="Banner background"
           fill
           className="object-cover"
-          quality={1}
+          quality={50}
           loading="lazy"
           placeholder="blur"
           blurDataURL="/images/placeholder.jpg"

@@ -108,24 +108,24 @@ const TopTitleAndThumnailList = () => {
   }, []);
 
   useEffect(() => {
-    const filtered =
-      data &&
-      data
-        .filter((item: { id: string; name: string }) => {
-          const nameMatch = item.name
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase());
-          const nicknameMatch =
-            nicknames[item.id]?.some((nickname) =>
-              nickname.toLowerCase().includes(searchTerm.toLowerCase())
-            ) || false;
+    if (!data || data.length === 0) return;
 
-          return nameMatch || nicknameMatch;
-        })
-        .reverse();
+    const filtered = data
+      .filter((item: { id: string; name: string }) => {
+        const nameMatch = item.name
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
+        const nicknameMatch =
+          nicknames[item.id]?.some((nickname) =>
+            nickname.toLowerCase().includes(searchTerm.toLowerCase())
+          ) || false;
 
-    setFilteredData(filtered || []);
-    setPaginatedData((filtered || []).slice(0, page * 15));
+        return nameMatch || nicknameMatch;
+      })
+      .reverse();
+
+    setFilteredData(filtered);
+    setPaginatedData(filtered.slice(0, page * 15));
   }, [data, searchTerm, nicknames, page]);
 
   useEffect(() => {
@@ -135,6 +135,10 @@ const TopTitleAndThumnailList = () => {
         console.log("이번주 최다 검색 : ", item.name, item.character)
       );
   }, [filteredData]);
+
+  useEffect(() => {
+    console.log("data", data);
+  }, [data]);
 
   return (
     <>
