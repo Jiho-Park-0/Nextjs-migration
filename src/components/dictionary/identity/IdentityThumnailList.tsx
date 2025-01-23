@@ -78,6 +78,8 @@ const TopTitleAndThumnailList = () => {
     refetchOnWindowFocus: false, // 포커스 할 때마다 다시 불러오는 기능 끔
   });
 
+  console.log(data);
+
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const target = entries[0];
     if (target.isIntersecting) {
@@ -128,11 +130,9 @@ const TopTitleAndThumnailList = () => {
     setPaginatedData((filtered || []).slice(0, page * 15));
   }, [data, searchTerm, nicknames, page]);
 
-  // console.log(nicknames["1"]);
-
   useEffect(() => {
     filteredData
-      .filter((item) => item.id === 128)
+      .filter((item) => item.id === 133)
       .map((item) =>
         console.log("이번주 최다 검색 : ", item.name, item.character)
       );
@@ -223,8 +223,8 @@ const TopTitleAndThumnailList = () => {
                   name: string;
                   grade: number;
                   character: string;
-                  beforeImage: string | null;
-                  afterImage: string | null;
+                  beforeImage: string;
+                  afterImage: string;
                 },
                 index: number
               ) => (
@@ -234,10 +234,8 @@ const TopTitleAndThumnailList = () => {
                   grade={item.grade}
                   name={item.name}
                   character={item.character}
-                  imageBefore={
-                    item.beforeImage ? item.beforeImage.trimEnd() : ""
-                  }
-                  imageAfter={item.afterImage ? item.afterImage.trimEnd() : ""}
+                  imageBefore={item.beforeImage}
+                  imageAfter={item.afterImage}
                   isSync={isSync}
                 />
               )
