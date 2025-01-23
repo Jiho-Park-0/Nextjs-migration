@@ -78,8 +78,6 @@ const TopTitleAndThumnailList = () => {
     refetchOnWindowFocus: false, // 포커스 할 때마다 다시 불러오는 기능 끔
   });
 
-  console.log(data);
-
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const target = entries[0];
     if (target.isIntersecting) {
