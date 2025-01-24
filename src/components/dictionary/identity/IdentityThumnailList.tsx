@@ -136,10 +136,6 @@ const TopTitleAndThumnailList = () => {
       );
   }, [filteredData]);
 
-  useEffect(() => {
-    console.log("data", data);
-  }, [data]);
-
   return (
     <>
       <div className="flex justify-between items-center">
