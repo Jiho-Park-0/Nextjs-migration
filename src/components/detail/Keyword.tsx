@@ -16,12 +16,13 @@ const Keyword = ({ keywords }: KeywordProps) => {
         // const keywordName = keyword_names.find((item) => item.name === keyword);
 
         if (keywordInfo && keywordInfo.content) {
+          const name = keywordInfo.name;
           const content = keywordInfo.content;
 
           return (
             <div key={index} className="p-4 rounded-md bg-primary-500">
               <Image
-                src={`/assets/keyword_copy/${keywordInfo.name}.webp`}
+                src={`/assets/keyword/${name}.webp`}
                 alt="resourceImg"
                 className="inline-block mr-1 mb-[2px]"
                 width={18}
