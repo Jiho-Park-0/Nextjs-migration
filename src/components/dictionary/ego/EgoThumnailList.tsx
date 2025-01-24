@@ -2,17 +2,27 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Button, Input } from "@material-tailwind/react";
-
 import { LuSearch } from "react-icons/lu";
-import axios from "axios";
 import { getEgo } from "@/api/dictionaryApi";
-import useStore from "@/zustand/store"; // zustand 스토어 import
+import useStore from "@/zustand/store";
 import EgoThumbnailCard from "./EgoThumbnailCard";
 import { Spinner } from "@material-tailwind/react";
 import ErrorMessage from "@/ui/ErrorMessage";
-
 import Filter from "./EgoFilter";
-import { useQuery } from "@tanstack/react-query";
+
+interface EgoData {
+  id: number;
+  name: string;
+  grade: number;
+  character: string;
+  zoomImage: string;
+  image: string;
+}
+
+interface ApiError {
+  message: string;
+  status?: number;
+}
 
 interface FilterModalProps {
   openFilter: boolean;
@@ -58,22 +68,17 @@ const FilterModal: React.FC<FilterModalProps> = ({
 };
 
 const TopTitleAndThumnailList = () => {
+  const [data, setData] = useState<EgoData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<ApiError | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [openFilter, setOpenFilter] = useState(false);
-  const options = useStore((state) => state.egoOptionsState); // options 상태 가져오기
-  const [filteredData, setFilteredData] = useState([
-    { id: 0, name: "", character: "" },
-  ]);
-  const [paginatedData, setPaginatedData] = useState([]);
+  const options = useStore((state) => state.egoOptionsState);
+
+  const [filteredData, setFilteredData] = useState<EgoData[]>([]);
+  const [paginatedData, setPaginatedData] = useState<EgoData[]>([]);
   const [page, setPage] = useState(1);
   const observerElem = useRef<HTMLDivElement | null>(null);
-
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["identity", options],
-    queryFn: () => getEgo(options),
-    staleTime: 1000 * 60 * 60 * 24, // 하루
-    refetchOnWindowFocus: false, // 포커스 할 때마다 다시 불러오는 기능 끔
-  });
 
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const target = entries[0];
@@ -97,32 +102,42 @@ const TopTitleAndThumnailList = () => {
   }, [handleObserver]);
 
   useEffect(() => {
-    if (data) {
-      const filtered = data
-        .filter((item: { name: string }) =>
-          item.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .reverse();
-      setFilteredData(filtered);
-      setPaginatedData(filtered.slice(0, page * 15));
-    }
-  }, [data, searchTerm, page]);
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const result = await getEgo(options);
+        setData(result);
+        setError(null);
+      } catch (err) {
+        setError({
+          message: err instanceof Error ? err.message : "An error occurred",
+          status: 500,
+        });
+        setData([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [options]);
 
   useEffect(() => {
-    if (data) {
-      const filtered = data
-        .filter((item: { name: string }) =>
-          item.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-        .reverse();
-      setFilteredData(filtered);
-      setPaginatedData(filtered.slice(0, page * 15));
-    }
+    if (!data || data.length === 0) return;
+
+    const filtered = data
+      .filter((item: EgoData) =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .reverse();
+
+    setFilteredData(filtered);
+    setPaginatedData(filtered.slice(0, page * 15));
   }, [data, searchTerm, page]);
 
   useEffect(() => {
     filteredData
-      .filter((item) => item.id === 79)
+      .filter((item) => item.id === 95)
       .map((item) =>
         console.log("이번주 최다 검색 : ", item.name, item.character)
       );
@@ -176,8 +191,8 @@ const TopTitleAndThumnailList = () => {
         <div className="flex justify-center items-center h-screen">
           <Spinner className="w-8 h-8 text-primary-200" />
         </div>
-      ) : isError ? (
-        axios.isAxiosError(error) && error.response?.status === 404 ? (
+      ) : error ? (
+        error.status === 404 ? (
           <div className="text-primary-200 text-center w-full my-8 h-screen">
             해당하는 에고가 없습니다.
           </div>
