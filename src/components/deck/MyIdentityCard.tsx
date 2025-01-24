@@ -22,9 +22,6 @@ const MyIdentityCard = ({ identities, title }: MyIdentityCardProps) => {
             height={24}
             quality={1}
             loading="lazy"
-            placeholder="blur"
-            blurDataURL="/images/placeholder.jpg"
-            sizes="(max-width: 768px) 100vw, 512px"
           />
         )}
       </div>
