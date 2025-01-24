@@ -75,25 +75,25 @@ const menu = [
   {
     name: "인격 도감",
     image:
-      "https://limbus-image-bucket.s3.amazonaws.com/%EC%9D%B4%EC%83%81/Identity/LCB%20%EC%88%98%EA%B0%90%EC%9E%90/10101_normal.webp",
+      "http://localhost:3000/_next/image?url=https%3A%2F%2Flimbus-image-bucket.s3.amazonaws.com%2F%EB%8F%88%ED%82%A4%ED%98%B8%ED%85%8C%2FIdentity%2FLCB%20%EC%88%98%EA%B0%90%EC%9E%90%2F10301_normal.webp&w=1080&q=10",
     link: "/identity",
   },
   {
     name: "에고 도감",
     image:
-      "https://limbus-image-bucket.s3.amazonaws.com/%EB%A1%9C%EC%9F%88/EGO/%ED%95%8F%EB%B9%9B%EC%9A%95%EB%A7%9D/20906_cg.webp",
+      "http://localhost:3000/_next/image?url=https%3A%2F%2Flimbus-image-bucket.s3.amazonaws.com%2F%EB%A3%8C%EC%8A%88%2FEGO%2F%ED%9D%89%ED%86%B5%2FThoracalgia_Ry%C5%8Dsh%C5%AB.webp&w=640&q=10",
     link: "/ego",
   },
   {
     name: "리세마라 티어표",
     image:
-      "https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%ED%99%8D%EB%A3%A8/Identity/20%EA%B5%AC%20%EC%9C%A0%EB%A1%9C%EC%A7%80%EB%B9%84/10609_gacksung.webp",
+      "http://localhost:3000/_next/image?url=https%3A%2F%2Flimbus-image-bucket.s3.amazonaws.com%2F%EB%A1%9C%EC%9F%88%2FIdentity%2F%EB%82%A8%EB%B6%80%20%EB%A6%AC%EC%9A%B0%20%ED%98%91%ED%9A%8C%204%EA%B3%BC%20%EB%B6%80%EC%9E%A5%2F10908_normal.webp&w=1080&q=10",
     link: "/tier",
   },
   {
     name: "키워드별 인격 분류표",
     image:
-      "https://limbus-image-bucket.s3.amazonaws.com/%EA%B7%B8%EB%A0%88%EA%B3%A0%EB%A5%B4/Identity/%ED%9D%91%EC%9A%B4%ED%9A%8C%20%EB%B6%80%EC%A1%B0%EC%9E%A5/11208_normal.webp",
+      "http://localhost:3000/_next/image?url=https%3A%2F%2Flimbus-image-bucket.s3.ap-northeast-2.amazonaws.com%2F%ED%8C%8C%EC%9A%B0%EC%8A%A4%ED%8A%B8%2FIdentity%2FLCE%20E.G.O%3A%3A%ED%99%8D%EC%97%BC%EC%82%B4%2F10211_gaksung.webp&w=1080&q=10",
     link: "/keyword",
   },
 ];
