@@ -3,8 +3,8 @@ import Header from "@/components/main/layout_components/Header";
 import Footer from "@/components/main/layout_components/Footer";
 import QueryProvider from "@/components/main/layout_components/QueryProvider";
 import "./globals.css";
-import { GoogleAdSense } from "./GoogleAdSense";
-import { GoogleAnalytics } from "./GoogleAnalytics";
+import { GoogleAdSense } from "@/components/main/GoogleAdSense";
+import { GoogleAnalytics } from "@/components/main/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: "림버스 컴퍼니 정보 사이트 - 단빵숲",
