@@ -1,27 +1,9 @@
 import IdentitySkillCard from "./IdentitySkillCard";
 import useStore from "@/zustand/store";
+import { Skill } from "@/interfaces/identityDetail";
 
 interface Props {
   identitySkills: Skill[][];
-}
-
-interface Skill {
-  name: string;
-  power: string;
-  type: string;
-  resource: string;
-  skillSeq: number;
-  skillPower: number;
-  coinPower: number;
-  coinNum: number;
-  atkWeight: number;
-  level: number;
-  normalEffect: string;
-  coin1Effect: string;
-  coin2Effect: string;
-  coin3Effect: string;
-  coin4Effect: string;
-  coin5Effect: string;
 }
 
 const IdentitySkills = ({ identitySkills }: Props) => {

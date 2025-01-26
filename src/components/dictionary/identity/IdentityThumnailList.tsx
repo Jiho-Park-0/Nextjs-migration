@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Button, Input, Tooltip } from "@material-tailwind/react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { LuSearch } from "react-icons/lu";
-import axios from "axios";
 import { getIdentity } from "@/api/dictionaryApi";
 import useStore from "@/zustand/store"; // zustand 스토어 import
 import IdentityThumbnailCard from "./IdentityThumbnailCard";
@@ -12,7 +11,8 @@ import { Spinner } from "@material-tailwind/react";
 import ErrorMessage from "@/ui/ErrorMessage";
 import nicknamesData from "@/constants/nicknames.json";
 import Filter from "./IdentityFilter";
-import { useQuery } from "@tanstack/react-query";
+import { IdentityData } from "@/interfaces/identity";
+import { ApiError } from "@/interfaces/apiError";
 
 interface FilterModalProps {
   openFilter: boolean;
@@ -58,25 +58,19 @@ const FilterModal: React.FC<FilterModalProps> = ({
 };
 
 const TopTitleAndThumnailList = () => {
+  const [data, setData] = useState<IdentityData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<ApiError | null>(null);
   const [isSync, setIsSync] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [openFilter, setOpenFilter] = useState(false);
   const options = useStore((state) => state.optionsState); // options 상태 가져오기
 
   const [nicknames, setNicknames] = useState<{ [key: string]: string[] }>({});
-  const [filteredData, setFilteredData] = useState([
-    { id: 0, name: "", character: "" },
-  ]);
-  const [paginatedData, setPaginatedData] = useState([]);
+  const [filteredData, setFilteredData] = useState<IdentityData[]>([]);
+  const [paginatedData, setPaginatedData] = useState<IdentityData[]>([]);
   const [page, setPage] = useState(1);
   const observerElem = useRef<HTMLDivElement | null>(null);
-
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["identity", options],
-    queryFn: () => getIdentity(options),
-    staleTime: 1000 * 60 * 60 * 24, // 하루
-    refetchOnWindowFocus: false, // 포커스 할 때마다 다시 불러오는 기능 끔
-  });
 
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const target = entries[0];
@@ -108,10 +102,31 @@ const TopTitleAndThumnailList = () => {
   }, []);
 
   useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const result = await getIdentity(options);
+        setData(result);
+        setError(null);
+      } catch (err) {
+        setError({
+          message: err instanceof Error ? err.message : "An error occurred",
+          status: 500,
+        });
+        setData([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [options]);
+
+  useEffect(() => {
     if (!data || data.length === 0) return;
 
     const filtered = data
-      .filter((item: { id: string; name: string }) => {
+      .filter((item: IdentityData) => {
         const nameMatch = item.name
           .toLowerCase()
           .includes(searchTerm.toLowerCase());
@@ -135,10 +150,6 @@ const TopTitleAndThumnailList = () => {
         console.log("이번주 최다 검색 : ", item.name, item.character)
       );
   }, [filteredData]);
-
-  useEffect(() => {
-    console.log("data", data);
-  }, [data]);
 
   return (
     <>
@@ -205,8 +216,8 @@ const TopTitleAndThumnailList = () => {
         <div className="flex justify-center items-center h-screen">
           <Spinner className="w-8 h-8 text-primary-200" />
         </div>
-      ) : isError ? (
-        axios.isAxiosError(error) && error.response?.status === 404 ? (
+      ) : error ? (
+        error.status === 404 ? (
           <div className="text-primary-200 text-center w-full my-8 h-screen">
             해당하는 인격이 없습니다.
           </div>

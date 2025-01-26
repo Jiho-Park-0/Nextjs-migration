@@ -4,8 +4,10 @@ import { EgoOptions } from "@/interfaces/ego";
 function getLength(value: string | number | string[]): number {
   if (typeof value === "string" || Array.isArray(value)) {
     return value.length;
+  } else if (typeof value === "number") {
+    return 1; // 숫자 타입의 값은 항상 유효한 값으로 간주
   } else {
-    return 0; // number 타입일 경우 length가 없으므로 0을 반환
+    return 0;
   }
 }
 
@@ -41,7 +43,9 @@ export const getIdentity = async (options: IdentityOptions) => {
     ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity?${query}`
     : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity`;
 
-  const response = await fetch(uri, { cache: "force-cache" });
+  console.log(uri);
+
+  const response = await fetch(uri, { cache: "no-cache" });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -82,7 +86,7 @@ export const getEgo = async (options: EgoOptions) => {
     ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego?${query}`
     : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego`;
 
-  const response = await fetch(uri, { cache: "force-cache" });
+  const response = await fetch(uri, { cache: "no-cache" });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }

@@ -49,7 +49,7 @@ const Filter = () => {
       [key]: newSelectedOptions,
     });
   };
-  // console.log("options", options);
+
   return (
     <div className="bg-primary-500 w-full rounded p-4 flex flex-col gap-2">
       <FilterButtonGroup

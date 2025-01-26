@@ -55,9 +55,6 @@ const EgoThumbnailCard = ({
             height={1024}
             quality={10}
             loading="lazy"
-            placeholder="blur"
-            blurDataURL="/images/placeholder.jpg"
-            sizes="(max-width: 768px) 100vw, 512px"
             className="rounded-full w-1/2 relative -mr-5 z-10"
           />
           <Image
@@ -67,9 +64,6 @@ const EgoThumbnailCard = ({
             height={1024}
             quality={10}
             loading="lazy"
-            placeholder="blur"
-            blurDataURL="/images/placeholder.jpg"
-            sizes="(max-width: 768px) 100vw, 512px"
             className="rounded-full w-1/2 relative z-20"
           />
         </div>

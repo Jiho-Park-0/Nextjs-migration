@@ -1,8 +1,7 @@
 "use client";
 
 import { getNews } from "@/api/mainApi";
-import { useQuery } from "@tanstack/react-query";
-import { Main_Keys } from "@/constants/queryKeys";
+import { useState, useEffect } from "react";
 
 interface News {
   title: string;
@@ -12,13 +11,20 @@ interface News {
 }
 
 const NewsCard = () => {
-  const { data: news } = useQuery({
-    queryKey: Main_Keys.news,
-    queryFn: getNews,
-    staleTime: 1000 * 60 * 30,
-    refetchOnWindowFocus: false,
-    placeholderData: [],
-  });
+  const [data, setData] = useState<News[]>([]);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const data = await getNews();
+        setData(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchNews();
+  }, []);
 
   return (
     <div className="w-full h-fit bg-primary-300 text-primary-100 rounded-md p-4 md:p-6 lg:p-10 flex flex-col justify-between">
@@ -26,7 +32,7 @@ const NewsCard = () => {
         최신 소식
       </h2>
       <div className="font-body mt-4 flex flex-col justify-between flex-grow">
-        {news?.map((news: News, index: number) => (
+        {data?.map((news: News, index: number) => (
           <div key={index}>
             <p className="text-xs text-primary-200">
               {news.release.split("T")[0]}

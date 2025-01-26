@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import {
   Tabs,
   TabsHeader,
@@ -10,10 +9,9 @@ import {
   Button,
   Spinner,
 } from "@material-tailwind/react";
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
-
+import { useState, useEffect } from "react";
 import { getIdentityDetail } from "@/api/detailAPI";
 import IdentityInfoBox from "@/components/detail/identity/IdentityInfoBox";
 import IdentitySkills from "@/components/detail/identity/IdentitySkills";
@@ -21,25 +19,39 @@ import IdentityPassive from "@/components/detail/identity/IdentityPassive";
 import Keyword from "@/components/detail/Keyword";
 // import DetailImage from "@/components/detail/DetailImage";
 import ErrorMessage from "@/ui/ErrorMessage";
-
 import useStore from "@/zustand/store";
-
 import keyword_data from "@/constants/keyword.json";
+import { IdentityData } from "@/interfaces/identityDetail";
+import { ApiError } from "@/interfaces/apiError";
 
 const IdentityTabs = () => {
   const id = useParams().id;
   const setSynchronization = useStore((state) => state.setSynchronizationState);
   const synchronization = useStore((state) => state.synchronizationState);
+  const [identityData, setIdentityData] = useState<IdentityData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<ApiError | null>(null);
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["identity", id],
-    queryFn: () => getIdentityDetail(Number(id)),
-    retry: 1,
-    staleTime: 1000 * 60 * 60 * 24,
-    refetchOnWindowFocus: false,
-  });
+  useEffect(() => {
+    const fetchIdentityDetail = async () => {
+      try {
+        const data = await getIdentityDetail(Number(id));
+        setIdentityData(data);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError({ message: err.message });
+        } else {
+          setError({ message: "An unknown error occurred" });
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (isLoading) {
+    fetchIdentityDetail();
+  }, [id]);
+
+  if (loading) {
     return (
       <div className="flex justify-center items-center h-96">
         <Spinner className="w-8 h-8 text-primary-200" />
@@ -47,17 +59,7 @@ const IdentityTabs = () => {
     );
   }
 
-  if (isError) {
-    console.log(error);
-  }
-
-  if (isError && axios.isAxiosError(error) && error.response?.status === 404) {
-    return (
-      <div className="text-primary-200 text-center w-full my-8">
-        인격 정보를 불러오지 못했습니다.
-      </div>
-    );
-  } else if (isError) {
+  if (error) {
     return (
       <div className="text-primary-200 text-center w-full my-8">
         <ErrorMessage />
@@ -65,33 +67,37 @@ const IdentityTabs = () => {
     );
   }
 
-  const keywordInfo = data?.keyword.some((kw: string) =>
+  const keywordInfo = identityData?.keyword.some((kw: string) =>
     keyword_data.some((item) => item.name === kw && item.content)
   );
 
-  const identitySkills = [
-    data.identitySkill1s,
-    data.identitySkill2s,
-    data.identitySkill3s,
-    data.identityDefSkills,
-  ];
+  const identitySkills = identityData
+    ? [
+        identityData.identitySkill1s,
+        identityData.identitySkill2s,
+        identityData.identitySkill3s,
+        identityData.identityDefSkills,
+      ]
+    : [];
 
   return (
     <div className="w-full mb-8">
       <Tabs value="스킬" orientation="horizontal" className="lg:flex">
         <div className="flex flex-col lg:items-start items-center gap-3 mt-4">
-          <IdentityInfoBox
-            character={data.character}
-            name={data.name}
-            afterProfileImage={data.afterProfileImage}
-            affiliation={data.affiliation}
-            grade={data.grade}
-            season={data.season}
-            releaseDate={data.releaseDate}
-            obtainingMethod={data.obtainingMethod}
-            resistance={data.resistance}
-            status={data.status}
-          />
+          {identityData && (
+            <IdentityInfoBox
+              character={identityData.character}
+              name={identityData.name}
+              afterProfileImage={identityData.afterProfileImage}
+              affiliation={identityData.affiliation}
+              grade={identityData.grade}
+              season={identityData.season}
+              releaseDate={identityData.releaseDate}
+              obtainingMethod={identityData.obtainingMethod}
+              resistance={identityData.resistance}
+              status={identityData.status}
+            />
+          )}
           <TabsHeader
             className="w-64 md:flex md:flex-col bg-primary-500"
             placeholder={"TabsHeader"}
@@ -153,12 +159,14 @@ const IdentityTabs = () => {
                 {value === "스킬" && (
                   <IdentitySkills identitySkills={identitySkills} />
                 )}
-                {value === "패시브" && (
-                  <IdentityPassive identityPassives={data.identityPassives} />
+                {value === "패시브" && identityData && (
+                  <IdentityPassive
+                    identityPassives={identityData.identityPassives}
+                  />
                 )}
                 {value === "키워드" &&
-                  (keywordInfo ? (
-                    <Keyword keywords={data.keyword} />
+                  (keywordInfo && identityData ? (
+                    <Keyword keywords={identityData.keyword} />
                   ) : (
                     <div className="text-primary-200 text-center w-full my-8">
                       키워드가 없습니다.

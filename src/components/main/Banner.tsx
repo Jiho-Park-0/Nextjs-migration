@@ -27,9 +27,6 @@ const Banner = ({
           className="object-cover"
           quality={50}
           loading="lazy"
-          placeholder="blur"
-          blurDataURL="/images/placeholder.jpg"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 100vw"
         />
       </div>
       {/* 오버레이 */}

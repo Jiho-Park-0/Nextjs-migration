@@ -2,9 +2,7 @@
 
 import { TierData } from "@/interfaces/identity";
 import { getIdentity } from "@/api/dictionaryApi";
-import { queryClient } from "@/api/queryClient";
 import { IdentityOptions } from "@/interfaces/identity";
-import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import TierLine from "./TierLine";
 import { Button, Tooltip, Spinner } from "@material-tailwind/react";
@@ -19,36 +17,40 @@ const KeywordTierTable = () => {
   const [sortedDataE, setSortedDataE] = useState<TierData[]>([]);
   const [sortedDataF, setSortedDataF] = useState<TierData[]>([]);
   const [isSync, setIsSync] = useState(false);
+  const [data, setData] = useState<TierData[]>([]);
+  const [loading, setLoading] = useState(true);
 
   // 필터링 옵션
-  const options: IdentityOptions = {
-    sinner: [],
-    season: [],
-    grade: [],
-    affiliation: [],
-    keyword: [],
-    etcKeyword: [],
-    resources: [],
-    types: [],
-    minSpeed: 1,
-    maxSpeed: 9,
-    minWeight: 1,
-    maxWeight: 9,
-  };
+  useEffect(() => {
+    // 필터링 옵션
+    const options: IdentityOptions = {
+      sinner: [],
+      season: [],
+      grade: ["3"],
+      affiliation: [],
+      keyword: [],
+      etcKeyword: [],
+      resources: [],
+      types: [],
+      minSpeed: 1,
+      maxSpeed: 9,
+      minWeight: 1,
+      maxWeight: 9,
+    };
 
-  // 데이터 가져오기
-  const { data, isLoading } = useQuery({
-    queryKey: ["identity", options],
-    queryFn: () => getIdentity(options),
-    retry: 1,
-    placeholderData: () => {
-      const cachedData = queryClient.getQueryData(["identity", options]);
-      return cachedData || [];
-    },
-    staleTime: 1000 * 60 * 60 * 24, // 하루
-    refetchOnWindowFocus: false, // 포커스 할 때마다 다시 불러오는 기능 끔
-  });
+    const fetchIdentity = async () => {
+      try {
+        const data = await getIdentity(options);
+        setData(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchIdentity();
+  }, []);
   // 분류 기준
   // 여기서 id만 설정하면 티어 바꿀 수 있음
 
@@ -59,14 +61,14 @@ const KeywordTierTable = () => {
     57, 29, 82, 90, 48,
   ];
 
-  // 화상: 103 런싱, 40 리우마엘, 91 리쟈, 83 마티스, 92 리슈
-  const A = [103, 40, 91, 83, 92];
+  // 화상: 134 홍파우, 103 런싱, 40 리우마엘, 91 리쟈, 83 마티스, 92 리슈
+  const A = [134, 103, 40, 91, 83, 92];
 
   // 진동: 13 후파우, 53 어티스, 110 탐루, 122 츠이스, 93 외히스, 113 티로쟈, 112 티돈, 124 츠싱클, 111 유슈, 37 대리마엘
   const B = [13, 53, 110, 122, 93, 113, 112, 124, 111, 37];
 
-  // 파열: 121 제로쟈, 12 세파우, 123 섕르소, 129 제싱클, 32 k루, 126 송루, 44 떱르소, 84 초돈, 26 셉히스, 52 셉티스, 95 데뫼, 18 장그렉
-  const C = [121, 12, 123, 129, 32, 126, 44, 84, 26, 52, 95, 18];
+  // 파열: 121 제로쟈, 12 세파우, 123 섕르소, 129 제싱클, 133 초상, 32 k루, 126 송루, 44 떱르소, 84 초돈, 26 셉히스, 52 셉티스, 95 데뫼, 18 장그렉
+  const C = [121, 12, 123, 129, 133, 32, 126, 44, 84, 26, 52, 95, 18];
 
   // 침잠: 120 죽나상, 118 와히스, 61 디로쟈, 114 디뫼, 85 디루, 94 치티스, 41 해녀마엘, 79 동상, 96 퐁그렉, 97 버파우
   const D = [120, 118, 61, 114, 85, 94, 41, 79, 96, 97];
@@ -120,7 +122,7 @@ const KeywordTierTable = () => {
         </Tooltip>
       </div>
 
-      {isLoading ? (
+      {loading ? (
         <div className="flex justify-center items-center h-screen">
           <Spinner className="w-8 h-8 text-primary-200" />
         </div>

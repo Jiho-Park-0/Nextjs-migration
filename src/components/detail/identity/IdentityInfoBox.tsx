@@ -107,9 +107,6 @@ const IdentityInfoBox = ({
                 height={1024}
                 quality={1}
                 loading="lazy"
-                placeholder="blur"
-                blurDataURL="/images/placeholder.jpg"
-                sizes="(max-width: 768px) 100vw, 512px"
               />
               {type}{" "}
             </span>
