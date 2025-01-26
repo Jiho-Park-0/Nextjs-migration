@@ -9,20 +9,8 @@ import EgoThumbnailCard from "./EgoThumbnailCard";
 import { Spinner } from "@material-tailwind/react";
 import ErrorMessage from "@/ui/ErrorMessage";
 import Filter from "./EgoFilter";
-
-interface EgoData {
-  id: number;
-  name: string;
-  grade: number;
-  character: string;
-  zoomImage: string;
-  image: string;
-}
-
-interface ApiError {
-  message: string;
-  status?: number;
-}
+import { EgoData } from "@/interfaces/ego";
+import { ApiError } from "@/interfaces/apiError";
 
 interface FilterModalProps {
   openFilter: boolean;

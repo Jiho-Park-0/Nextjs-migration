@@ -10,3 +10,12 @@ export interface EgoOptions {
   minWeight: number;
   maxWeight: number;
 }
+
+export interface EgoData {
+  id: number;
+  name: string;
+  grade: number;
+  character: string;
+  zoomImage: string;
+  image: string;
+}

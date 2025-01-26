@@ -11,21 +11,8 @@ import { Spinner } from "@material-tailwind/react";
 import ErrorMessage from "@/ui/ErrorMessage";
 import nicknamesData from "@/constants/nicknames.json";
 import Filter from "./IdentityFilter";
-
-// 타입 정의
-interface IdentityData {
-  id: number;
-  name: string;
-  grade: number;
-  character: string;
-  beforeImage: string;
-  afterImage: string;
-}
-
-interface ApiError {
-  message: string;
-  status?: number;
-}
+import { IdentityData } from "@/interfaces/identity";
+import { ApiError } from "@/interfaces/apiError";
 
 interface FilterModalProps {
   openFilter: boolean;

@@ -23,19 +23,11 @@ export interface TierData {
   afterImage: string;
 }
 
-export interface Identity {
+export interface IdentityData {
   id: number;
   name: string;
+  grade: number;
   character: string;
-  season: number;
   beforeImage: string;
   afterImage: string;
-  speed: number;
-  weight: number;
-  grade: string;
-  affiliation: string;
-  keyword: string;
-  etcKeyword: string[];
-  resources: string[];
-  types: string[];
 }
