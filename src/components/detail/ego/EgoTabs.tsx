@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import {
   Tabs,
   TabsHeader,
@@ -10,36 +9,49 @@ import {
   Button,
   Spinner,
 } from "@material-tailwind/react";
-import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
-
 import { getEgoDetail } from "@/api/detailAPI";
+import { useState, useEffect } from "react";
 import EgoInfoBox from "@/components/detail/ego/EgoInfoBox";
 import EgoSkills from "@/components/detail/ego/EgoSkills";
 import EgoPassive from "@/components/detail/ego/EgoPassive";
 import Keyword from "@/components/detail/Keyword";
 // import DetailImage from "@/components/detail/DetailImage";
 import ErrorMessage from "@/ui/ErrorMessage";
-
 import useStore from "@/zustand/store";
-
 import keyword_data from "@/constants/keyword.json";
+import { EgoDetail } from "@/interfaces/egoDetail";
+import { ApiError } from "@/interfaces/apiError";
 
 const EgoTabs = () => {
   const id = useParams().id;
   const setSynchronization = useStore((state) => state.setSynchronizationState);
   const synchronization = useStore((state) => state.synchronizationState);
+  const [EgoData, setEgoData] = useState<EgoDetail | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<ApiError | null>(null);
 
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["ego", id],
-    queryFn: () => getEgoDetail(Number(id)),
-    retry: 1,
-    staleTime: 1000 * 60 * 60 * 24,
-    refetchOnWindowFocus: false,
-  });
+  useEffect(() => {
+    const fetchEgoDetail = async () => {
+      try {
+        const data = await getEgoDetail(Number(id));
+        setEgoData(data);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError({ message: err.message });
+        } else {
+          setError({ message: "An unknown error occurred" });
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (isLoading) {
+    fetchEgoDetail();
+  }, [id]);
+
+  if (loading) {
     return (
       <div className="flex justify-center items-center h-96">
         <Spinner className="w-8 h-8 text-primary-200" />
@@ -47,17 +59,15 @@ const EgoTabs = () => {
     );
   }
 
-  if (isError) {
-    console.log(error);
-  }
-
-  if (isError && axios.isAxiosError(error) && error.response?.status === 404) {
+  if (loading) {
     return (
-      <div className="text-primary-200 text-center w-full my-8">
-        인격 정보를 불러오지 못했습니다.
+      <div className="flex justify-center items-center h-96">
+        <Spinner className="w-8 h-8 text-primary-200" />
       </div>
     );
-  } else if (isError) {
+  }
+
+  if (error) {
     return (
       <div className="text-primary-200 text-center w-full my-8">
         <ErrorMessage />
@@ -65,7 +75,7 @@ const EgoTabs = () => {
     );
   }
 
-  const keywordInfo = data?.keyword.some((kw: string) =>
+  const keywordInfo = EgoData?.keyword.some((kw: string) =>
     keyword_data.some((item) => item.name === kw && item.content)
   );
 
@@ -73,17 +83,19 @@ const EgoTabs = () => {
     <div className="w-full mb-8">
       <Tabs value="스킬" orientation="horizontal" className="lg:flex">
         <div className="flex flex-col lg:items-start items-center gap-3 mt-4">
-          <EgoInfoBox
-            character={data.character}
-            name={data.name}
-            zoomImage={data.zoomImage}
-            grade={data.grade}
-            season={data.season}
-            resistance={data.resistance}
-            releaseDate={data.releaseDate}
-            obtainingMethod={data.obtainingMethod}
-            cost={data.cost}
-          />
+          {EgoData && (
+            <EgoInfoBox
+              character={EgoData.character}
+              name={EgoData.name}
+              zoomImage={EgoData.zoomImage}
+              grade={EgoData.grade}
+              season={EgoData.season}
+              resistance={EgoData.resistance}
+              releaseDate={EgoData.releaseDate}
+              obtainingMethod={EgoData.obtainingMethod}
+              cost={EgoData.cost}
+            />
+          )}
 
           <TabsHeader
             className="w-64 md:flex md:flex-col bg-primary-500"
@@ -146,20 +158,22 @@ const EgoTabs = () => {
               </div>
 
               <div className="py-1">
-                {value === "스킬" && data.egoskills && data.egoCorSkills && (
-                  <EgoSkills
-                    EgoSkills={{
-                      EgoSkill1s: data.egoskills,
-                      EgoSkill2s: data.egoCorSkills,
-                    }}
-                  />
-                )}
-                {value === "패시브" && data.passive && (
-                  <EgoPassive Egodata={data.passive} />
+                {value === "스킬" &&
+                  EgoData?.egoskills &&
+                  EgoData?.egoCorSkills && (
+                    <EgoSkills
+                      EgoSkills={{
+                        EgoSkill1s: EgoData.egoskills,
+                        EgoSkill2s: EgoData.egoCorSkills,
+                      }}
+                    />
+                  )}
+                {value === "패시브" && EgoData?.passive && (
+                  <EgoPassive Egodata={EgoData.passive} />
                 )}
                 {value === "키워드" &&
-                  (keywordInfo ? (
-                    <Keyword keywords={data.keyword} />
+                  (keywordInfo && EgoData ? (
+                    <Keyword keywords={EgoData.keyword} />
                   ) : (
                     <div className="text-primary-200 text-center w-full my-8">
                       키워드가 없습니다.

@@ -23,7 +23,7 @@ export interface IdentityData {
   identitySkill2s: Skill[];
   identitySkill3s: Skill[];
   identityDefSkills: Skill[];
-  identityPassives: Passive[];
+  identityPassives: Passives[];
 }
 
 export interface Skill {
@@ -46,7 +46,7 @@ export interface Skill {
   coin5Effect: string;
 }
 
-export interface Passive {
+export interface Passives {
   name: string;
   isMain: boolean;
   resource: string;

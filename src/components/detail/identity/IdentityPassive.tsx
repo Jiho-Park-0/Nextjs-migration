@@ -1,19 +1,9 @@
 import PassiveCard from "./PassiveCard";
-
 import useStore from "@/zustand/store";
+import { Passives } from "@/interfaces/identityDetail";
 
 interface Props {
   identityPassives: Passives[];
-}
-
-interface Passives {
-  name: string;
-  isMain: boolean;
-  resource: string;
-  resQuantity: number;
-  activeCond: string;
-  effect: string;
-  level: number;
 }
 
 const IdentityPassive = ({ identityPassives }: Props) => {
