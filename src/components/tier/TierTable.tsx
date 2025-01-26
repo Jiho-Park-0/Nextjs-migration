@@ -2,9 +2,8 @@
 
 import { TierData } from "@/interfaces/identity";
 import { getIdentity } from "@/api/dictionaryApi";
-import { queryClient } from "@/api/queryClient";
 import { IdentityOptions } from "@/interfaces/identity";
-import { useQuery } from "@tanstack/react-query";
+
 import { useEffect, useState } from "react";
 import TierLine from "./TierLine";
 import { Button, Tooltip, Spinner } from "@material-tailwind/react";
@@ -21,35 +20,41 @@ const TierTable = () => {
   const [sortedDataG, setSortedDataG] = useState<TierData[]>([]);
   const [sortedDataH, setSortedDataH] = useState<TierData[]>([]);
   const [isSync, setIsSync] = useState(false);
-
-  // 필터링 옵션
-  const options: IdentityOptions = {
-    sinner: [],
-    season: [],
-    grade: ["3"],
-    affiliation: [],
-    keyword: [],
-    etcKeyword: [],
-    resources: [],
-    types: [],
-    minSpeed: 1,
-    maxSpeed: 9,
-    minWeight: 1,
-    maxWeight: 9,
-  };
+  const [data, setData] = useState<TierData[]>([]);
+  const [loading, setLoading] = useState(true);
 
   // 데이터 가져오기
-  const { data, isLoading } = useQuery({
-    queryKey: ["identity", options],
-    queryFn: () => getIdentity(options),
-    retry: 1,
-    placeholderData: () => {
-      const cachedData = queryClient.getQueryData(["identity", options]);
-      return cachedData || [];
-    },
-    staleTime: 1000 * 60 * 60 * 24, // 하루
-    refetchOnWindowFocus: false, // 포커스 할 때마다 다시 불러오는 기능 끔
-  });
+
+  useEffect(() => {
+    // 필터링 옵션
+    const options: IdentityOptions = {
+      sinner: [],
+      season: [],
+      grade: ["3"],
+      affiliation: [],
+      keyword: [],
+      etcKeyword: [],
+      resources: [],
+      types: [],
+      minSpeed: 1,
+      maxSpeed: 9,
+      minWeight: 1,
+      maxWeight: 9,
+    };
+
+    const fetchIdentity = async () => {
+      try {
+        const data = await getIdentity(options);
+        setData(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchIdentity();
+  }, []);
 
   // 분류 기준
   // 여기서 id만 설정하면 티어 바꿀 수 있음
@@ -134,7 +139,7 @@ const TierTable = () => {
         </Tooltip>
       </div>
 
-      {isLoading ? (
+      {loading ? (
         <div className="flex justify-center items-center h-screen">
           <Spinner className="w-8 h-8 text-primary-200" />
         </div>
