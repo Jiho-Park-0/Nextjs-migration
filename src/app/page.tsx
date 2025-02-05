@@ -16,8 +16,9 @@ export default function Home() {
       <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         안녕하세요 단빵숲 입니다.
         <br />
-        현재 데이터 분석을 위해 상세 페이지의 이미지 탭을 잠시 비활성화
-        하였습니다.
+        2월 6일 업데이트와 함께 사이트 서버 점검으로 잠시 비활성화 될 수
+        있습니다.
+        <br />
         <br />
         이용 시 참고 바랍니다.
       </div>
