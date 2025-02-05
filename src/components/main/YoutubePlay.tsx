@@ -1,96 +1,75 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { getYoutube } from "@/api/mainApi";
 import YouTube from "react-youtube";
-import { ApiError } from "@/interfaces/apiError";
+import { ErrorBoundary } from "react-error-boundary";
 
-interface News {
+type YoutubeVideo = {
   videoId: string;
-}
-const YoutubePlay = () => {
-  const [data, setData] = useState<News[]>([]);
-  const [error, setError] = useState<ApiError | null>(null);
-  const [loading, setLoading] = useState(true);
+  // 추가 필드가 있을 경우 여기에 확장
+};
+
+const YoutubePlayerContent = () => {
+  const [videoData, setVideoData] = useState<YoutubeVideo>({
+    videoId: "HTRQgFYCXHY",
+  });
 
   useEffect(() => {
-    const fetchNews = async () => {
+    const fetchData = async () => {
       try {
-        const data = await getYoutube();
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        const response = await getYoutube();
 
-        if (data === undefined || data.length === 0) {
-          setData([{ videoId: "HTRQgFYCXHY" }]);
+        // 응답 데이터 구조 검증 강화
+        const isValidSingle = (data: unknown): data is YoutubeVideo =>
+          !!data && typeof data === "object" && "videoId" in data;
+
+        const isValidArray = (data: unknown): data is YoutubeVideo[] =>
+          Array.isArray(data) && data.length > 0 && isValidSingle(data[0]);
+
+        if (isValidSingle(response)) {
+          setVideoData(response);
+        } else if (isValidArray(response)) {
+          setVideoData(response[0]);
         } else {
-          setData(data);
+          console.warn("Unexpected API response structure:", response);
+          throw new Error("Invalid API response format");
         }
-      } catch (err) {
-        if (err instanceof Error) {
-          setError({ message: err.message });
-        } else {
-          setError({ message: "An unknown error occurred" });
-        }
-      } finally {
-        setLoading(false);
+      } catch (error) {
+        console.error("YouTube data fetch failed:", error);
+        // 오류 발생 시 기본 영상 ID 유지
       }
     };
 
-    fetchNews();
+    fetchData();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="w-full mx-auto">
-        <div className="aspect-video bg-gray-800 animate-pulse"></div>
-      </div>
-    );
-  }
-
-  if (error || data.length === 0) {
-    return (
-      <div className="w-full mx-auto">
-        <div className="aspect-video ">
-          <YouTube
-            videoId={"HTRQgFYCXHY"}
-            className="aspect-video"
-            opts={{
-              width: "100%",
-              height: "100%",
-              playerVars: {
-                autoplay: 0,
-                controls: 1,
-                modestbranding: 1,
-                rel: 0,
-                showinfo: 0,
-              },
-            }}
-          />
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="w-full mx-auto">
-      <div className="aspect-video">
-        <YouTube
-          videoId={data[0]?.videoId || "HTRQgFYCXHY"}
-          className="aspect-video"
-          opts={{
-            width: "100%",
-            height: "100%",
-            playerVars: {
-              autoplay: 0,
-              controls: 1,
-              modestbranding: 1,
-              rel: 0,
-              showinfo: 0,
-            },
-          }}
-        />
-      </div>
-    </div>
+    <YouTube
+      videoId={videoData.videoId}
+      className="aspect-video"
+      opts={{
+        width: "100%",
+        height: "100%",
+        playerVars: {
+          autoplay: 0,
+          controls: 1,
+          modestbranding: 1,
+          rel: 0,
+          showinfo: 0,
+        },
+      }}
+    />
   );
 };
+
+// Error Boundary로 감싼 최종 컴포넌트
+const YoutubePlay = () => (
+  <ErrorBoundary fallback={<div>영상을 불러올 수 없습니다.</div>}>
+    <Suspense fallback={<div>로딩 중...</div>}>
+      <YoutubePlayerContent />
+    </Suspense>
+  </ErrorBoundary>
+);
 
 export default YoutubePlay;
