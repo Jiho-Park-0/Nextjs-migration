@@ -16,13 +16,12 @@ export default function Home() {
       <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         안녕하세요 단빵숲 입니다.
         <br />
-        흑운회 이스마엘, 히스클리프 티어표 반영은 원본 출처에서 업데이트가
-        이루어지면 반영하도록 하겠습니다.
+        <div>
+          <span className="font-bold">내 인격 분류 </span>페이지의 일관 선택
+          기능과 개별 선택 기능이 추가되었습니다.
+        </div>
         <br />
-        추가로 서버 점검이 아직 미실시 되어 잠시 비활성화 될 수 있습니다.
-        <br />
-        <br />
-        이용 시 참고 바랍니다.
+        <div>많은 이용 부탁드립니다. 감사합니다.</div>
       </div>
       <div className="w-full mx-auto">
         <MainCarousel />
