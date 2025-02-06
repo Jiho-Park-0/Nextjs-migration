@@ -19,7 +19,6 @@ const YoutubePlayerContent = () => {
     const fetchData = async () => {
       try {
         const response = await getYoutube();
-
         // 응답 데이터 구조 검증 강화
         const isValidSingle = (data: unknown): data is YoutubeVideo =>
           !!data && typeof data === "object" && "videoId" in data;

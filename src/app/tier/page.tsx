@@ -15,7 +15,7 @@ const TierListPage = () => {
           기준으로 제작되었습니다.{" "}
           <span className="underline">전체 컨텐츠의 성능 기준이 아님</span>을
           유의해주세요. <br />- 티어 출처는{" "}
-          <Link href="https://gall.dcinside.com/mgallery/board/view/?id=limbuscompany&no=103495&page=1">
+          <Link href="https://gall.dcinside.com/mgallery/board/view/?id=limbuscompany&no=142468&page=1">
             <i>여기</i>
           </Link>
           이며 원본 작성자의 동의를 받아 제작되었습니다.
