@@ -16,8 +16,10 @@ export default function Home() {
       <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         안녕하세요 단빵숲 입니다.
         <br />
-        2월 6일 업데이트와 함께 사이트 서버 점검으로 잠시 비활성화 될 수
-        있습니다.
+        흑운회 이스마엘, 히스클리프 티어표 반영은 원본 출처에서 업데이트가
+        이루어지면 반영하도록 하겠습니다.
+        <br />
+        추가로 서버 점검이 아직 미실시 되어 잠시 비활성화 될 수 있습니다.
         <br />
         <br />
         이용 시 참고 바랍니다.

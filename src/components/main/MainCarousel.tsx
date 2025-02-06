@@ -25,17 +25,17 @@ const MainCarousel = () => {
       {/* 업데이트 */}
 
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/파우스트/Identity/LCE E.G.O::홍염살/10211_gaksung.webp"
-        spanText="LCB 정기검진 업데이트"
-        headingText="LCE E.G.O::홍염살 파우스트 추가"
-        linkPath="/identity/134"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/이스마엘/Identity/흑운회 부조장/10811_gaksung.webp"
+        spanText="육참골단 복각 업데이트"
+        headingText="흑운회 부조장 이스마엘 추가"
+        linkPath="/identity/136"
         linkText="인격 정보 바로가기"
       />
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/이상/Identity/LCE E.G.O::초롱/LCE_E.G.O_Lantern_Yi_Sang_Uptied_Full.webp"
-        spanText="LCB 정기검진 업데이트"
-        headingText="LCE E.G.O::초롱 이상 추가"
-        linkPath="/identity/133"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/히스클리프/Identity/흑운회 와카슈/10712_gaksung.webp"
+        spanText="육참골단 복각 업데이트"
+        headingText="흑운회 와카슈 히스클리프 추가"
+        linkPath="/identity/135"
         linkText="인격 정보 바로가기"
       />
 
