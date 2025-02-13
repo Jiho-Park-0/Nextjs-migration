@@ -13,7 +13,7 @@ const NewsCard = lazy(() => import("@/components/main/NewsCard"));
 export default function Home() {
   return (
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
-      <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
+      {/* <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         안녕하세요 단빵숲 입니다.
         <br />
         <div>
@@ -22,7 +22,7 @@ export default function Home() {
         </div>
         <br />
         <div>많은 이용 부탁드립니다. 감사합니다.</div>
-      </div>
+      </div> */}
       <div className="w-full mx-auto">
         <MainCarousel />
       </div>
