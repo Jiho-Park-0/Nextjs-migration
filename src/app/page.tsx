@@ -13,16 +13,17 @@ const NewsCard = lazy(() => import("@/components/main/NewsCard"));
 export default function Home() {
   return (
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
-      {/* <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
+      <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         안녕하세요 단빵숲 입니다.
         <br />
         <div>
-          <span className="font-bold">내 인격 분류 </span>페이지의 일관 선택
-          기능과 개별 선택 기능이 추가되었습니다.
+          금일 22일 오후 6시 부터 간단한 점검이 있어 사이트가 잠시 비활성화 될
+          예정입니다. <br />
+          이용에 참고 바랍니다.
         </div>
         <br />
-        <div>많은 이용 부탁드립니다. 감사합니다.</div>
-      </div> */}
+        <div> 감사합니다.</div>
+      </div>
       <div className="w-full mx-auto">
         <MainCarousel />
       </div>
