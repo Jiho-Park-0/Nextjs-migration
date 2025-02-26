@@ -46,7 +46,7 @@ export const getIdentity = async (options: IdentityOptions) => {
   console.log(uri);
 
   const response = await fetch(uri, {
-    cache: "no-cache",
+    cache: "force-cache",
   });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
@@ -89,7 +89,7 @@ export const getEgo = async (options: EgoOptions) => {
     : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego`;
 
   const response = await fetch(uri, {
-    cache: "no-cache",
+    cache: "force-cache",
   });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
