@@ -47,6 +47,7 @@ export const getIdentity = async (options: IdentityOptions) => {
 
   const response = await fetch(uri, {
     cache: "force-cache",
+    next: { revalidate: 3600 },
   });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
@@ -90,6 +91,7 @@ export const getEgo = async (options: EgoOptions) => {
 
   const response = await fetch(uri, {
     cache: "force-cache",
+    next: { revalidate: 3600 },
   });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
