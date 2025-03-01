@@ -61,7 +61,7 @@ const Footer = () => {
         />
 
         <div className="flex items-center">
-          <div className="p-1 font-light text-xs md:text-sm text-primary-100">
+          {/* <div className="p-1 font-light text-xs md:text-sm text-primary-100">
             <Typography
               variant="small"
               className="p-1 font-light text-xs md:text-sm text-primary-100 cursor-pointer"
@@ -88,7 +88,7 @@ const Footer = () => {
                 후원하기(투네이션)
               </a>
             </Typography>
-          </div>
+          </div> */}
 
           <div className="p-1 font-light text-xs md:text-sm text-primary-100">
             <PrivacyPolicy />
