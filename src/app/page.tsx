@@ -36,11 +36,11 @@ export default function Home() {
         {/* NewsCard가 나머지 40%를 차지하게 설정 */}
 
         <div className="w-full md:w-2/5 flex flex-col gap-3 md:gap-6">
+          <Donation />
+
           <Suspense fallback={<Skeleton />}>
             <NewsCard />
           </Suspense>
-
-          <Donation />
         </div>
       </div>
       <div className="flex justify-between w-full h-20 md:h-28 lg:h-40 gap-2 md:gap-4">
