@@ -14,7 +14,13 @@ const TierListPage = () => {
           에게 도움이 되도록 초반 컨텐츠에서의 활용도 및 인격 사용 난이도를
           기준으로 제작되었습니다.{" "}
           <span className="underline">전체 컨텐츠의 성능 기준이 아님</span>을
-          유의해주세요. <br />- 티어 출처는{" "}
+          유의해주세요.
+          <br />- 같은 티어 내에서는{" "}
+          <span className="text-red-400">
+            성능 순서와 상관 없이 수감자 번호 순서대로 나열
+          </span>{" "}
+          했으니 참고하시길 바랍니다.
+          <br />- 티어 출처는{" "}
           <Link href="https://gall.dcinside.com/mgallery/board/view/?id=limbuscompany&no=142468&page=1">
             <i>여기</i>
           </Link>
