@@ -25,19 +25,19 @@ const MainCarousel = () => {
       {/* 업데이트 */}
 
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/이상/Identity/남부 리우 협회 3과/10112_gaksung.webp"
-        spanText="2월 20일 업데이트"
-        headingText="남부 리우 협회 3과 이상 추가"
-        linkPath="/identity/137"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/그레고르/Identity/불주먹 사무소 생존자/11211_gacksung.webp"
+        spanText="이건... 우리 불주먹 사무소의 복장이군."
+        headingText=" 불주먹 사무소 생존자 그레고르 추가"
+        linkPath="/identity/138"
         linkText="인격 정보 바로가기"
       />
-      {/* <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/히스클리프/Identity/흑운회 와카슈/10712_gaksung.webp"
-        spanText="육참골단 복각 업데이트"
-        headingText="흑운회 와카슈 히스클리프 추가"
-        linkPath="/identity/135"
+      <Banner
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/돈키호테/Identity/동부 섕크 협회 3과/10311_gacksung.webp"
+        spanText="음식이 좀 슴슴한가 했더니~ 이런 난장판이라는 조미료를 준비해 둘 줄은 본인이 미처 몰랐군!"
+        headingText="동부 섕크 협회 3과 돈키호테 추가"
+        linkPath="/identity/139"
         linkText="인격 정보 바로가기"
-      /> */}
+      />
 
       {/* 신규 기능 */}
       {/* <Banner

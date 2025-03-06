@@ -46,7 +46,7 @@ export const getIdentity = async (options: IdentityOptions) => {
   console.log(uri);
 
   const response = await fetch(uri, {
-    cache: "force-cache",
+    cache: "no-cache",
     next: { revalidate: 3600 },
   });
   if (!response.ok) {
