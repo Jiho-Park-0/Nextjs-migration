@@ -43,8 +43,6 @@ export const getIdentity = async (options: IdentityOptions) => {
     ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity?${query}`
     : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity`;
 
-  console.log(uri);
-
   const response = await fetch(uri, {
     cache: "force-cache",
     next: { revalidate: 3600 },
