@@ -44,6 +44,7 @@ export const getIdentity = async (options: IdentityOptions) => {
     : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity`;
 
   const response = await fetch(uri, {
+    cache: "force-cache",
     next: { revalidate: 3600 },
   });
   if (!response.ok) {
