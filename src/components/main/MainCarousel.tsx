@@ -25,17 +25,17 @@ const MainCarousel = () => {
       {/* 업데이트 */}
 
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/그레고르/Identity/불주먹 사무소 생존자/11211_gacksung.webp"
-        spanText="이건... 우리 불주먹 사무소의 복장이군."
-        headingText=" 불주먹 사무소 생존자 그레고르 추가"
-        linkPath="/identity/138"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/료슈/Identity/흑수 - 묘/10411_gacksung.webp"
+        spanText="아직 정해진 시기가 되지 않았으니... 이 고. 담. 정도는 끝까지 태워도 되겠지."
+        headingText="흑수 - 묘 료슈 추가"
+        linkPath="/identity/141"
         linkText="인격 정보 바로가기"
       />
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/돈키호테/Identity/동부 섕크 협회 3과/10311_gacksung.webp"
-        spanText="음식이 좀 슴슴한가 했더니~ 이런 난장판이라는 조미료를 준비해 둘 줄은 본인이 미처 몰랐군!"
-        headingText="동부 섕크 협회 3과 돈키호테 추가"
-        linkPath="/identity/139"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/오티스/Identity/흑수 - 묘/11112_gacksung.webp"
+        spanText="주군께선 [주군]의 집무에 충실하소서."
+        headingText="흑수 - 묘 오티스 추가"
+        linkPath="/identity/140"
         linkText="인격 정보 바로가기"
       />
 
