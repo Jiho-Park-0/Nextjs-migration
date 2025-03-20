@@ -24,6 +24,8 @@ const EgoThumbnailCard = ({
       : "text-[0.5rem] sm:text-[0.8rem]";
   };
 
+  const hasImages = imageZoomIn && imageZoomOut;
+
   return (
     <Link href={`ego/${id}`}>
       <div className=" bg-primary-500 rounded-lg p-[10px] hover:scale-105 relative h-fit">
@@ -48,24 +50,30 @@ const EgoThumbnailCard = ({
           </div>
         </div>
         <div className="flex justify-center w-full">
-          <Image
-            src={imageZoomOut}
-            alt="imageZoomOut"
-            width={1024}
-            height={1024}
-            quality={10}
-            loading="lazy"
-            className="rounded-full w-1/2 relative -mr-5 z-10"
-          />
-          <Image
-            src={imageZoomIn}
-            alt="imageZoomIn"
-            width={1024}
-            height={1024}
-            quality={10}
-            loading="lazy"
-            className="rounded-full w-1/2 relative z-20"
-          />
+          {hasImages ? (
+            <>
+              <Image
+                src={imageZoomOut}
+                alt="imageZoomOut"
+                width={1024}
+                height={1024}
+                quality={10}
+                loading="lazy"
+                className="rounded-full w-1/2 relative -mr-5 z-10"
+              />
+              <Image
+                src={imageZoomIn}
+                alt="imageZoomIn"
+                width={1024}
+                height={1024}
+                quality={10}
+                loading="lazy"
+                className="rounded-full w-1/2 relative z-20"
+              />
+            </>
+          ) : (
+            <div className="py-6 text-center text-sm">이미지 준비중</div>
+          )}
         </div>
       </div>
     </Link>

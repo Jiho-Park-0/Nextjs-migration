@@ -30,6 +30,8 @@ const IdentityThumbnailCard = ({
     }
   };
 
+  const hasImages = imageBefore || imageAfter;
+
   return (
     <Link href={`/identity/${id}`}>
       <div className=" bg-primary-500 rounded-lg p-[10px] hover:scale-105">
@@ -39,7 +41,7 @@ const IdentityThumbnailCard = ({
               key={grade}
               src={`/assets/common/${grade}.webp`}
               alt={`grade-${grade}`}
-              width={40} // Tailwind에서 크기 조정을 하므로 설정하지 않음
+              width={40}
               height={28}
               style={{ width: 40, height: 28 }}
               className="object-contain h-full w-full"
@@ -51,26 +53,30 @@ const IdentityThumbnailCard = ({
             <span className="">{character}</span>
           </div>
         </div>
-        {!isSync ? (
-          <Image
-            src={imageBefore}
-            alt="beforeImage"
-            className="rounded-lg w-full"
-            width={1024}
-            height={1024}
-            loading="lazy"
-            quality={10}
-          />
+        {hasImages ? (
+          !isSync ? (
+            <Image
+              src={imageBefore}
+              alt="beforeImage"
+              className="rounded-lg w-full"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              quality={10}
+            />
+          ) : (
+            <Image
+              src={imageAfter ? imageAfter : imageBefore}
+              alt="afterImage"
+              className="rounded-lg"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              quality={10}
+            />
+          )
         ) : (
-          <Image
-            src={imageAfter ? imageAfter : imageBefore}
-            alt="afterImage"
-            className="rounded-lg"
-            width={1024}
-            height={1024}
-            loading="lazy"
-            quality={10}
-          />
+          <div className="py-6 text-center text-sm">이미지 준비중</div>
         )}
       </div>
     </Link>
