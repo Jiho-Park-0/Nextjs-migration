@@ -3,14 +3,14 @@ import MainCarousel from "@/components/main/MainCarousel";
 import MenuCard from "@/components/main/MenuCard";
 import SiteButton from "@/components/main/SiteButton";
 import Donation from "@/components/main/Donation";
-import Bbangchinko from "@/components/main/Bbangchinko";
+//import Bbangchinko from "@/components/main/Bbangchinko";
 import { FaSquareXTwitter, FaSquareYoutube } from "react-icons/fa6";
 import Image from "next/image";
-// import Skeleton from "@/components/main/Skeleton";
-import { lazy } from "react";
+import Skeleton from "@/components/main/Skeleton";
+import { lazy, Suspense } from "react";
 
 const YoutubePlay = lazy(() => import("@/components/main/YoutubePlay"));
-// const NewsCard = lazy(() => import("@/components/main/NewsCard"));
+const NewsCard = lazy(() => import("@/components/main/NewsCard"));
 
 export default function Home() {
   return (
@@ -44,15 +44,15 @@ export default function Home() {
         {/* NewsCard가 나머지 40%를 차지하게 설정 */}
 
         <div className="w-full md:w-2/5 flex flex-col gap-3 md:gap-6 ">
-          <div className="flex-1 h-1/2">
+          {/* <div className="flex-1 h-1/2">
             <Bbangchinko />
-          </div>
+          </div> */}
           <div className="flex-1 h-1/2">
             <Donation />
           </div>
-          {/* <Suspense fallback={<Skeleton />}>
-      <NewsCard />
-    </Suspense> */}
+          <Suspense fallback={<Skeleton />}>
+            <NewsCard />
+          </Suspense>
         </div>
       </div>
       <div className="flex justify-between w-full h-20 md:h-28 lg:h-40 gap-2 md:gap-4">
