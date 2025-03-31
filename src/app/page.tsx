@@ -15,24 +15,16 @@ const YoutubePlay = lazy(() => import("@/components/main/YoutubePlay"));
 export default function Home() {
   return (
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
-      {/* <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
+      <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         안녕하세요 단빵숲 입니다.
         <br />
         <div>
-          &apos;내 인격 분류&apos; 페이지의 인격 편성 순서를 추천 인격에 맞게
-          재조정했습니다.
-        </div>
-        <div>
-          순서 변경이 필요해 보이는 인격이 발견되시면 메일로 문의해주시길
-          바랍니다.
+          이번 주부터 신규 데이터 추가는 목(데이터 추가), 금(이미지 추가)로
+          진행하겠습니다.
         </div>
         <br />
-        <div>
-          추가적으로 &apos;내 인격 분류&apos; 페이지의 각 기종별 전체 캡쳐
-          방법을 추가했습니다.
-        </div>
         <div> 감사합니다.</div>
-      </div> */}
+      </div>
       <div className="w-full mx-auto">
         <MainCarousel />
       </div>
