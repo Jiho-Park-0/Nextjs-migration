@@ -44,7 +44,7 @@ export const getIdentity = async (options: IdentityOptions) => {
     : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity`;
 
   const response = await fetch(uri, {
-    cache: "no-cache",
+    cache: "force-cache",
     next: { revalidate: 3600 },
   });
   if (!response.ok) {
@@ -101,7 +101,7 @@ export const getAllIdentity = async () => {
   const uri = `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity?minSpeed=1&maxSpeed=9&minWeight=1&maxWeight=9`;
 
   const response = await fetch(uri, {
-    cache: "no-cache",
+    cache: "force-cache",
     next: { revalidate: 86400 },
   });
   if (!response.ok) {
