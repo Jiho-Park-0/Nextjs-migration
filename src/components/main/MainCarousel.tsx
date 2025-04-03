@@ -25,17 +25,10 @@ const MainCarousel = () => {
       {/* 업데이트 */}
 
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/료슈/Identity/흑수 - 묘/10411_gacksung.webp"
-        spanText="아직 정해진 시기가 되지 않았으니... 이 고. 담. 정도는 끝까지 태워도 되겠지."
-        headingText="흑수 - 묘 료슈 추가"
-        linkPath="/identity/141"
-        linkText="인격 정보 바로가기"
-      />
-      <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/오티스/Identity/흑수 - 묘/11112_gacksung.webp"
-        spanText="주군께선 [주군]의 집무에 충실하소서."
-        headingText="흑수 - 묘 오티스 추가"
-        linkPath="/identity/140"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/싱클레어/Identity/중지 작은 아우/11012_gacksung.webp"
+        spanText="내가 죽어도... 넌 [장부]에 남는다."
+        headingText="중지 작은 아우 싱클레어 추가"
+        linkPath="/identity/142"
         linkText="인격 정보 바로가기"
       />
 
