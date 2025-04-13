@@ -28,7 +28,7 @@ export default function Home() {
           신청하실 수 있습니다.
         </div>
         <Link href="https://forms.gle/h8fskCoCuE5yMZEF7" target="_blank">
-          <div className="text-primary-500 hover:text-primary-400 underline">
+          <div className="text-primary-500 hover:text-primary-400 underline text-center text-lg">
             지원하기
           </div>
         </Link>
