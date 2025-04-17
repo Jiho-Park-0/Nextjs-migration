@@ -2,7 +2,7 @@ export const getIdentityDetail = async (id: number) => {
   const identityURL = `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity/${id}`;
 
   const response = await fetch(identityURL, {
-    cache: "force-cache",
+    cache: "no-cache",
   });
   if (!response.ok) {
     throw new Error("Network response was not ok");
@@ -15,7 +15,7 @@ export const getEgoDetail = async (id: number) => {
   const identityURL = `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego/${id}`;
 
   const response = await fetch(identityURL, {
-    cache: "force-cache",
+    cache: "no-cache",
   });
   if (!response.ok) {
     throw new Error("Network response was not ok");

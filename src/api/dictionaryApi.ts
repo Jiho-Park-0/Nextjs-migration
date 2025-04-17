@@ -88,7 +88,7 @@ export const getEgo = async (options: EgoOptions) => {
     : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego`;
 
   const response = await fetch(uri, {
-    cache: "force-cache",
+    cache: "no-cache",
     next: { revalidate: 3600 },
   });
   if (!response.ok) {

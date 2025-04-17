@@ -25,11 +25,11 @@ const MainCarousel = () => {
       {/* 업데이트 */}
 
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/싱클레어/Identity/중지 작은 아우/11012_gacksung.webp"
-        spanText="내가 죽어도... 넌 [장부]에 남는다."
-        headingText="중지 작은 아우 싱클레어 추가"
-        linkPath="/identity/142"
-        linkText="인격 정보 바로가기"
+        imageUrl="https://limbus-image-bucket.s3.amazonaws.com/로쟈/EGO/지정 재판/20908_cg.webp"
+        spanText="매달고, 불태우거라. 끝끝내 뼛조각 하나 남지 않도록."
+        headingText="지정 재판 로쟈 추가"
+        linkPath="/ego/97"
+        linkText="에고 정보 바로가기"
       />
 
       {/* 신규 기능 */}
