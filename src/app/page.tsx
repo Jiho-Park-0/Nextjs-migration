@@ -8,7 +8,7 @@ import { FaSquareXTwitter, FaSquareYoutube } from "react-icons/fa6";
 import Image from "next/image";
 // import Skeleton from "@/components/main/Skeleton";
 import { lazy } from "react";
-import Link from "next/link";
+// import Link from "next/link";
 
 const YoutubePlay = lazy(() => import("@/components/main/YoutubePlay"));
 //const NewsCard = lazy(() => import("@/components/main/NewsCard"));
@@ -18,22 +18,8 @@ export default function Home() {
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
       <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         <div className="font-bold text-center">
-          ❗❗단빵숲과 함께 성장해 나갈 백엔드 개발자분을 모집합니다❗❗
+          백엔드 지원 마감되었습니다. 지원해주셔서 감사합니다!
         </div>
-        <br />
-        안녕하세요 단빵숲 입니다.
-        <br />
-        <div>
-          림버스컴퍼니와 백엔드 개발에 관심이 있으신 분들은 아래 폼을 통해
-          신청하실 수 있습니다.
-        </div>
-        <Link href="https://forms.gle/h8fskCoCuE5yMZEF7" target="_blank">
-          <div className="text-primary-500 hover:text-primary-400 underline text-center text-lg">
-            지원하기
-          </div>
-        </Link>
-        <div>지원 폼은 합격자가 나올 때까지 열려있을 예정입니다.</div>
-        <div>많은 관심과 지원 부탁드립니다!</div>
       </div>
       <div className="w-full mx-auto">
         <MainCarousel />
