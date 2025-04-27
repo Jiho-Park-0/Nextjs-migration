@@ -1,6 +1,6 @@
 import { Button } from "@material-tailwind/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Identity } from "@/interfaces/identity";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 
@@ -8,11 +8,19 @@ interface Props {
   identities: Identity[];
   setMine: (mine: number[]) => void;
   setIsResult: (isResult: boolean) => void;
+  initialSelected?: number[];
 }
 
-const SelectIdentity = ({ identities, setMine, setIsResult }: Props) => {
-  const [myList, setMyList] = useState<number[]>([]);
-  const [isSelect, setIsSelect] = useState(false);
+const SelectIdentity = ({
+  identities,
+  setMine,
+  setIsResult,
+  initialSelected = [],
+}: Props) => {
+  const [myList, setMyList] = useState<number[]>(initialSelected);
+  const [isSelect, setIsSelect] = useState(
+    initialSelected.length > 0 && initialSelected.length === identities.length
+  );
   const sinners = [
     "이상",
     "파우스트",
@@ -38,6 +46,18 @@ const SelectIdentity = ({ identities, setMine, setIsResult }: Props) => {
     });
   };
 
+  // initialSelected가 바뀌면 myList 갱신
+  useEffect(() => {
+    setMyList(initialSelected);
+  }, [initialSelected]);
+
+  // initialSelected/identities 변경 시 '일괄 선택' 버튼 상태 갱신
+  useEffect(() => {
+    setIsSelect(
+      initialSelected.length > 0 && initialSelected.length === identities.length
+    );
+  }, [initialSelected, identities]);
+
   const handleSelectAll = () => {
     if (isSelect) {
       setMyList([]);
@@ -58,6 +78,11 @@ const SelectIdentity = ({ identities, setMine, setIsResult }: Props) => {
   };
 
   const handleSave = () => {
+    // 1) 로컬스토리지에 영구 저장
+    if (typeof window !== "undefined") {
+      localStorage.setItem("selectedIdentities", JSON.stringify(myList));
+    }
+    // 2) 기존 로직: 상위로 상태 전달
     setMine(myList);
     setIsResult(true);
     window.scrollTo(0, 0);

@@ -16,11 +16,11 @@ const YoutubePlay = lazy(() => import("@/components/main/YoutubePlay"));
 export default function Home() {
   return (
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
-      <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
+      {/* <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         <div className="font-bold text-center">
           백엔드 지원 마감되었습니다. 지원해주셔서 감사합니다!
         </div>
-      </div>
+      </div> */}
       <div className="w-full mx-auto">
         <MainCarousel />
       </div>
