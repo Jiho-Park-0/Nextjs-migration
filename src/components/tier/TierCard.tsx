@@ -1,10 +1,11 @@
-import React from "react";
 import { TierData } from "@/interfaces/identity";
 import Link from "next/link";
 import Image from "next/image";
 
 // 발푸밤
 const walpurgisIds = [13, 34, 83, 84, 103, 119, 120, 131, 132]; // 후파우, 갈루, 마티스, 초돈, 런싱, 적슈, 죽나상, 탕히스, 탕후루
+
+const walpurgisON = false;
 
 // 이번 시즌 자판기 획득 불가(전 시즌 인격에서 통상 제외)
 const previousSeasonIds = [94, 95, 96, 97, 98, 99, 118];
@@ -16,6 +17,11 @@ const TierCard = ({ data, isSync }: { data: TierData; isSync: boolean }) => {
   const isWalpurgis = walpurgisIds.includes(data.id);
   const isPreviousSeason = previousSeasonIds.includes(data.id);
   const isPreviousEvent = previousEvent.includes(data.id);
+
+  // walpurgisON이 false이고 walpurgis id인 경우 null 반환
+  if (!walpurgisON && isWalpurgis) {
+    return null;
+  }
 
   const getBackgroundColor = () => {
     if (isWalpurgis) {

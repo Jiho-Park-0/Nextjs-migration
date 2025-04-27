@@ -43,9 +43,10 @@ export const getIdentity = async (options: IdentityOptions) => {
     ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity?${query}`
     : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity`;
 
-  console.log(uri);
-
-  const response = await fetch(uri, { cache: "no-cache" });
+  const response = await fetch(uri, {
+    cache: "no-cache",
+    next: { revalidate: 3600 },
+  });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -86,7 +87,10 @@ export const getEgo = async (options: EgoOptions) => {
     ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego?${query}`
     : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego`;
 
-  const response = await fetch(uri, { cache: "no-cache" });
+  const response = await fetch(uri, {
+    cache: "no-cache",
+    next: { revalidate: 3600 },
+  });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -96,7 +100,10 @@ export const getEgo = async (options: EgoOptions) => {
 export const getAllIdentity = async () => {
   const uri = `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity?minSpeed=1&maxSpeed=9&minWeight=1&maxWeight=9`;
 
-  const response = await fetch(uri, { cache: "force-cache" });
+  const response = await fetch(uri, {
+    cache: "force-cache",
+    next: { revalidate: 86400 },
+  });
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }

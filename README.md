@@ -1,37 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 단테의 빵과 수프
 
-## Getting Started
+**단빵숲**은 림버스 컴퍼니 게임을 위한 정보를 제공하는 웹 플랫폼입니다. 유저들에게 각종 정보를 쉽게 탐색하고 확인할 수 있도록 제작되었습니다.
 
-First, run the development server:
+## 📎 사이트 링크
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+[Baslimbus.info](https://baslimbus.info)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🌟 주요 기능
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### - 메인
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+메인 페이지는 주요 업데이트 내용을 배너로 보여주며, 프로젝트 문의와 관련된 최신 정보를 제공합니다. 새롭게 업데이트된 인격과 에고 배너, 새로운 유튜브 영상, 최신 소식, 그리고 프로젝트 문의의 공식 홈페이지, SNS, 유튜브 채널 링크를 확인할 수 있습니다.
 
-## Learn More
+#### - 인격 및 에고 도감
 
-To learn more about Next.js, take a look at the following resources:
+인격 및 에고 도감 페이지는 림버스 컴퍼니에 존재하는 모든 인격과 에고의 리스트를 나열합니다. 페이지별 필터링 기능을 통해 원하는 정보를 쉽게 찾을 수 있습니다. 동기화 버튼을 체크하면 인격의 동기화 일러스트를 변경할 수 있습니다. 서치바를 활용하면 입력한 검색어와 일치하는 소속이나 별칭을 가진 인격들을 보여줍니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### - 인격 및 에고 상세 정보
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+상세 정보 페이지에는 인격과 에고에 대한 구체적인 정보를 제공합니다. 해당 인격 및 에고의 기본 정보, 스킬, 패시브, 사용하는 키워드, 그리고 이미지를 확인할 수 있습니다. 각 페이지에는 동기화 버튼이 있어 체크 시 동기화에 맞는 정보를 볼 수 있습니다.
 
-## Deploy on Vercel
+#### - 리세 티어표
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+리세 티어표 페이지는 각 인격별 활용도를 티어표로 나타냅니다. 티어는 S+부터 X까지로 구분되며, 원본 작성자의 동의를 받아 제작되었습니다. 분류된 인격은 동기화 버튼을 통해 일러스트를 변경할 수 있으며, 클릭 시 해당 인격의 상세 페이지로 이동합니다. 인격들은 현재 획득 가능한지 또는 이벤트로만 얻을 수 있는지를 이름표 색상으로 구별합니다.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# Nextjs-migration
+#### - 키워드별 인격표
+
+키워드별 인격표 페이지는 림버스 컴퍼니에서 사용하는 주요 키워드 7종을 기준으로 인격들을 분류합니다. 분류된 인격은 동기화 버튼을 통해 일러스트를 변경할 수 있으며, 클릭 시 해당 인격의 상세 페이지로 이동합니다. 인격들은 현재 획득 가능한지 또는 이벤트로만 얻을 수 있는지를 이름표 색상으로 구별합니다.
+
+#### - 인격 분류
+
+인격 분류 페이지는 사용자가 보유한 인격을 키워드별로 정리해 볼 수 있도록 도와줍니다. 수감자별로 보유한 인격을 선택한 뒤 저장하기 버튼을 누르면, 키워드별로 해당 인격이 어떻게 분류되는지를 확인할 수 있습니다.
+
+## 🛠️ 기술 스택
+
+- **Frontend**: React, TypeScript, Recoil
+- **Styling**: material-tailwind
+- **Deployment**: Netlify
+- **Backend**:Spring, AWS EC2, AWS RDS, mysql
+
+## 📬 멤버
+
+- [박지호](https://github.com/Jiho-Park-0) (팀장, 기획, FE)
+- [송지혜](https://github.com/qwer15948)(FE)
+- [김지명](https://github.com/kimjimyeong)(BE)
+
+## 📧 문의
+
+bas.limbus@gmail.com
+
+모든 데이터의 권리와 저작권은 프로젝트 문 및 해당 저작권자의 소유입니다.

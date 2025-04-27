@@ -40,9 +40,11 @@ const ShowIdentity = ({ identities, mine, setIsResult }: ShowIdentityProps) => {
     );
   };
 
-  const [open, setOpen] = useState(false);
+  const [openTip, setOpenTip] = useState(false);
+  const [openScreenTip, setopenScreenTip] = useState(false);
 
-  const toggleOpen = () => setOpen((cur) => !cur);
+  const toggleOpen = () => setOpenTip((cur) => !cur);
+  const toggleScreenTip = () => setopenScreenTip((cur) => !cur);
 
   return (
     <div>
@@ -52,14 +54,43 @@ const ShowIdentity = ({ identities, mine, setIsResult }: ShowIdentityProps) => {
         <br />* 기타 키워드에는 특정 키워드를 가지고 있지 않거나, 키워드를
         가지고 있더라도 거의 사용되지 않는 인격을 표시합니다.
       </p>
-      <Button
-        onClick={toggleOpen}
-        placeholder={undefined}
-        className="bg-primary-300 rounded-sm font-light text-xs md:text-sm mb-4"
-      >
-        사용 팁 보기
-      </Button>
-      <Collapse open={open} className="bg-primary-200">
+      <div className="flex gap-1">
+        <Button
+          onClick={toggleScreenTip}
+          placeholder={undefined}
+          className="bg-primary-300 rounded-sm font-light text-xs md:text-sm mb-1"
+        >
+          전체 스크롤 캡쳐 사용법
+        </Button>
+
+        <Button
+          onClick={toggleOpen}
+          placeholder={undefined}
+          className="bg-primary-300 rounded-sm font-light text-xs md:text-sm mb-1"
+        >
+          사용 팁 보기
+        </Button>
+      </div>
+
+      <Collapse open={openScreenTip} className="bg-primary-200 mb-1">
+        <p className=" font-body text-primary-500 text-xs md:text-sm p-8">
+          데스크탑 스크린샷 적용 법: F12 (개발자 모드) -&gt; Ctrl + Shift + P
+          -&gt; <span className="font-bold">Capture full size screenshot</span>{" "}
+          선택
+          <br />
+          <br />
+          갤럭시 스크린샷 적용 법: 볼륨 버튼 + 전원 버튼 동시 클릭 -&gt;{" "}
+          <span className="font-bold">아래 화살표 모양 버튼 클릭</span>
+          <br />
+          <br />
+          아이폰 스크린샷 적용 법: 사파리 -&gt; 볼륨(홈) 버튼 + 전원 버튼 동시
+          클릭 -&gt; 미리보기 선택 -&gt;{" "}
+          <span className="font-bold">전체 페이지 선택</span>
+          <br />
+        </p>
+      </Collapse>
+
+      <Collapse open={openTip} className="bg-primary-200">
         <p className=" font-body text-primary-500 text-xs md:text-sm p-8">
           - 순서가 앞일수록 내 덱에서 상대적으로 추천하는 인격이에요.
           <br /> -{" "}

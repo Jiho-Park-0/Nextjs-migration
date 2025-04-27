@@ -25,18 +25,11 @@ const MainCarousel = () => {
       {/* 업데이트 */}
 
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/파우스트/Identity/LCE E.G.O::홍염살/10211_gaksung.webp"
-        spanText="LCB 정기검진 업데이트"
-        headingText="LCE E.G.O::홍염살 파우스트 추가"
-        linkPath="/identity/134"
-        linkText="인격 정보 바로가기"
-      />
-      <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/이상/Identity/LCE E.G.O::초롱/LCE_E.G.O_Lantern_Yi_Sang_Uptied_Full.webp"
-        spanText="LCB 정기검진 업데이트"
-        headingText="LCE E.G.O::초롱 이상 추가"
-        linkPath="/identity/133"
-        linkText="인격 정보 바로가기"
+        imageUrl="https://limbus-image-bucket.s3.amazonaws.com/로쟈/EGO/지정 재판/20908_cg.webp"
+        spanText="매달고, 불태우거라. 끝끝내 뼛조각 하나 남지 않도록."
+        headingText="지정 재판 로쟈 추가"
+        linkPath="/ego/97"
+        linkText="에고 정보 바로가기"
       />
 
       {/* 신규 기능 */}

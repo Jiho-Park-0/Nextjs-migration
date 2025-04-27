@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
 
   // 이미지 최적화 설정
   images: {
-    unoptimized: false, // Next.js 이미지 최적화 활성화
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
