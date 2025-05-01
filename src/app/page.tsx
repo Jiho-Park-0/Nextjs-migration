@@ -16,11 +16,14 @@ const YoutubePlay = lazy(() => import("@/components/main/YoutubePlay"));
 export default function Home() {
   return (
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
-      {/* <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
-        <div className="font-bold text-center">
-          백엔드 지원 마감되었습니다. 지원해주셔서 감사합니다!
+      <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
+        <div className="text-center">
+          안녕하세요. 단빵숲 입니다. <br />
+          이제 <span className="font-bold">&apos;내 인격 분류&apos;</span>{" "}
+          페이지에서 이전에 선택하신 인격들이 저장됩니다. <br />
+          이용에 참고 바랍니다.
         </div>
-      </div> */}
+      </div>
       <div className="w-full mx-auto">
         <MainCarousel />
       </div>
