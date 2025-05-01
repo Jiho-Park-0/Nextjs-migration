@@ -19,6 +19,11 @@ export default function Home() {
       <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         <div className="text-center">
           안녕하세요. 단빵숲 입니다. <br />
+          서버점검으로 인해 잠시 사이트가 비활성화 될 수 있습니다. 양해
+          부탁드립니다. <br />
+          <br />
+        </div>
+        <div className="text-center">
           이제 <span className="font-bold">&apos;내 인격 분류&apos;</span>{" "}
           페이지에서 이전에 선택하신 인격들이 저장됩니다. <br />
           이용에 참고 바랍니다.
