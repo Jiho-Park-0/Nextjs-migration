@@ -106,7 +106,13 @@ const FilterButtonGroup = ({
         )}
       </span>
 
-      <div className="grid grid-cols-6 gap-1.5">
+      <div
+        className={`
+    grid
+    gap-1.5
+    ${buttonType === "largeText" ? "grid-cols-3" : "grid-cols-6"}
+  `}
+      >
         {content.map((item, index) => {
           const itemsName = getEngName(item.name);
           return (
