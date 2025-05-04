@@ -57,12 +57,14 @@ const Filter = () => {
         content={sinners}
         src="/assets/profile/logo/"
         propertyToSaveTo="sinner"
+        PageType="Identity"
       />
       <FilterButtonGroup
         title="자원"
         content={resource}
         src="/assets/resource/"
         propertyToSaveTo="resources"
+        PageType="Identity"
       />
       <FilterSelectGroup
         title="키워드"
@@ -89,6 +91,7 @@ const Filter = () => {
         content={attackType}
         src="/assets/attackType/"
         propertyToSaveTo="types"
+        PageType="Identity"
       />
       <FilterSliderGroup title="속도" name="Speed" minValue={1} maxValue={9} />
       <FilterSliderGroup
@@ -109,12 +112,14 @@ const Filter = () => {
         src=""
         buttonType="text"
         propertyToSaveTo="season"
+        PageType="Identity"
       />
       <FilterButtonGroup
         title="등급"
         content={[{ name: "1" }, { name: "2" }, { name: "3" }]}
         src="/assets/common/"
         propertyToSaveTo="grade"
+        PageType="Identity"
       />
       <FilterEtcButtonGroup
         title="기타"

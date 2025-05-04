@@ -54,14 +54,14 @@ const Filter = () => {
         content={sinners}
         src="/assets/profile/logo/"
         propertyToSaveTo="sinner"
-        isIdentityPage={false}
+        PageType="Ego"
       />
       <FilterButtonGroup
         title="사용 자원"
         content={resource}
         src="/assets/resource/"
         propertyToSaveTo="resources"
-        isIdentityPage={false}
+        PageType="Ego"
       />
       <FilterSelectGroup
         title="키워드"
@@ -89,7 +89,7 @@ const Filter = () => {
         ]}
         src="/assets/attackType/"
         propertyToSaveTo="types"
-        isIdentityPage={false}
+        PageType="Ego"
       />
       <FilterSliderGroup
         title="가중치"
@@ -110,7 +110,7 @@ const Filter = () => {
         src=""
         buttonType="text"
         propertyToSaveTo="season"
-        isIdentityPage={false}
+        PageType="Ego"
       />
       <FilterEtcButtonGroup
         title="등급"

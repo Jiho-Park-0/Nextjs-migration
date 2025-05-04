@@ -22,8 +22,8 @@ const keywordOptionList: Option[] = keyword.map((item) => ({
 }));
 
 const Filter = () => {
-  const setOptions = useStore((state) => state.setOptionsState);
-  const options = useStore((state) => state.optionsState);
+  const setOptions = useStore((state) => state.setPassiveOptionState);
+  const options = useStore((state) => state.passiveOptionsState);
 
   const {
     selectedOptions: keywordOptions,
@@ -50,12 +50,14 @@ const Filter = () => {
         content={sinners}
         src="/assets/profile/logo/"
         propertyToSaveTo="sinner"
+        PageType="Passive"
       />
       <FilterButtonGroup
         title="자원"
         content={resource}
         src="/assets/resource/"
         propertyToSaveTo="resources"
+        PageType="Passive"
       />
       <FilterSelectGroup
         title="키워드"
@@ -79,6 +81,7 @@ const Filter = () => {
         src=""
         buttonType="text"
         propertyToSaveTo="season"
+        PageType="Passive"
       />
       <FilterButtonGroup
         title="유형"
@@ -86,12 +89,14 @@ const Filter = () => {
         src=""
         buttonType="largeText"
         propertyToSaveTo="activeCond"
+        PageType="Passive"
       />
       <FilterButtonGroup
         title="등급"
         content={[{ name: "1" }, { name: "2" }, { name: "3" }]}
         src="/assets/common/"
         propertyToSaveTo="grade"
+        PageType="Passive"
       />
       <FilterEtcButtonGroup
         title="기타"

@@ -15,7 +15,7 @@ interface FilterButtonGroupProps {
   src: string;
   buttonType?: string;
   propertyToSaveTo: string;
-  isIdentityPage?: boolean;
+  PageType: string;
 }
 
 const FilterButtonGroup = ({
@@ -24,7 +24,7 @@ const FilterButtonGroup = ({
   src,
   buttonType,
   propertyToSaveTo,
-  isIdentityPage = true,
+  PageType,
 }: FilterButtonGroupProps) => {
   const [buttons, toggleButton] = useToggleButtons(
     content.map((item) => item.name)
@@ -36,23 +36,30 @@ const FilterButtonGroup = ({
   const setOptions = useStore((state) => state.setOptionsState);
   const egoOptions = useStore((state) => state.egoOptionsState);
   const setEgoOptions = useStore((state) => state.setEgoOptionsState);
+  const passiveOptions = useStore((state) => state.passiveOptionsState);
+  const setpassiveOptions = useStore((state) => state.setPassiveOptionState);
 
   const savePropertyToOptions = (selectedButtons: string[]) => {
-    if (isIdentityPage) {
+    if (PageType === "Identity") {
       setOptions({
         ...options,
         [propertyToSaveTo as keyof typeof options]: selectedButtons,
       });
-    } else {
+    } else if (PageType === "Ego") {
       setEgoOptions({
         ...egoOptions,
         [propertyToSaveTo as keyof typeof egoOptions]: selectedButtons,
+      });
+    } else if (PageType === "Passive") {
+      setpassiveOptions({
+        ...passiveOptions,
+        [propertyToSaveTo as keyof typeof passiveOptions]: selectedButtons,
       });
     }
   };
 
   useEffect(() => {
-    const initialSelectedButtons: string[] | number | undefined = isIdentityPage
+    const initialSelectedButtons: string[] | number | undefined = PageType
       ? options[propertyToSaveTo as keyof typeof options]
       : egoOptions[propertyToSaveTo as keyof typeof egoOptions];
 

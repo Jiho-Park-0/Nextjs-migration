@@ -2,7 +2,7 @@ import React from "react";
 import FilterHeader from "@/components/dictionary/FilterHeader";
 import PassiveFilter from "@/components/dictionary/passive/PassiveFilter";
 import FilterModal from "@/components/dictionary/FilterModal";
-import IdentityThumnailList from "@/components/dictionary/identity/IdentityThumnailList";
+import PassiveThumnailList from "@/components/dictionary/passive/PassiveThumnailList";
 
 export default function IdentityPage() {
   return (
@@ -12,7 +12,9 @@ export default function IdentityPage() {
         <PassiveFilter />
       </div>
       <FilterModal />
-      <div className="flex-auto md:pl-10">{/* <IdentityThumnailList /> */}</div>
+      <div className="flex-auto md:pl-10">
+        <PassiveThumnailList />
+      </div>
     </div>
   );
 }
