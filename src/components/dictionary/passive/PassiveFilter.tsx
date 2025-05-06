@@ -88,7 +88,7 @@ const Filter = () => {
         content={[{ name: "보유" }, { name: "공명" }]}
         src=""
         buttonType="largeText"
-        propertyToSaveTo="activeCond"
+        propertyToSaveTo="activeConds"
         PageType="Passive"
       />
       <FilterButtonGroup

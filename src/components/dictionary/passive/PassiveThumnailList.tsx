@@ -66,8 +66,6 @@ const PassiveThumbnailList: React.FC = () => {
   // zustand에서 패시브 필터 옵션 가져오기
   const options = useStore((state) => state.passiveOptionsState);
 
-  console.log(options);
-
   // 무한 스크롤 옵저버 콜백
   const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     if (entries[0].isIntersecting) {

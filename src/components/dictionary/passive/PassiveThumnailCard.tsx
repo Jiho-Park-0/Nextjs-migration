@@ -1,24 +1,7 @@
 import Image from "next/image";
 import KeywordHighlighted from "@/components/detail/KeywordHighlighted";
 import useGetEngName from "@/hooks/useGetEngName";
-
-interface Resource {
-  [key: string]: number;
-}
-
-interface IdentitySkillInfo {
-  rownum: number;
-  skillName: string;
-  resource: Resource;
-  activeCond: string;
-  effect: string;
-  skillType: string;
-}
-
-interface IdentitySkillLevelInfo {
-  level: number;
-  identitySkillInfos: IdentitySkillInfo[];
-}
+import { IdentitySkillLevelInfo } from "@/interfaces/passive";
 
 export interface PassiveThumbnailCardProps {
   sinnerName: string;
@@ -106,9 +89,8 @@ const PassiveThumbnailCard = ({
       </div>
 
       {/* 두 번째 줄: 레벨별 effect */}
-      <div className="text-xs text-gray-100 whitespace-pre-wrap">
-        <KeywordHighlighted text={effectText} />
-      </div>
+
+      <KeywordHighlighted text={effectText} />
     </div>
   );
 };

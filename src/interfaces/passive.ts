@@ -7,7 +7,7 @@ export interface PasiveOptions {
   grade: string[];
   keyword: string[];
   resources: string[];
-  activeCond: string;
+  activeConds: string;
   etcKeyword: string[];
 }
 

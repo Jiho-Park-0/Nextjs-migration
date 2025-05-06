@@ -36,7 +36,8 @@ interface PasiveOptions {
   grade: string[];
   keyword: string[];
   resources: string[];
-  activeCond: string;
+  activeConds: string;
+  etcKeyword: string[];
 }
 
 interface Synchronization {
@@ -94,7 +95,8 @@ const useStore = create<StoreState>((set) => ({
     grade: [],
     keyword: [],
     resources: [],
-    activeCond: "",
+    activeConds: "",
+    etcKeyword: [],
   },
   synchronizationState: {
     synchronization: 0,
