@@ -125,6 +125,7 @@ const Filter = () => {
         title="기타"
         content={etcKeyword}
         propertyToSaveTo="etcKeyword"
+        PageType="Identity"
       />
     </div>
   );

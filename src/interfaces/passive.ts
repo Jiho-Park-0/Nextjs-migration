@@ -8,6 +8,7 @@ export interface PasiveOptions {
   keyword: string[];
   resources: string[];
   activeCond: string;
+  etcKeyword: string[];
 }
 
 export interface PassiveData {

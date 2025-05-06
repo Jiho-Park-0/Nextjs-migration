@@ -116,13 +116,13 @@ const Filter = () => {
         title="등급"
         content={egoGrade}
         propertyToSaveTo="grade"
-        isIdentityPage={false}
+        PageType="Ego"
       />
       <FilterEtcButtonGroup
         title="기타"
         content={egoEtcKeyword}
         propertyToSaveTo="etcKeyword"
-        isIdentityPage={false}
+        PageType="Ego"
       />
     </div>
   );
