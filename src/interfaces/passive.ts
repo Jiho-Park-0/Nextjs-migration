@@ -16,6 +16,7 @@ export interface PassiveData {
   season: number;
   grade: number;
   keyword: string[];
+  afterProfileImage: string;
   identitySkillLevelInfos: IdentitySkillLevelInfo[];
 }
 

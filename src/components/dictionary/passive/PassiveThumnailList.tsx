@@ -10,6 +10,7 @@ import ErrorMessage from "@/ui/ErrorMessage";
 import Filter from "./PassiveFilter";
 import { PassiveData } from "@/interfaces/passive";
 import { ApiError } from "@/interfaces/apiError";
+import PassiveThumbnailCard from "./PassiveThumnailCard";
 
 interface FilterModalProps {
   openFilter: boolean;
@@ -127,6 +128,12 @@ const PassiveThumbnailList: React.FC = () => {
     setPaginatedData(filtered.slice(0, page * 15));
   }, [data, searchTerm, page]);
 
+  useEffect(() => {
+    filteredData
+      .filter((item) => item.identityName === "로보토미 E.G.O::적안 · 참회")
+      .map((item) => console.log("이번주 최다 검색 : ", item.sinnerName));
+  }, [filteredData]);
+
   return (
     <>
       {/* 헤더, 동기화, 검색 */}
@@ -206,46 +213,20 @@ const PassiveThumbnailList: React.FC = () => {
           )}
         </div>
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 my-8">
+        <div className="grid grid-cols-1 gap-4 my-8">
           {paginatedData.length > 0 ? (
-            paginatedData.map((item, idx) => (
-              <div
-                key={idx}
-                className="bg-primary-500 rounded-lg shadow overflow-hidden p-4"
-              >
-                <h3 className="text-lg font-semibold text-primary-100 truncate">
-                  {item.sinnerName}
-                </h3>
-                <p className="text-sm text-primary-200 truncate">
-                  {item.identityName}
-                </p>
-                <div className="flex justify-center gap-2 my-2">
-                  <span className="text-xs px-2 py-1 bg-primary-400 rounded">
-                    시즌 {item.season}
-                  </span>
-                  <span className="text-xs px-2 py-1 bg-primary-400 rounded">
-                    등급 {item.grade}
-                  </span>
-                </div>
-                {!isSync ? (
-                  <p className="text-xs text-primary-200 line-clamp-3">
-                    {item.keyword.join(", ")}
-                  </p>
-                ) : (
-                  <div className="text-xs text-primary-200 space-y-2">
-                    {item.identitySkillLevelInfos.map((lvl) => (
-                      <div key={lvl.level}>
-                        <p className="font-medium">레벨 {lvl.level}</p>
-                        {lvl.identitySkillInfos.map((skill) => (
-                          <p key={skill.rownum} className="truncate">
-                            - {skill.skillName}: {skill.effect}
-                          </p>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+            paginatedData.map((item: PassiveData, index: number) => (
+              <PassiveThumbnailCard
+                key={index}
+                sinnerName={item.sinnerName}
+                identityName={item.identityName}
+                season={item.season}
+                grade={item.grade}
+                keyword={item.keyword}
+                afterProfileImage={item.afterProfileImage}
+                isSync={isSync}
+                identitySkillLevelInfos={item.identitySkillLevelInfos}
+              />
             ))
           ) : (
             <p className="text-center text-primary-200 w-full">
