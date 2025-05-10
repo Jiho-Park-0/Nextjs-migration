@@ -8,7 +8,7 @@ import { FaSquareXTwitter, FaSquareYoutube } from "react-icons/fa6";
 import Image from "next/image";
 // import Skeleton from "@/components/main/Skeleton";
 import { lazy } from "react";
-// import Link from "next/link";
+import Link from "next/link";
 
 const YoutubePlay = lazy(() => import("@/components/main/YoutubePlay"));
 //const NewsCard = lazy(() => import("@/components/main/NewsCard"));
@@ -16,19 +16,20 @@ const YoutubePlay = lazy(() => import("@/components/main/YoutubePlay"));
 export default function Home() {
   return (
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
-      {/* <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
+      <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         <div className="text-center">
           안녕하세요. 단빵숲 입니다. <br />
-          서버점검으로 인해 잠시 사이트가 비활성화 될 수 있습니다. 양해
-          부탁드립니다. <br />
+          신규 프론트엔드 팀원을 모집하고 있습니다. 많은 참여 바립니다!
+          <br />
+          <Link
+            className="font-bold text-primary-100 hover:text-primary-500"
+            href="https://docs.google.com/forms/d/1C0jJuaS8GgATmrvetARmOqRER6dx_MWx-YhnPUQ54Xg/edit"
+          >
+            지원하기
+          </Link>
           <br />
         </div>
-        <div className="text-center">
-          이제 <span className="font-bold">&apos;내 인격 분류&apos;</span>{" "}
-          페이지에서 이전에 선택하신 인격들이 저장됩니다. <br />
-          이용에 참고 바랍니다.
-        </div>
-      </div> */}
+      </div>
       <div className="w-full mx-auto">
         <MainCarousel />
       </div>
