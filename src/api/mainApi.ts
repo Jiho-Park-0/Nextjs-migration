@@ -15,7 +15,7 @@ export const getYoutube = async () => {
   const youtubeURL = `${process.env.NEXT_PUBLIC_API_URL}/main/youtube`;
 
   const response = await fetch(youtubeURL, {
-    cache: "force-cache",
+    cache: "no-cache",
   });
   if (!response.ok) {
     throw new Error("Network response was not ok");

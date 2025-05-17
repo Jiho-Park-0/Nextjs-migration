@@ -25,22 +25,20 @@ const MainCarousel = () => {
       {/* 업데이트 */}
 
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/홍루/Identity/R사 제 4무리 순록팀/10612_gacksung.webp"
-        spanText="하... 이번엔 [순록](이)가 가장 먼저 투입되는 건가?"
-        headingText="R사 제 4무리 순록 홍루 추가"
-        linkPath="/identity/143"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%EB%A1%9C%EC%9F%88/Identity/%ED%9D%91%EC%88%98-%EC%82%AC/10912_gacksung.webp"
+        spanText="이걸로 팔십… 조금만 더 채우면 [짐승]으로 사는 것도 끝일 거야."
+        headingText="흑수 - 사 로쟈 추가"
+        linkPath="/identity/146"
         linkText="인격 정보 바로가기"
       />
-
+      <Banner
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%EA%B7%B8%EB%A0%88%EA%B3%A0%EB%A5%B4/Identity/%ED%9D%91%EC%88%98-%EC%82%AC/11212_gacksung.webp"
+        spanText="낯선 [도구]에 원한을 품는 건, 이상하잖아?"
+        headingText="흑수 - 사 그레고르 추가"
+        linkPath="/identity/145"
+        linkText="인격 정보 바로가기"
+      />
       {/* 신규 기능 */}
-      {/* <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%ED%9E%88%EC%8A%A4%ED%81%B4%EB%A6%AC%ED%94%84/Identity/%EB%A7%88%EC%B9%A8%ED%91%9C%20%EC%82%AC%EB%AC%B4%EC%86%8C%20%ED%95%B4%EA%B2%B0%EC%82%AC/10711_normal.webp"
-        spanText="내가 가진 인격 키워드를 모르겠다고?"
-        headingText="내 인격 분류 기능 추가"
-        linkPath="/deck"
-        linkText="인격 분류 바로가기"
-      /> */}
-
       {/* 발푸밤 리세 홍보 */}
       {/* <Banner
         imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%EB%A3%8C%EC%8A%88/Identity/%EB%A1%9C%EB%B3%B4%ED%86%A0%EB%AF%B8%20E.G.O::%EC%A0%81%EC%95%88%20%C2%B7%20%EC%B0%B8%ED%9A%8C/10410_gacksung.webp"
