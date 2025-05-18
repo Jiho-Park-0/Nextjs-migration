@@ -3,12 +3,13 @@ import MainCarousel from "@/components/main/MainCarousel";
 import MenuCard from "@/components/main/MenuCard";
 import SiteButton from "@/components/main/SiteButton";
 import Donation from "@/components/main/Donation";
-import Bbangchinko from "@/components/main/Bbangchinko";
+import ApplyForm from "@/components/main/ApplyForm";
+import Toss from "@/components/main/Toss";
 import { FaSquareXTwitter, FaSquareYoutube } from "react-icons/fa6";
 import Image from "next/image";
 // import Skeleton from "@/components/main/Skeleton";
 import { lazy } from "react";
-import Link from "next/link";
+// import Link from "next/link";
 
 const YoutubePlay = lazy(() => import("@/components/main/YoutubePlay"));
 //const NewsCard = lazy(() => import("@/components/main/NewsCard"));
@@ -16,7 +17,7 @@ const YoutubePlay = lazy(() => import("@/components/main/YoutubePlay"));
 export default function Home() {
   return (
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
-      <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
+      {/* <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
         <div className="text-center">
           안녕하세요. 단빵숲 입니다. <br />
           신규 프론트엔드 팀원을 모집하고 있습니다. 많은 참여 바립니다!
@@ -29,7 +30,7 @@ export default function Home() {
           </Link>
           <br />
         </div>
-      </div>
+      </div> */}
       <div className="w-full mx-auto">
         <MainCarousel />
       </div>
@@ -42,10 +43,13 @@ export default function Home() {
 
         <div className="w-full md:w-2/5 flex flex-col gap-3 md:gap-6 ">
           <div className="flex-1 h-1/2">
-            <Bbangchinko />
+            <ApplyForm />
           </div>
           <div className="flex-1 h-1/2">
             <Donation />
+          </div>
+          <div className="flex-1 h-1/2">
+            <Toss />
           </div>
           {/* <Suspense fallback={<Skeleton />}>
             <NewsCard />
