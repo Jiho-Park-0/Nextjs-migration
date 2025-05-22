@@ -25,17 +25,10 @@ const MainCarousel = () => {
       {/* 업데이트 */}
 
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%EB%A1%9C%EC%9F%88/Identity/%ED%9D%91%EC%88%98-%EC%82%AC/10912_gacksung.webp"
-        spanText="이걸로 팔십… 조금만 더 채우면 [짐승]으로 사는 것도 끝일 거야."
-        headingText="흑수 - 사 로쟈 추가"
-        linkPath="/identity/146"
-        linkText="인격 정보 바로가기"
-      />
-      <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%EA%B7%B8%EB%A0%88%EA%B3%A0%EB%A5%B4/Identity/%ED%9D%91%EC%88%98-%EC%82%AC/11212_gacksung.webp"
-        spanText="낯선 [도구]에 원한을 품는 건, 이상하잖아?"
-        headingText="흑수 - 사 그레고르 추가"
-        linkPath="/identity/145"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/파우스트/Identity/흑수 - 묘 필두/10212_gacksung.webp"
+        spanText="그 대답으로 충분합니다, 주군."
+        headingText="흑수 - 묘 필두 파우스트 추가"
+        linkPath="/identity/147"
         linkText="인격 정보 바로가기"
       />
       {/* 신규 기능 */}
