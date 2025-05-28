@@ -8,10 +8,10 @@ const walpurgisIds = [13, 34, 83, 84, 103, 119, 120, 131, 132]; // 후파우, �
 const walpurgisON = false;
 
 // 이번 시즌 자판기 획득 불가(전 시즌 인격에서 통상 제외)
-const previousSeasonIds = [94, 95, 96, 97, 98, 99, 118];
+const previousSeasonIds = [123, 124, 125, 126, 127, 128, 130, 134, 138];
 
 // 이번 시즌 추출 및 자판기 획득 불가(전 시즌 이벤트 인격)
-const previousEvent = [116, 117, 110, 111]; // 멀파우, 멀히스, 탐루, 유슈
+const previousEvent = [140, 133, 135, 136, 141]; // 멀파우, 멀히스, 탐루, 유슈
 
 const TierCard = ({ data, isSync }: { data: TierData; isSync: boolean }) => {
   const isWalpurgis = walpurgisIds.includes(data.id);

@@ -108,6 +108,7 @@ const Filter = () => {
           { name: "3" },
           { name: "4" },
           { name: "5" },
+          { name: "6" },
         ]}
         src=""
         buttonType="text"
