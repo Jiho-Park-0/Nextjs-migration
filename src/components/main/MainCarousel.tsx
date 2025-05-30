@@ -25,11 +25,11 @@ const MainCarousel = () => {
       {/* 업데이트 */}
 
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/파우스트/Identity/흑수 - 묘 필두/10212_gacksung.webp"
-        spanText="그 대답으로 충분합니다, 주군."
-        headingText="흑수 - 묘 필두 파우스트 추가"
-        linkPath="/identity/147"
-        linkText="인격 정보 바로가기"
+        imageUrl="https://limbus-image-bucket.s3.amazonaws.com/홍루/EGO/오혈읍루/20608_cg.webp"
+        spanText="더럽혀진 몸은 오를 [하늘]조차 없다시니…"
+        headingText="패스 에고 추가"
+        linkPath="/ego/101"
+        linkText="에고 정보 바로가기"
       />
       {/* 신규 기능 */}
       {/* 발푸밤 리세 홍보 */}
