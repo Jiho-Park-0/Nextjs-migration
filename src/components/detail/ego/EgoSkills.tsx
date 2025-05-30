@@ -33,22 +33,35 @@ const EgoSkills = ({ EgoSkills }: Props) => {
 
   return (
     <div>
-      {EgoSkill1s.map((skills, idx) => (
-        <EgoSkillCard
-          key={`awakening-${idx}`}
-          type="Awakening"
-          synchronization={synchronization.synchronization}
-          skill={skills}
-        />
-      ))}
-      {EgoSkill2s.map((skills, idx) => (
-        <EgoSkillCard
-          key={`corrosion-${idx}`}
-          type="Corrosion"
-          synchronization={synchronization.synchronization}
-          skill={skills}
-        />
-      ))}
+      {EgoSkill1s.map((skills, idx) => {
+        // 2개씩 잘라서 chunk 배열 생성
+        const chunks: Skill[][] = [];
+        for (let i = 0; i < skills.length; i += 2) {
+          chunks.push(skills.slice(i, i + 2));
+        }
+        return chunks.map((chunk, chunkIdx) => (
+          <EgoSkillCard
+            key={`awakening-${idx}-${chunkIdx}`}
+            type="Awakening"
+            synchronization={synchronization.synchronization}
+            skill={chunk}
+          />
+        ));
+      })}
+      {EgoSkill2s.map((skills, idx) => {
+        const chunks: Skill[][] = [];
+        for (let i = 0; i < skills.length; i += 2) {
+          chunks.push(skills.slice(i, i + 2));
+        }
+        return chunks.map((chunk, chunkIdx) => (
+          <EgoSkillCard
+            key={`corrosion-${idx}-${chunkIdx}`}
+            type="Corrosion"
+            synchronization={synchronization.synchronization}
+            skill={chunk}
+          />
+        ));
+      })}
     </div>
   );
 };
