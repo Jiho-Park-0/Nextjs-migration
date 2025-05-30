@@ -3,8 +3,8 @@ import useStore from "@/zustand/store";
 
 interface Props {
   EgoSkills: {
-    EgoSkill1s: Skill[];
-    EgoSkill2s: Skill[];
+    EgoSkill1s: Skill[][];
+    EgoSkill2s: Skill[][];
   };
 }
 
@@ -33,16 +33,22 @@ const EgoSkills = ({ EgoSkills }: Props) => {
 
   return (
     <div>
-      <EgoSkillCard
-        type="Awakening"
-        synchronization={synchronization.synchronization}
-        skill={EgoSkill1s}
-      />
-      <EgoSkillCard
-        type="Corrosion"
-        synchronization={synchronization.synchronization}
-        skill={EgoSkill2s}
-      />
+      {EgoSkill1s.map((skills, idx) => (
+        <EgoSkillCard
+          key={`awakening-${idx}`}
+          type="Awakening"
+          synchronization={synchronization.synchronization}
+          skill={skills}
+        />
+      ))}
+      {EgoSkill2s.map((skills, idx) => (
+        <EgoSkillCard
+          key={`corrosion-${idx}`}
+          type="Corrosion"
+          synchronization={synchronization.synchronization}
+          skill={skills}
+        />
+      ))}
     </div>
   );
 };
