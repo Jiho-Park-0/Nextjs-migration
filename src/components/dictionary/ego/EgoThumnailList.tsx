@@ -70,7 +70,12 @@ const TopTitleAndThumnailList = () => {
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       const target = entries[0];
-      if (target.isIntersecting && !isLoading && isLastPage && error === null) {
+      if (
+        target.isIntersecting &&
+        !isLoading &&
+        !isLastPage &&
+        error === null
+      ) {
         setPage((prev) => prev + 1);
       }
     },
@@ -116,10 +121,10 @@ const TopTitleAndThumnailList = () => {
           ? result
           : result.list ?? [];
 
-        if (result.last === true) {
-          setIsLastPage(false);
-        } else {
+        if (result.last === false) {
           setIsLastPage(true);
+        } else {
+          setIsLastPage(false);
         }
 
         if (page === 0) {
