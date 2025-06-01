@@ -68,19 +68,17 @@ const TopTitleAndThumnailList = () => {
 
   const [nicknames, setNicknames] = useState<{ [key: string]: string[] }>({});
   const [filteredData, setFilteredData] = useState<IdentityData[]>([]);
-  const [isLast, setIsLast] = useState(false);
   const [page, setPage] = useState(0);
   const observerElem = useRef<HTMLDivElement | null>(null);
 
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       const target = entries[0];
-      // 마지막 페이지가 아니고, 현재 로딩 중이 아닐 때만 다음 페이지 요청
-      if (target.isIntersecting && !isLoading && !isLast) {
+      if (target.isIntersecting && !isLoading) {
         setPage((prev) => prev + 1);
       }
     },
-    [isLoading, isLast]
+    [isLoading] // ← now depends on isLoading
   );
 
   useEffect(() => {
@@ -110,7 +108,14 @@ const TopTitleAndThumnailList = () => {
     setNicknames(nicknamesMap);
   }, []);
 
+  const lastFetchKeyRef = useRef<string>("");
+
   useEffect(() => {
+    const fetchKey = JSON.stringify(options) + "|" + page;
+    if (lastFetchKeyRef.current === fetchKey) {
+      return; // 이미 동일한 options+page로 fetch한 적이 있으면 중복 호출 금지
+    }
+    lastFetchKeyRef.current = fetchKey;
     const fetchPage = async () => {
       setIsLoading(true);
       try {
@@ -120,17 +125,12 @@ const TopTitleAndThumnailList = () => {
           size: 15,
           page,
         });
-        // API 응은 { list: IdentityData[], currentPage, pageSize, first, last, ... }
         const list: IdentityData[] = Array.isArray(result)
           ? result
           : result.list ?? [];
-        setIsLast(!!result.last);
-        // console.log(typeof result, typeof list, result, list);
         if (page === 0) {
-          // 첫 페이지: 대체
           setData(list);
         } else {
-          // 이후 페이지: 누적
           setData((prev) => [...prev, ...list]);
         }
         setError(null);
@@ -147,7 +147,6 @@ const TopTitleAndThumnailList = () => {
       }
     };
     fetchPage();
-    // options가 바뀌면 무조건 처음부터 다시 불러오도록 페이지 초기화
   }, [options, page]);
 
   useEffect(() => {
@@ -170,14 +169,6 @@ const TopTitleAndThumnailList = () => {
 
     setFilteredData(filtered);
   }, [data, searchTerm, nicknames]);
-
-  useEffect(() => {
-    filteredData
-      .filter((item) => item.id === 133)
-      .map((item) =>
-        console.log("이번주 최다 검색 : ", item.name, item.character)
-      );
-  }, [filteredData]);
 
   return (
     <>
