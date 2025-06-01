@@ -1,13 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Button, Input, Tooltip } from "@material-tailwind/react";
+import { Button, Input, Tooltip, Spinner } from "@material-tailwind/react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { LuSearch } from "react-icons/lu";
 import { getIdentityPaginated } from "@/api/dictionaryPaginated.api";
 import useStore from "@/zustand/store"; // zustand 스토어 import
 import IdentityThumbnailCard from "./IdentityThumbnailCard";
-import { Spinner } from "@material-tailwind/react";
 import ErrorMessage from "@/ui/ErrorMessage";
 import nicknamesData from "@/constants/nicknames.json";
 import Filter from "./IdentityFilter";
@@ -69,16 +68,17 @@ const TopTitleAndThumnailList = () => {
   const [nicknames, setNicknames] = useState<{ [key: string]: string[] }>({});
   const [filteredData, setFilteredData] = useState<IdentityData[]>([]);
   const [page, setPage] = useState(0);
+  const [isLastPage, setIsLastPage] = useState(false);
   const observerElem = useRef<HTMLDivElement | null>(null);
 
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       const target = entries[0];
-      if (target.isIntersecting && !isLoading) {
+      if (target.isIntersecting && !isLoading && !isLastPage) {
         setPage((prev) => prev + 1);
       }
     },
-    [isLoading] // ← now depends on isLoading
+    [isLoading, isLastPage] // ← now depends on isLoading
   );
 
   useEffect(() => {
@@ -125,9 +125,17 @@ const TopTitleAndThumnailList = () => {
           size: 15,
           page,
         });
+
         const list: IdentityData[] = Array.isArray(result)
           ? result
           : result.list ?? [];
+
+        if (result.last === false) {
+          setIsLastPage(true);
+        } else {
+          setIsLastPage(false);
+        }
+
         if (page === 0) {
           setData(list);
         } else {
@@ -167,8 +175,9 @@ const TopTitleAndThumnailList = () => {
       return nameMatch || nicknameMatch;
     });
 
-    setFilteredData(filtered);
-  }, [data, searchTerm, nicknames]);
+    const paginated = filtered.slice(0, (page + 1) * 15);
+    setFilteredData(paginated);
+  }, [data, searchTerm, nicknames, page]);
 
   return (
     <>
@@ -232,7 +241,6 @@ const TopTitleAndThumnailList = () => {
       </div>
       <FilterModal openFilter={openFilter} setOpenFilter={setOpenFilter} />
       {isLoading && data.length === 0 ? (
-        // data가 빈 상태에서만 풀스크린 로딩
         <div className="flex justify-center items-center h-screen">
           <Spinner className="w-8 h-8 text-primary-200" />
         </div>

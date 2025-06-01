@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Button, Input } from "@material-tailwind/react";
+import { Button, Input, Spinner } from "@material-tailwind/react";
 import { LuSearch } from "react-icons/lu";
-import { getEgo } from "@/api/dictionaryApi";
+import { getEgoPaginated } from "@/api/dictionaryPaginated.api";
 import useStore from "@/zustand/store";
 import EgoThumbnailCard from "./EgoThumbnailCard";
-import { Spinner } from "@material-tailwind/react";
 import ErrorMessage from "@/ui/ErrorMessage";
 import Filter from "./EgoFilter";
 import { EgoData } from "@/interfaces/ego";
@@ -64,22 +63,30 @@ const TopTitleAndThumnailList = () => {
   const options = useStore((state) => state.egoOptionsState);
 
   const [filteredData, setFilteredData] = useState<EgoData[]>([]);
-  const [paginatedData, setPaginatedData] = useState<EgoData[]>([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
+  const [isLastPage, setIsLastPage] = useState(false);
   const observerElem = useRef<HTMLDivElement | null>(null);
 
-  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
-    const target = entries[0];
-    if (target.isIntersecting) {
-      setPage((prev) => prev + 1);
-    }
-  }, []);
+  const handleObserver = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const target = entries[0];
+      if (target.isIntersecting && !isLoading && !isLastPage) {
+        setPage((prev) => prev + 1);
+      }
+    },
+    [isLoading, isLastPage] // ← now depends on isLoading
+  );
+
+  useEffect(() => {
+    setPage(0);
+    setData([]);
+  }, [options]);
 
   useEffect(() => {
     const option = {
       root: null,
       rootMargin: "20px",
-      threshold: 1.0,
+      threshold: 0.2,
     };
     const observer = new IntersectionObserver(handleObserver, option);
     const currentElem = observerElem.current;
@@ -89,50 +96,70 @@ const TopTitleAndThumnailList = () => {
     };
   }, [handleObserver]);
 
+  const lastFetchKeyRef = useRef<string>(""); // 중복 호출 방지용 키
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchKey = JSON.stringify(options) + "|" + page;
+    if (lastFetchKeyRef.current === fetchKey) {
+      return; // 동일한 (options, page)이면 fetch 중복 금지
+    }
+    lastFetchKeyRef.current = fetchKey;
+    const fetchPage = async () => {
       setIsLoading(true);
       try {
-        const result = await getEgo(options);
-        setData(result);
+        const result = await getEgoPaginated({
+          ...options,
+          size: 15,
+          page,
+        });
+
+        const list: EgoData[] = Array.isArray(result)
+          ? result
+          : result.list ?? [];
+
+        if (result.last === false) {
+          setIsLastPage(true);
+        } else {
+          setIsLastPage(false);
+        }
+
+        if (page === 0) {
+          setData(list);
+        } else {
+          setData((prev) => [...prev, ...list]);
+        }
         setError(null);
       } catch (err) {
         setError({
           message: err instanceof Error ? err.message : "An error occurred",
           status: 500,
         });
-        setData([]);
+        if (page === 0) {
+          setData([]);
+        }
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchData();
-  }, [options]);
+    fetchPage();
+  }, [options, page]);
 
   useEffect(() => {
-    if (!data || data.length === 0) return;
+    if (!data || data.length === 0) {
+      setFilteredData([]);
+      return;
+    }
 
-    const filtered = data
-      .filter((item: EgoData) =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-      .reverse();
+    const filtered = data.filter((item: EgoData) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
-    setFilteredData(filtered);
-    setPaginatedData(filtered.slice(0, page * 15));
+    const paginated = filtered.slice(0, (page + 1) * 15);
+    setFilteredData(paginated);
   }, [data, searchTerm, page]);
 
-  useEffect(() => {
-    filteredData
-      .filter((item) => item.id === 95)
-      .map((item) =>
-        console.log("이번주 최다 검색 : ", item.name, item.character)
-      );
-  }, [filteredData]);
-
   return (
-    <div className="">
+    <>
       {/* 상단 제목, 버튼 */}
       <div className="flex justify-between items-center">
         <span className="text-3xl lg:text-4xl whitespace-nowrap hidden lg:block pr-2">
@@ -175,7 +202,7 @@ const TopTitleAndThumnailList = () => {
       <FilterModal openFilter={openFilter} setOpenFilter={setOpenFilter} />
 
       {/* 썸네일 리스트 */}
-      {isLoading ? (
+      {isLoading && data.length === 0 ? (
         <div className="flex justify-center items-center h-screen">
           <Spinner className="w-8 h-8 text-primary-200" />
         </div>
@@ -191,30 +218,18 @@ const TopTitleAndThumnailList = () => {
         )
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 my-8">
-          {paginatedData.length > 0 ? (
-            paginatedData.map(
-              (
-                item: {
-                  id: number;
-                  name: string;
-                  grade: number;
-                  character: string;
-                  zoomImage: string;
-                  image: string;
-                },
-                index: number
-              ) => (
-                <EgoThumbnailCard
-                  key={index}
-                  id={item.id}
-                  grade={item.grade}
-                  name={item.name}
-                  character={item.character}
-                  imageZoomIn={item.zoomImage}
-                  imageZoomOut={item.image}
-                />
-              )
-            )
+          {filteredData.length > 0 ? (
+            filteredData.map((item: EgoData, index: number) => (
+              <EgoThumbnailCard
+                key={index}
+                id={item.id}
+                grade={item.grade}
+                name={item.name}
+                character={item.character}
+                imageZoomIn={item.zoomImage}
+                imageZoomOut={item.image}
+              />
+            ))
           ) : (
             <div className="text-primary-200 text-center w-full">
               검색 결과가 없습니다.
@@ -222,8 +237,8 @@ const TopTitleAndThumnailList = () => {
           )}
         </div>
       )}
-      <div ref={observerElem} className="h-10"></div>
-    </div>
+      <div ref={observerElem} className="h-10" />
+    </>
   );
 };
 

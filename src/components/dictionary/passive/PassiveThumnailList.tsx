@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Button, Input, Tooltip, Spinner } from "@material-tailwind/react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { LuSearch } from "react-icons/lu";
-import { getPassive } from "@/api/dictionaryApi";
+import { getPassivePaginated } from "@/api/dictionaryPaginated.api";
 import useStore from "@/zustand/store";
 import ErrorMessage from "@/ui/ErrorMessage";
 import Filter from "./PassiveFilter";
@@ -58,8 +58,8 @@ const PassiveThumbnailList: React.FC = () => {
   const [isSync, setIsSync] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState<PassiveData[]>([]);
-  const [paginatedData, setPaginatedData] = useState<PassiveData[]>([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
+  const [isLastPage, setIsLastPage] = useState(false);
   const [openFilter, setOpenFilter] = useState(false);
   const observerElem = useRef<HTMLDivElement | null>(null);
 
@@ -67,70 +67,105 @@ const PassiveThumbnailList: React.FC = () => {
   const options = useStore((state) => state.passiveOptionsState);
 
   // 무한 스크롤 옵저버 콜백
-  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
-    if (entries[0].isIntersecting) {
-      setPage((prev) => prev + 1);
-    }
-  }, []);
+
+  const handleObserver = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      const target = entries[0];
+      if (target.isIntersecting && !isLoading && !isLastPage) {
+        setPage((prev) => prev + 1);
+      }
+    },
+    [isLoading, isLastPage]
+  );
 
   useEffect(() => {
-    const observer = new IntersectionObserver(handleObserver, {
+    setPage(0);
+    setData([]);
+  }, [options]);
+
+  useEffect(() => {
+    const option = {
       root: null,
       rootMargin: "20px",
-      threshold: 1.0,
-    });
-    const el = observerElem.current;
-    if (el) observer.observe(el);
+      threshold: 0.2,
+    };
+    const observer = new IntersectionObserver(handleObserver, option);
+    const currentElem = observerElem.current;
+    if (currentElem) observer.observe(currentElem);
     return () => {
-      if (el) observer.unobserve(el);
+      if (currentElem) observer.unobserve(currentElem);
     };
   }, [handleObserver]);
 
   // API 호출
+  const lastFetchKeyRef = useRef<string>(""); // 중복 호출 방지용 키
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchKey = JSON.stringify(options) + "|" + page;
+    if (lastFetchKeyRef.current === fetchKey) {
+      return; // 동일한 (options, page)이면 fetch 중복 금지
+    }
+    lastFetchKeyRef.current = fetchKey;
+    const fetchPage = async () => {
       setIsLoading(true);
       try {
-        const result = await getPassive(options);
-        setData(result);
+        // size=15, page는 0부터 시작
+        const result = await getPassivePaginated({
+          ...options,
+          size: 8,
+          page,
+        });
+        const list: PassiveData[] = Array.isArray(result)
+          ? result
+          : result.list ?? [];
+
+        if (result.last === false) {
+          setIsLastPage(true);
+        } else {
+          setIsLastPage(false);
+        }
+
+        if (page === 0) {
+          setData(list);
+        } else {
+          setData((prev) => [...prev, ...list]);
+        }
         setError(null);
       } catch (err) {
         setError({
           message: err instanceof Error ? err.message : "An error occurred",
           status: 500,
         });
-        setData([]);
+        if (page === 0) {
+          setData([]);
+        }
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchData();
-  }, [options]);
+    fetchPage();
+  }, [options, page]);
   // 검색 & 페이징 처리
   useEffect(() => {
+    if (!data || data.length === 0) {
+      setFilteredData([]);
+      return;
+    }
+
     const term = searchTerm.trim().toLowerCase();
-    const filtered = data
-      .filter((item) => {
-        if (!term) return true;
-        const matchSinner = item.sinnerName.toLowerCase().includes(term);
-        const matchIdentity = item.identityName.toLowerCase().includes(term);
-        const matchKeyword = item.keyword.some((k) =>
-          k.toLowerCase().includes(term)
-        );
-        return matchSinner || matchIdentity || matchKeyword;
-      })
-      .reverse();
+    const filtered = data.filter((item) => {
+      if (!term) return true;
+      const matchSinner = item.sinnerName.toLowerCase().includes(term);
+      const matchIdentity = item.identityName.toLowerCase().includes(term);
+      const matchKeyword = item.keyword.some((k) =>
+        k.toLowerCase().includes(term)
+      );
+      return matchSinner || matchIdentity || matchKeyword;
+    });
 
-    setFilteredData(filtered);
-    setPaginatedData(filtered.slice(0, page * 15));
+    const paginated = filtered.slice(0, (page + 1) * 15);
+    setFilteredData(paginated);
   }, [data, searchTerm, page]);
-
-  useEffect(() => {
-    filteredData
-      .filter((item) => item.identityName === "로보토미 E.G.O::적안 · 참회")
-      .map((item) => console.log("이번주 최다 검색 : ", item.sinnerName));
-  }, [filteredData]);
 
   return (
     <>
@@ -198,7 +233,7 @@ const PassiveThumbnailList: React.FC = () => {
       <FilterModal openFilter={openFilter} setOpenFilter={setOpenFilter} />
 
       {/* 로딩 / 에러 / 그리드 */}
-      {isLoading ? (
+      {isLoading && data.length === 0 ? (
         <div className="flex justify-center items-center h-64">
           <Spinner className="w-8 h-8 text-primary-200" />
         </div>
@@ -212,8 +247,8 @@ const PassiveThumbnailList: React.FC = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4 my-8">
-          {paginatedData.length > 0 ? (
-            paginatedData.map((item: PassiveData, index: number) => (
+          {filteredData.length > 0 ? (
+            filteredData.map((item: PassiveData, index: number) => (
               <PassiveThumbnailCard
                 key={index}
                 sinnerName={item.sinnerName}
