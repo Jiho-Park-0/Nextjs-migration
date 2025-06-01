@@ -71,11 +71,11 @@ const PassiveThumbnailList: React.FC = () => {
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       const target = entries[0];
-      if (target.isIntersecting && !isLoading && !isLastPage) {
+      if (target.isIntersecting && !isLoading && isLastPage && error === null) {
         setPage((prev) => prev + 1);
       }
     },
-    [isLoading, isLastPage]
+    [isLoading, isLastPage, error]
   );
 
   useEffect(() => {
@@ -118,10 +118,10 @@ const PassiveThumbnailList: React.FC = () => {
           ? result
           : result.list ?? [];
 
-        if (result.last === false) {
-          setIsLastPage(true);
-        } else {
+        if (result.last === true) {
           setIsLastPage(false);
+        } else {
+          setIsLastPage(true);
         }
 
         if (page === 0) {

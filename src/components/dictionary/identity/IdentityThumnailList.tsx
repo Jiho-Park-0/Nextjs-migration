@@ -74,11 +74,11 @@ const TopTitleAndThumnailList = () => {
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       const target = entries[0];
-      if (target.isIntersecting && !isLoading && !isLastPage) {
+      if (target.isIntersecting && !isLoading && isLastPage && error === null) {
         setPage((prev) => prev + 1);
       }
     },
-    [isLoading, isLastPage] // ← now depends on isLoading
+    [isLoading, isLastPage, error] // ← now depends on isLoading
   );
 
   useEffect(() => {
@@ -130,10 +130,10 @@ const TopTitleAndThumnailList = () => {
           ? result
           : result.list ?? [];
 
-        if (result.last === false) {
-          setIsLastPage(true);
-        } else {
+        if (result.last === true) {
           setIsLastPage(false);
+        } else {
+          setIsLastPage(true);
         }
 
         if (page === 0) {

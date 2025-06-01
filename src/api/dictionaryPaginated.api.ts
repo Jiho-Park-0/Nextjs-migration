@@ -41,8 +41,8 @@ export const getIdentityPaginated = async (options: IdentityOptions) => {
     .join("&");
 
   const uri = query
-    ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/sample/identity?${query}`
-    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/sample/identity`;
+    ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/identity?${query}`
+    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/identity`;
 
   const response = await fetch(uri, {
     cache: "no-cache",
@@ -85,8 +85,8 @@ export const getEgoPaginated = async (options: EgoOptions) => {
 
   // 배열이 아닌 경우: 속도랑 가중치 현재 API 에러로 제외하고 호출
   const uri = query
-    ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/sample/ego?${query}`
-    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/sample/ego`;
+    ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/ego?${query}`
+    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/ego`;
 
   const response = await fetch(uri, {
     cache: "no-cache",
@@ -129,8 +129,8 @@ export const getPassivePaginated = async (options: PasiveOptions) => {
 
   // 배열이 아닌 경우: 속도랑 가중치 현재 API 에러로 제외하고 호출
   const uri = query
-    ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/sample/skill/6?${query}`
-    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/sample/skill/6`;
+    ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/skill/6?${query}`
+    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/skill/6`;
 
   const response = await fetch(uri, {
     cache: "no-cache",
@@ -143,7 +143,7 @@ export const getPassivePaginated = async (options: PasiveOptions) => {
 };
 
 export const getAllIdentityPaginated = async () => {
-  const uri = `${process.env.NEXT_PUBLIC_API_URL}/dictionary/sample/identity?minSpeed=1&maxSpeed=9&minWeight=1&maxWeight=9`;
+  const uri = `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/identity?minSpeed=1&maxSpeed=9&minWeight=1&maxWeight=9`;
 
   const response = await fetch(uri, {
     cache: "force-cache",
