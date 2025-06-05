@@ -25,11 +25,11 @@ const MainCarousel = () => {
       {/* 업데이트 */}
 
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.amazonaws.com/홍루/EGO/오혈읍루/20608_cg.webp"
-        spanText="더럽혀진 몸은 오를 [하늘]조차 없다시니…"
-        headingText="패스 에고 추가"
-        linkPath="/ego/101"
-        linkText="에고 정보 바로가기"
+        imageUrl="https://limbus-image-bucket.s3.amazonaws.com/시쮼이가 왔어.webp"
+        spanText="야 김롭뿡! 귀여운 시쮼이가 와써!"
+        headingText="가주 후보 이스마엘 추가"
+        linkPath="/identity/148"
+        linkText="인격 정보 바로가기"
       />
       {/* 신규 기능 */}
       {/* 발푸밤 리세 홍보 */}
