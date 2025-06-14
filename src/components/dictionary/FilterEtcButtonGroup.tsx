@@ -11,13 +11,13 @@ interface FilterEtcButtonGroupProps {
   title: string;
   content: Content[];
   propertyToSaveTo: string;
-  isIdentityPage?: boolean;
+  PageType: string;
 }
 
 const FilterEtcButtonGroup = ({
   title,
   content,
-  isIdentityPage = true,
+  PageType,
   propertyToSaveTo,
 }: FilterEtcButtonGroupProps) => {
   const [buttons, toggleButton] = useToggleButtons(
@@ -28,16 +28,23 @@ const FilterEtcButtonGroup = ({
   const setEgoOptions = useStore((state) => state.setEgoOptionsState);
   const options = useStore((state) => state.optionsState);
   const egoOptions = useStore((state) => state.egoOptionsState);
+  const passiveOptions = useStore((state) => state.passiveOptionsState);
+  const setpassiveOptions = useStore((state) => state.setPassiveOptionState);
 
   const savePropertyToOptions = (selectedButtons: string[]) => {
-    if (isIdentityPage) {
+    if (PageType === "Identity") {
       setOptions({
         ...options,
         [propertyToSaveTo]: selectedButtons,
       });
-    } else {
+    } else if (PageType === "Ego") {
       setEgoOptions({
         ...egoOptions,
+        [propertyToSaveTo]: selectedButtons,
+      });
+    } else if (PageType === "Passive") {
+      setpassiveOptions({
+        ...passiveOptions,
         [propertyToSaveTo]: selectedButtons,
       });
     }

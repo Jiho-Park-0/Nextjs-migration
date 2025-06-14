@@ -1,17 +1,16 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Button, Input, Tooltip, Spinner } from "@material-tailwind/react";
 import { FaCheckCircle, FaRegCircle } from "react-icons/fa";
 import { LuSearch } from "react-icons/lu";
-import { getIdentityPaginated } from "@/api/dictionaryPaginated.api";
-import useStore from "@/zustand/store"; // zustand 스토어 import
-import IdentityThumbnailCard from "./IdentityThumbnailCard";
+import { getPassivePaginated } from "@/api/dictionaryPaginated.api";
+import useStore from "@/zustand/store";
 import ErrorMessage from "@/ui/ErrorMessage";
-import nicknamesData from "@/constants/nicknames.json";
-import Filter from "./IdentityFilter";
-import { IdentityData } from "@/interfaces/identity";
+import Filter from "./PassiveFilter";
+import { PassiveData } from "@/interfaces/passive";
 import { ApiError } from "@/interfaces/apiError";
+import PassiveThumbnailCard from "./PassiveThumnailCard";
 
 interface FilterModalProps {
   openFilter: boolean;
@@ -22,12 +21,8 @@ const FilterModal: React.FC<FilterModalProps> = ({
   openFilter,
   setOpenFilter,
 }) => {
-  const handleBackgroundClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
-  ) => {
-    if (e.target === e.currentTarget) {
-      setOpenFilter(false);
-    }
+  const handleBackgroundClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) setOpenFilter(false);
   };
 
   return (
@@ -38,11 +33,11 @@ const FilterModal: React.FC<FilterModalProps> = ({
       onClick={handleBackgroundClick}
     >
       <div
-        className={`bg-primary-500 p-0 h-5/6 rounded-lg w-11/12 max-w-sm transition-transform duration-300 max-h-screen overflow-y-auto ${
+        className={`bg-primary-500 rounded-lg w-11/12 max-w-sm h-5/6 max-h-screen overflow-y-auto transition-transform duration-300 ${
           openFilter ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <div className="flex justify-end items-center m-0 p-2 pb-0 ">
+        <div className="flex justify-end p-2">
           <button
             onClick={() => setOpenFilter(false)}
             className="text-primary-100 hover:text-primary-200 text-2xl"
@@ -56,20 +51,22 @@ const FilterModal: React.FC<FilterModalProps> = ({
   );
 };
 
-const TopTitleAndThumnailList = () => {
-  const [data, setData] = useState<IdentityData[]>([]);
+const PassiveThumbnailList: React.FC = () => {
+  const [data, setData] = useState<PassiveData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<ApiError | null>(null);
   const [isSync, setIsSync] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [openFilter, setOpenFilter] = useState(false);
-  const options = useStore((state) => state.optionsState); // options 상태 가져오기
-
-  const [nicknames, setNicknames] = useState<{ [key: string]: string[] }>({});
-  const [filteredData, setFilteredData] = useState<IdentityData[]>([]);
+  const [filteredData, setFilteredData] = useState<PassiveData[]>([]);
   const [page, setPage] = useState(0);
   const [isLastPage, setIsLastPage] = useState(false);
+  const [openFilter, setOpenFilter] = useState(false);
   const observerElem = useRef<HTMLDivElement | null>(null);
+
+  // zustand에서 패시브 필터 옵션 가져오기
+  const options = useStore((state) => state.passiveOptionsState);
+
+  // 무한 스크롤 옵저버 콜백
 
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
@@ -83,7 +80,7 @@ const TopTitleAndThumnailList = () => {
         setPage((prev) => prev + 1);
       }
     },
-    [isLoading, isLastPage, error] // ← now depends on isLoading
+    [isLoading, isLastPage, error]
   );
 
   useEffect(() => {
@@ -105,33 +102,24 @@ const TopTitleAndThumnailList = () => {
     };
   }, [handleObserver]);
 
-  useEffect(() => {
-    const nicknamesMap: { [key: string]: string[] } = {};
-    nicknamesData.forEach((item: { id: string; nicknames: string[] }) => {
-      nicknamesMap[item.id] = item.nicknames;
-    });
-    setNicknames(nicknamesMap);
-  }, []);
-
-  const lastFetchKeyRef = useRef<string>("");
-
+  // API 호출
+  const lastFetchKeyRef = useRef<string>(""); // 중복 호출 방지용 키
   useEffect(() => {
     const fetchKey = JSON.stringify(options) + "|" + page;
     if (lastFetchKeyRef.current === fetchKey) {
-      return; // 이미 동일한 options+page로 fetch한 적이 있으면 중복 호출 금지
+      return; // 동일한 (options, page)이면 fetch 중복 금지
     }
     lastFetchKeyRef.current = fetchKey;
     const fetchPage = async () => {
       setIsLoading(true);
       try {
         // size=15, page는 0부터 시작
-        const result = await getIdentityPaginated({
+        const result = await getPassivePaginated({
           ...options,
-          size: 15,
+          size: 8,
           page,
         });
-
-        const list: IdentityData[] = Array.isArray(result)
+        const list: PassiveData[] = Array.isArray(result)
           ? result
           : result.list ?? [];
 
@@ -159,36 +147,37 @@ const TopTitleAndThumnailList = () => {
         setIsLoading(false);
       }
     };
+
     fetchPage();
   }, [options, page]);
-
+  // 검색 & 페이징 처리
   useEffect(() => {
     if (!data || data.length === 0) {
       setFilteredData([]);
       return;
     }
 
-    const filtered = data.filter((item: IdentityData) => {
-      const nameMatch = item.name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-      const nicknameMatch =
-        nicknames[item.id]?.some((nickname) =>
-          nickname.toLowerCase().includes(searchTerm.toLowerCase())
-        ) || false;
-
-      return nameMatch || nicknameMatch;
+    const term = searchTerm.trim().toLowerCase();
+    const filtered = data.filter((item) => {
+      if (!term) return true;
+      const matchSinner = item.sinnerName.toLowerCase().includes(term);
+      const matchIdentity = item.identityName.toLowerCase().includes(term);
+      const matchKeyword = item.keyword.some((k) =>
+        k.toLowerCase().includes(term)
+      );
+      return matchSinner || matchIdentity || matchKeyword;
     });
 
     const paginated = filtered.slice(0, (page + 1) * 15);
     setFilteredData(paginated);
-  }, [data, searchTerm, nicknames, page]);
+  }, [data, searchTerm, page]);
 
   return (
     <>
+      {/* 헤더, 동기화, 검색 */}
       <div className="flex justify-between items-center">
         <span className="text-3xl lg:text-4xl whitespace-nowrap hidden lg:block pr-2">
-          인격
+          패시브
         </span>
 
         <div className="my-2 grid grid-cols-1 sm:flex sm:justify-between w-full lg:w-fit gap-2 h-fit md:h-10">
@@ -244,50 +233,51 @@ const TopTitleAndThumnailList = () => {
           </div>
         </div>
       </div>
+
+      {/* 필터 모달 */}
       <FilterModal openFilter={openFilter} setOpenFilter={setOpenFilter} />
+
+      {/* 로딩 / 에러 / 그리드 */}
       {isLoading && data.length === 0 ? (
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center h-64">
           <Spinner className="w-8 h-8 text-primary-200" />
         </div>
       ) : error ? (
-        error.status === 404 ? (
-          <div className="text-primary-200 text-center w-full my-8 h-screen">
-            해당하는 인격이 없습니다.
-          </div>
-        ) : (
-          <div className="text-primary-200 text-center w-full my-8">
+        <div className="text-center my-8">
+          {error.message.includes("404") ? (
+            <p className="text-primary-200">해당하는 패시브이 없습니다.</p>
+          ) : (
             <ErrorMessage />
-          </div>
-        )
+          )}
+        </div>
       ) : (
-        <>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 my-8">
-            {filteredData.length > 0 ? (
-              filteredData.map((item: IdentityData, index: number) => (
-                <IdentityThumbnailCard
-                  key={index}
-                  id={item.id}
-                  grade={item.grade}
-                  name={item.name}
-                  character={item.character}
-                  imageBefore={item.beforeImage}
-                  imageAfter={item.afterImage}
-                  isSync={isSync}
-                />
-              ))
-            ) : (
-              <div className="text-primary-200 text-center w-full">
-                검색 결과가 없습니다.
-              </div>
-            )}
-          </div>
-        </>
+        <div className="grid grid-cols-1 gap-4 my-8">
+          {filteredData.length > 0 ? (
+            filteredData.map((item: PassiveData, index: number) => (
+              <PassiveThumbnailCard
+                key={index}
+                sinnerName={item.sinnerName}
+                identityName={item.identityName}
+                season={item.season}
+                grade={item.grade}
+                keyword={item.keyword}
+                afterProfileImage={item.afterProfileImage}
+                isSync={isSync}
+                identitySkillLevelInfos={item.identitySkillLevelInfos}
+              />
+            ))
+          ) : (
+            <p className="text-center text-primary-200 w-full">
+              검색 결과가 없습니다.
+            </p>
+          )}
+        </div>
       )}
 
-      {/* ─── 반드시 항상 렌더되어야 하는 교차점 감지용 요소 ─── */}
+      {/* 무한 스크롤 관찰용 div */}
       <div ref={observerElem} className="h-10" />
     </>
   );
 };
 
-export default TopTitleAndThumnailList;
+export default PassiveThumbnailList;

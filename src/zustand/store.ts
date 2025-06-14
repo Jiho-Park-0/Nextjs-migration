@@ -29,6 +29,17 @@ interface EgoOptions {
   maxWeight: number;
 }
 
+interface PasiveOptions {
+  [key: string]: string | string[] | number;
+  sinner: string[];
+  season: string[];
+  grade: string[];
+  keyword: string[];
+  resources: string[];
+  activeConds: string;
+  etcKeyword: string[];
+}
+
 interface Synchronization {
   synchronization: number;
 }
@@ -42,10 +53,12 @@ interface IdentityState {
 interface StoreState {
   optionsState: IdentityOptions;
   egoOptionsState: EgoOptions;
+  passiveOptionsState: PasiveOptions;
   synchronizationState: Synchronization;
   identityState: IdentityState;
   setOptionsState: (options: IdentityOptions) => void;
   setEgoOptionsState: (options: EgoOptions) => void;
+  setPassiveOptionState: (options: PasiveOptions) => void;
   setSynchronizationState: (sync: Synchronization) => void;
   setIdentityState: (state: IdentityState) => void;
 }
@@ -76,6 +89,15 @@ const useStore = create<StoreState>((set) => ({
     minWeight: 1,
     maxWeight: 7,
   },
+  passiveOptionsState: {
+    sinner: [],
+    season: [],
+    grade: [],
+    keyword: [],
+    resources: [],
+    activeConds: "",
+    etcKeyword: [],
+  },
   synchronizationState: {
     synchronization: 0,
   },
@@ -86,6 +108,7 @@ const useStore = create<StoreState>((set) => ({
   },
   setOptionsState: (options) => set({ optionsState: options }),
   setEgoOptionsState: (options) => set({ egoOptionsState: options }),
+  setPassiveOptionState: (options) => set({ passiveOptionsState: options }),
   setSynchronizationState: (sync) => set({ synchronizationState: sync }),
   setIdentityState: (state) => set({ identityState: state }),
 }));

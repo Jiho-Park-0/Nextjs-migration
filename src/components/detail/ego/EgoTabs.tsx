@@ -163,8 +163,8 @@ const EgoTabs = () => {
                   EgoData?.egoCorSkills && (
                     <EgoSkills
                       EgoSkills={{
-                        EgoSkill1s: EgoData.egoskills,
-                        EgoSkill2s: EgoData.egoCorSkills,
+                        EgoSkill1s: [EgoData.egoskills],
+                        EgoSkill2s: [EgoData.egoCorSkills],
                       }}
                     />
                   )}

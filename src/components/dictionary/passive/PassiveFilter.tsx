@@ -2,16 +2,12 @@
 
 import FilterButtonGroup from "../FilterButtonGroup";
 import FilterSelectGroup from "../FilterSelectGroup";
-import FilterSliderGroup from "../FilterSliderGroup";
 import FilterEtcButtonGroup from "../FilterEtcButtonGroup";
 
 import sinners from "@/constants/sinners.json";
 import resource from "@/constants/resource.json";
-
 import keyword from "@/constants/keyword.json";
-
-import egoGrade from "@/constants/egoGrade.json";
-import egoEtcKeyword from "@/constants/egoEtcKeyword.json";
+import etcKeyword from "@/constants/etcKeyword.json";
 import useSelectOptions from "@/hooks/useSelectOptions";
 import useStore from "@/zustand/store";
 
@@ -26,8 +22,8 @@ const keywordOptionList: Option[] = keyword.map((item) => ({
 }));
 
 const Filter = () => {
-  const setOptions = useStore((state) => state.setEgoOptionsState);
-  const options = useStore((state) => state.egoOptionsState);
+  const setOptions = useStore((state) => state.setPassiveOptionState);
+  const options = useStore((state) => state.passiveOptionsState);
 
   const {
     selectedOptions: keywordOptions,
@@ -54,14 +50,14 @@ const Filter = () => {
         content={sinners}
         src="/assets/profile/logo/"
         propertyToSaveTo="sinner"
-        PageType="Ego"
+        PageType="Passive"
       />
       <FilterButtonGroup
-        title="사용 자원"
+        title="자원"
         content={resource}
         src="/assets/resource/"
         propertyToSaveTo="resources"
-        PageType="Ego"
+        PageType="Passive"
       />
       <FilterSelectGroup
         title="키워드"
@@ -72,31 +68,6 @@ const Filter = () => {
           updateOptions("keyword", [...selectedOptions]);
         }}
         zIndex="z-20"
-      />
-
-      <FilterButtonGroup
-        title="유형"
-        content={[
-          {
-            name: "참격",
-          },
-          {
-            name: "관통",
-          },
-          {
-            name: "타격",
-          },
-        ]}
-        src="/assets/attackType/"
-        propertyToSaveTo="types"
-        PageType="Ego"
-      />
-      <FilterSliderGroup
-        title="가중치"
-        name="Weight"
-        minValue={1}
-        maxValue={7}
-        isIdentityPage={false}
       />
       <FilterButtonGroup
         title="시즌"
@@ -111,19 +82,28 @@ const Filter = () => {
         src=""
         buttonType="text"
         propertyToSaveTo="season"
-        PageType="Ego"
+        PageType="Passive"
       />
-      <FilterEtcButtonGroup
+      <FilterButtonGroup
+        title="유형"
+        content={[{ name: "보유" }, { name: "공명" }]}
+        src=""
+        buttonType="largeText"
+        propertyToSaveTo="activeConds"
+        PageType="Passive"
+      />
+      <FilterButtonGroup
         title="등급"
-        content={egoGrade}
+        content={[{ name: "1" }, { name: "2" }, { name: "3" }]}
+        src="/assets/common/"
         propertyToSaveTo="grade"
-        PageType="Ego"
+        PageType="Passive"
       />
       <FilterEtcButtonGroup
         title="기타"
-        content={egoEtcKeyword}
+        content={etcKeyword}
         propertyToSaveTo="etcKeyword"
-        PageType="Ego"
+        PageType="Passive"
       />
     </div>
   );

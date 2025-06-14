@@ -16,6 +16,7 @@ const KeywordHighlighted = ({ text }: KeywordHighlightedProps) => {
 
   // \n을 기준으로 텍스트를 분할
   const lines = text.split("\n");
+  const targets = ["[피아식별불가]", "[합 불가능]"];
 
   return (
     <span className="font-body font-thin text-brown-100 text-xs sm:text-sm">
@@ -33,7 +34,7 @@ const KeywordHighlighted = ({ text }: KeywordHighlightedProps) => {
                 </span>
               );
             } else if (part.match(/^\[.*?\]$/)) {
-              if (part.toLowerCase() === "[피아식별불가]") {
+              if (targets.includes(part.toLowerCase())) {
                 return (
                   <span key={index} className="text-red-500">
                     {part}

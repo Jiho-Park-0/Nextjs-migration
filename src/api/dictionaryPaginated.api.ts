@@ -12,7 +12,7 @@ function getLength(value: string | number | string[]): number {
   }
 }
 
-export const getIdentity = async (options: IdentityOptions) => {
+export const getIdentityPaginated = async (options: IdentityOptions) => {
   const query = Object.entries(options)
     .filter(
       ([_, value]) =>
@@ -41,8 +41,8 @@ export const getIdentity = async (options: IdentityOptions) => {
     .join("&");
 
   const uri = query
-    ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity?${query}`
-    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity`;
+    ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/identity?${query}`
+    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/identity`;
 
   const response = await fetch(uri, {
     cache: "no-cache",
@@ -54,7 +54,7 @@ export const getIdentity = async (options: IdentityOptions) => {
   return response.json();
 };
 
-export const getEgo = async (options: EgoOptions) => {
+export const getEgoPaginated = async (options: EgoOptions) => {
   // 옵션들을 쿼리 문자열로 변환
   const query = Object.entries(options)
     .filter(
@@ -85,8 +85,8 @@ export const getEgo = async (options: EgoOptions) => {
 
   // 배열이 아닌 경우: 속도랑 가중치 현재 API 에러로 제외하고 호출
   const uri = query
-    ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego?${query}`
-    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/ego`;
+    ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/ego?${query}`
+    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/ego`;
 
   const response = await fetch(uri, {
     cache: "no-cache",
@@ -98,7 +98,7 @@ export const getEgo = async (options: EgoOptions) => {
   return response.json();
 };
 
-export const getPassive = async (options: PasiveOptions) => {
+export const getPassivePaginated = async (options: PasiveOptions) => {
   // 옵션들을 쿼리 문자열로 변환
   const query = Object.entries(options)
     .filter(
@@ -129,8 +129,8 @@ export const getPassive = async (options: PasiveOptions) => {
 
   // 배열이 아닌 경우: 속도랑 가중치 현재 API 에러로 제외하고 호출
   const uri = query
-    ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/skill/6?${query}`
-    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/skill/6`;
+    ? `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/skill/6?${query}`
+    : `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/skill/6`;
 
   const response = await fetch(uri, {
     cache: "no-cache",
@@ -142,8 +142,8 @@ export const getPassive = async (options: PasiveOptions) => {
   return response.json();
 };
 
-export const getAllIdentity = async () => {
-  const uri = `${process.env.NEXT_PUBLIC_API_URL}/dictionary/identity?minSpeed=1&maxSpeed=9&minWeight=1&maxWeight=9`;
+export const getAllIdentityPaginated = async () => {
+  const uri = `${process.env.NEXT_PUBLIC_API_URL}/dictionary/paginated/identity?minSpeed=1&maxSpeed=9&minWeight=1&maxWeight=9`;
 
   const response = await fetch(uri, {
     cache: "force-cache",

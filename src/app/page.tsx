@@ -3,7 +3,8 @@ import MainCarousel from "@/components/main/MainCarousel";
 import MenuCard from "@/components/main/MenuCard";
 import SiteButton from "@/components/main/SiteButton";
 import Donation from "@/components/main/Donation";
-import Bbangchinko from "@/components/main/Bbangchinko";
+import ApplyForm from "@/components/main/ApplyForm";
+import Toss from "@/components/main/Toss";
 import { FaSquareXTwitter, FaSquareYoutube } from "react-icons/fa6";
 import Image from "next/image";
 // import Skeleton from "@/components/main/Skeleton";
@@ -16,11 +17,20 @@ const YoutubePlay = lazy(() => import("@/components/main/YoutubePlay"));
 export default function Home() {
   return (
     <div className="py-1 md:py-10 flex flex-col gap-3 md:gap-12">
-      <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
-        <div className="font-bold text-center">
-          백엔드 지원 마감되었습니다. 지원해주셔서 감사합니다!
+      {/* <div className="text-white bg-primary-300 rounded-md p-2 md:p-4 lg:p-6 flex flex-col justify-between">
+        <div className="text-center">
+          안녕하세요. 단빵숲 입니다. <br />
+          신규 프론트엔드 팀원을 모집하고 있습니다. 많은 참여 바립니다!
+          <br />
+          <Link
+            className="font-bold text-primary-100 hover:text-primary-500"
+            href="https://docs.google.com/forms/d/1C0jJuaS8GgATmrvetARmOqRER6dx_MWx-YhnPUQ54Xg/edit"
+          >
+            지원하기
+          </Link>
+          <br />
         </div>
-      </div>
+      </div> */}
       <div className="w-full mx-auto">
         <MainCarousel />
       </div>
@@ -33,10 +43,13 @@ export default function Home() {
 
         <div className="w-full md:w-2/5 flex flex-col gap-3 md:gap-6 ">
           <div className="flex-1 h-1/2">
-            <Bbangchinko />
+            <ApplyForm />
           </div>
           <div className="flex-1 h-1/2">
             <Donation />
+          </div>
+          <div className="flex-1 h-1/2">
+            <Toss />
           </div>
           {/* <Suspense fallback={<Skeleton />}>
             <NewsCard />

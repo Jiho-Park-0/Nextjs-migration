@@ -25,22 +25,13 @@ const MainCarousel = () => {
       {/* 업데이트 */}
 
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.amazonaws.com/로쟈/EGO/지정 재판/20908_cg.webp"
-        spanText="매달고, 불태우거라. 끝끝내 뼛조각 하나 남지 않도록."
-        headingText="지정 재판 로쟈 추가"
-        linkPath="/ego/97"
-        linkText="에고 정보 바로가기"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/이스마엘/Identity/가주 후보/10812_gacksung.webp"
+        spanText="[봄] 한 번… 짧기도 하지…"
+        headingText="가주 후보 이스마엘 추가"
+        linkPath="/identity/148"
+        linkText="인격 정보 바로가기"
       />
-
       {/* 신규 기능 */}
-      {/* <Banner
-        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%ED%9E%88%EC%8A%A4%ED%81%B4%EB%A6%AC%ED%94%84/Identity/%EB%A7%88%EC%B9%A8%ED%91%9C%20%EC%82%AC%EB%AC%B4%EC%86%8C%20%ED%95%B4%EA%B2%B0%EC%82%AC/10711_normal.webp"
-        spanText="내가 가진 인격 키워드를 모르겠다고?"
-        headingText="내 인격 분류 기능 추가"
-        linkPath="/deck"
-        linkText="인격 분류 바로가기"
-      /> */}
-
       {/* 발푸밤 리세 홍보 */}
       {/* <Banner
         imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/%EB%A3%8C%EC%8A%88/Identity/%EB%A1%9C%EB%B3%B4%ED%86%A0%EB%AF%B8%20E.G.O::%EC%A0%81%EC%95%88%20%C2%B7%20%EC%B0%B8%ED%9A%8C/10410_gacksung.webp"
