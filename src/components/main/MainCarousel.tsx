@@ -25,8 +25,8 @@ const MainCarousel = () => {
       {/* 업데이트 */}
 
       <Banner
-        imageUrl="https://limbus-image-bucket.s3.amazonaws.com/시쮼이가 왔어.webp"
-        spanText="야 김롭뿡! 귀여운 시쮼이가 와써!"
+        imageUrl="https://limbus-image-bucket.s3.ap-northeast-2.amazonaws.com/이스마엘/Identity/가주 후보/10812_gacksung.webp"
+        spanText="[봄] 한 번… 짧기도 하지…"
         headingText="가주 후보 이스마엘 추가"
         linkPath="/identity/148"
         linkText="인격 정보 바로가기"
